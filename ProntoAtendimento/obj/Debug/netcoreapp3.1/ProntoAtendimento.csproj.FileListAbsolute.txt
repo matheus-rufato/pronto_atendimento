@@ -1,0 +1,7 @@
+C:\Users\mrs55\source\repos\ProntoAtendimento\ProntoAtendimento\obj\Debug\netcoreapp3.1\ProntoAtendimento.csprojAssemblyReference.cache
+C:\Users\mrs55\source\repos\ProntoAtendimento\ProntoAtendimento\obj\Debug\netcoreapp3.1\ProntoAtendimento.AssemblyInfoInputs.cache
+C:\Users\mrs55\source\repos\ProntoAtendimento\ProntoAtendimento\obj\Debug\netcoreapp3.1\ProntoAtendimento.AssemblyInfo.cs
+C:\Users\mrs55\source\repos\ProntoAtendimento\ProntoAtendimento\obj\Debug\netcoreapp3.1\ProntoAtendimento.csproj.CoreCompileInputs.cache
+C:\Users\mrs55\source\repos\ProntoAtendimento\ProntoAtendimento\obj\Debug\netcoreapp3.1\ProntoAtendimento.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\mrs55\source\repos\ProntoAtendimento\ProntoAtendimento\obj\Debug\netcoreapp3.1\ProntoAtendimento.RazorAssemblyInfo.cache
+C:\Users\mrs55\source\repos\ProntoAtendimento\ProntoAtendimento\obj\Debug\netcoreapp3.1\ProntoAtendimento.RazorAssemblyInfo.cs

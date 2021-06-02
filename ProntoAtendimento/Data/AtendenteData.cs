@@ -44,7 +44,7 @@ namespace ProntoAtendimento.Data
          * com vários registros (no caso todos os registros da tabela) 
          * caso a tabela esteja vazia ele retornará uma lista vazia
          */
-        public List<Atendente> Read()
+        public List<Atendente> Read(AtendenteViewModel model)
         {
             List<Atendente> lista = null;
 

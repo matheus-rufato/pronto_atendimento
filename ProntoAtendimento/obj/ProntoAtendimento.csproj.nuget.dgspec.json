@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\mrs55\\source\\repos\\ProntoAtendimento\\ProntoAtendimento\\ProntoAtendimento.csproj": {}
+    "C:\\Users\\Henri\\Desktop\\InterProjeto\\pronto_atendimento\\ProntoAtendimento\\ProntoAtendimento.csproj": {}
   },
   "projects": {
-    "C:\\Users\\mrs55\\source\\repos\\ProntoAtendimento\\ProntoAtendimento\\ProntoAtendimento.csproj": {
+    "C:\\Users\\Henri\\Desktop\\InterProjeto\\pronto_atendimento\\ProntoAtendimento\\ProntoAtendimento.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\mrs55\\source\\repos\\ProntoAtendimento\\ProntoAtendimento\\ProntoAtendimento.csproj",
+        "projectUniqueName": "C:\\Users\\Henri\\Desktop\\InterProjeto\\pronto_atendimento\\ProntoAtendimento\\ProntoAtendimento.csproj",
         "projectName": "ProntoAtendimento",
-        "projectPath": "C:\\Users\\mrs55\\source\\repos\\ProntoAtendimento\\ProntoAtendimento\\ProntoAtendimento.csproj",
-        "packagesPath": "C:\\Users\\mrs55\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\mrs55\\source\\repos\\ProntoAtendimento\\ProntoAtendimento\\obj\\",
+        "projectPath": "C:\\Users\\Henri\\Desktop\\InterProjeto\\pronto_atendimento\\ProntoAtendimento\\ProntoAtendimento.csproj",
+        "packagesPath": "C:\\Users\\Henri\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Henri\\Desktop\\InterProjeto\\pronto_atendimento\\ProntoAtendimento\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\mrs55\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Henri\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -63,7 +63,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
         }
       }
     }

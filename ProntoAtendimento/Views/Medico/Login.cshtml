@@ -1,0 +1,23 @@
+﻿@model MedicoViewModel
+
+@if(ViewBag.Message != null)
+{
+    <div class="alert alert-danger">@ViewBag.Message</div>
+}
+
+<form asp-controller="Medico" asp-action="Login" method="post">
+
+    <div class="form-group">
+        <label>Login</label>
+        <input asp-for="Login" class="form-control" />
+        <span asp-validation-for="Login"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Senha"></label>
+        <input asp-for="Senha" class="form-control" />
+        <span asp-validation-for="Senha"></span>
+    </div>
+
+    <button class="btn btn-primary">Entrar</button>
+</form>

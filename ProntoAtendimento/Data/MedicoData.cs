@@ -177,7 +177,7 @@ namespace ProntoAtendimento.Data
                 cmd.Connection = base.connectionDB; // Conexão com o banco de dados
 
                 //Criação da string SQL (comando SQL)
-                cmd.CommandText = @"AltMedico(@id, @nome, @endereco, @telefone, @status, @login, @senha)";
+                cmd.CommandText = @"AltMedico(@id, @nome, @cpf, @endereco, @telefone, @status, @crm, @login, @senha)";
 
                 //Colocando os dados recebidos pelo objeto cliente, na string SQL
 
@@ -187,10 +187,10 @@ namespace ProntoAtendimento.Data
                 cmd.Parameters.AddWithValue("@cpf", medico.Cpf);
                 cmd.Parameters.AddWithValue("@endereco", medico.Endereco);
                 cmd.Parameters.AddWithValue("@telefone", medico.Telefone);
-                cmd.Parameters.AddWithValue("@status", medico.status);
-                cmd.Parameters.AddWithValue("@convenio", medico.CRM);
-                cmd.Parameters.AddWithValue("@convenio", medico.Login);
-                cmd.Parameters.AddWithValue("@convenio", medico.Senha);
+                cmd.Parameters.AddWithValue("@status", medico.Status);
+                cmd.Parameters.AddWithValue("@crm", medico.CRM);
+                cmd.Parameters.AddWithValue("@login", medico.Login);
+                cmd.Parameters.AddWithValue("@senha", medico.Senha);
 
             //Execução da string SQL no banco de dados
             cmd.ExecuteNonQuery();

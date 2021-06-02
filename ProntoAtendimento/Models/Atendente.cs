@@ -13,6 +13,7 @@ namespace ProntoAtendimento.Models
         [Required(ErrorMessage = "Campo Login obrigatório")]
         [MinLength(5)]
         [MaxLength(15)]
+        [DataType(DataType.EmailAddress)]
         public string Login { get; set; }
 
         [Display(Name = "Senha")]

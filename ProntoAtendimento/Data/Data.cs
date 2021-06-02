@@ -18,9 +18,10 @@ namespace ProntoAtendimento.Data
             {
                 // String conexão com o BD
                 string strConexao = @"Data Source = localhost;
-                                    Initial Catalog = prontoAtendimento
-                                    Integrated Security= true";
-                //User Id=sa; Password = Matheus123; //Complementa
+                                    Initial Catalog = prontoAtendimento;
+                                    Integrated Security= false;
+                                    User Id = sa;
+                                    Password = Matheus123";
 
                 connectionDB = new SqlConnection(strConexao);
                 connectionDB.Open();

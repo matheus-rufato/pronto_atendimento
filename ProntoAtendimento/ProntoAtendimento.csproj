@@ -8,4 +8,12 @@
     <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\Medico\" />
+    <Folder Include="Views\Consulta\" />
+    <Folder Include="Views\ItensUtilizados\" />
+    <Folder Include="Views\Procedimento\" />
+    <Folder Include="Views\Paciente\" />
+  </ItemGroup>
+
 </Project>

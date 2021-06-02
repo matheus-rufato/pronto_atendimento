@@ -18,7 +18,6 @@ namespace ProntoAtendimento.Models
         [Required(ErrorMessage = "Campo Nome obrigatório")]
         [MinLength(3)]
         [MaxLength(50)]
-
         public string Nome { get; set; }
 
         [Display(Name = "CPF")]

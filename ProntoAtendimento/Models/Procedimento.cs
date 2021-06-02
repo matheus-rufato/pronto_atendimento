@@ -20,6 +20,7 @@ namespace ProntoAtendimento.Models
 
         [Display(Name = "Valor")]
         [Required(ErrorMessage = "Campo valor obrigatório")]
+        [DataType(DataType.Currency)]
         public decimal Valor { get; set; }        
     }
 }

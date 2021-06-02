@@ -16,7 +16,7 @@ namespace ProntoAtendimento.Data
             cmd.CommandText = @"CadProcedimento(@nome, @tipo, @valor)";
 
             cmd.Parameters.AddWithValue("@nome", procedimento.Nome);
-            cmd.Parameters.AddWithValue("@tipo", procedimento.Tipo);
+            cmd.Parameters.AddWithValue("@tipo", procedimento.Tipo == "Ativo"? 1:0);
             cmd.Parameters.AddWithValue("@valor", procedimento.Valor);
             
         }

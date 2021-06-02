@@ -9,6 +9,7 @@ namespace ProntoAtendimento.Models
     {
 
         //Propriedades e Atributos
+        public int IdConsulta { get; set; }
         public int IdProcedmento { get; set; }
         public decimal ValorTotal { get; set; }
         public string Observacao { get; set; }

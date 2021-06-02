@@ -20,8 +20,6 @@ namespace ProntoAtendimento.Models
 
         [Display(Name = "Valor")]
         [Required(ErrorMessage = "Campo valor obrigatório")]
-        public decimal Valor { get; set; }
-
-        
+        public decimal Valor { get; set; }        
     }
 }

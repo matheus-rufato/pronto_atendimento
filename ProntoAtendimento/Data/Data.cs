@@ -18,7 +18,7 @@ namespace ProntoAtendimento.Data
             {
                 // String conexão com o BD
                 string strConexao = @"Data Source = localhost;
-                                    Initial Catalog = prontoAtendimento3
+                                    Initial Catalog = prontoAtendimento
                                     Integrated Security= true";
                 //User Id=sa; Password = Matheus123; //Complementa
 

@@ -22,11 +22,17 @@ namespace ProntoAtendimento.Models
             {
                 return Procedimentos.Sum(i => i.ValorTotal);
             }
+
+            set { Valor = value; }
         }
-        public int Status { get; set; }
+
+        public string Status { get; set; }
 
         [Required(ErrorMessage = "Campo Diagnóstico obrigatório")]
         public string Diagnostico { get; set; }
+
+        public Paciente Paciente { get; set; }
+        public Medico Medico { get; set; }
 
 
     }

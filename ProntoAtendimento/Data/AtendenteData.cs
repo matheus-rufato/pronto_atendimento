@@ -93,7 +93,7 @@ namespace ProntoAtendimento.Data
             cmd.Connection = base.connectionDB; //Conexão com o banco de dados
 
             //String SQL para ser executada no banco de dados
-            cmd.CommandText = @"v_atendentes WHERE Id = @id";
+            cmd.CommandText = @"v_atendentes WHERE Id = @id ";
 
             //Inserindo o valor do id recebido a string SQL
             cmd.Parameters.AddWithValue("@Id", id);

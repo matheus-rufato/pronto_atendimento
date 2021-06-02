@@ -35,6 +35,8 @@ namespace ProntoAtendimento.Controllers
             string login = atendente["Login"];
             string senha = atendente["Senha"];
 
+
+
             if (nome.Length < 6)
             {
                 ViewBag.Mensagem = "Nome deve conter 6 ou mais carecteres";
@@ -161,7 +163,7 @@ namespace ProntoAtendimento.Controllers
                     return View(model);
                 }
 
-                HttpContext.Session.SetString("user", JsonSerializer.Serialize<Atendente>(user)); // Ta dando erro
+                //HttpContext.Session.SetString("user", JsonSerializer.Serialize<Atendente>(user)); // Ta dando erro
 
                 return RedirectToAction("Index", "Produto");
             }

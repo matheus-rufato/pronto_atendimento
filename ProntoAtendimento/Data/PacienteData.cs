@@ -25,7 +25,7 @@ namespace ProntoAtendimento.Data
             //Conectando com o banco de dados
             cmd.Connection = base.connectionDB;
             //Criando a string SQL
-            cmd.CommandText = @"CadPaciente(@nome, @cpf, @endereco, @telefone,@convenio)";
+            cmd.CommandText = @"CadPaciente @nome, @cpf, @endereco, @telefone,@convenio";
 
 
             //Colocando os dados recebidos pelo objeto cliente, na string SQL
@@ -84,7 +84,7 @@ namespace ProntoAtendimento.Data
 
 
         //Metódo que fará uma consulta do cliente pelo id
-        public Paciente Read(int id)
+        public Paciente Read(string cpf)
         {
             //Declarando um objeto cliente e incializando como null
             Paciente paciente = null;
@@ -93,10 +93,10 @@ namespace ProntoAtendimento.Data
             cmd.Connection = base.connectionDB; //Conexão com o banco de dados
 
             //String SQL para ser executada no banco de dados
-            cmd.CommandText = @"v_pacientes WHERE Id = @id";
+            cmd.CommandText = @"v_pacientes WHERE Cpf = @Cpf";
 
             //Inserindo o valor do id recebido a string SQL
-            cmd.Parameters.AddWithValue("@Id", id);
+            cmd.Parameters.AddWithValue("@Cpf", cpf);
 
             //Executando o comando SQL no banco de dados
             SqlDataReader reader = cmd.ExecuteReader();
@@ -127,7 +127,7 @@ namespace ProntoAtendimento.Data
 
 
 
-        public Paciente Read(string cpf)
+        public Paciente Read(int id)
         {
             //Declarando um objeto cliente e inicializando como null
             Paciente paciente = null;
@@ -136,10 +136,10 @@ namespace ProntoAtendimento.Data
             cmd.Connection = base.connectionDB; // Conexão com o banco de dados
 
             //String SQL para ser executada no banco de dados
-            cmd.CommandText = @"v_pacientes WHERE cpf = @cpf";
+            cmd.CommandText = @"v_pacientes WHERE Id = @id";
 
             //Inserindo o valor do id recebido na string SQL
-            cmd.Parameters.AddWithValue("@cpf", cpf);
+            cmd.Parameters.AddWithValue("@id", id);
 
             //Executando o comando SQL no banco
             SqlDataReader reader = cmd.ExecuteReader();

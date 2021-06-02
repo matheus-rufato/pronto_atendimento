@@ -343,7 +343,7 @@ go
 
 select * from v_pacientes
 select * from v_medicos
-select * from v_atendentes
+select * from v_atendentes where Id = 3
 select * from v_consultas
 select * from v_procedimentos
 select * from v_proc_utilizas

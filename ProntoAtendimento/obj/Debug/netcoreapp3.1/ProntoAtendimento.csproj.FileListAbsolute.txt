@@ -152,3 +152,6 @@ C:\Users\Henri\Desktop\InterProjeto\pronto_atendimento\ProntoAtendimento\obj\Deb
 C:\Users\Henri\Desktop\InterProjeto\pronto_atendimento\ProntoAtendimento\obj\Debug\netcoreapp3.1\ProntoAtendimento.Views.pdb
 C:\Users\Henri\Desktop\InterProjeto\pronto_atendimento\ProntoAtendimento\obj\Debug\netcoreapp3.1\ProntoAtendimento.csproj.CopyComplete
 C:\Users\Henri\Desktop\InterProjeto\pronto_atendimento\ProntoAtendimento\obj\Debug\netcoreapp3.1\ProntoAtendimento.genruntimeconfig.cache
+C:\Users\Henri\Desktop\InterProjeto\pronto_atendimento\ProntoAtendimento\obj\Debug\netcoreapp3.1\Razor\Views\Procedimento\Create.cshtml.g.cs
+C:\Users\Henri\Desktop\InterProjeto\pronto_atendimento\ProntoAtendimento\obj\Debug\netcoreapp3.1\Razor\Views\Procedimento\Index.cshtml.g.cs
+C:\Users\Henri\Desktop\InterProjeto\pronto_atendimento\ProntoAtendimento\obj\Debug\netcoreapp3.1\Razor\Views\Procedimento\Update.cshtml.g.cs

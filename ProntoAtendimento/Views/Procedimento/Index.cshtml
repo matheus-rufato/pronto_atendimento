@@ -1,0 +1,36 @@
+﻿@model List<Procedimento>
+
+@{
+
+    ViewData["Title"] = "Produto - Index";
+}
+
+<table class="table table-hover">
+
+    <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Tipo</th>
+        <th>Valor</th>
+        
+    </tr>
+    @foreach (var proced in Model)
+
+    {
+        <tr>
+            <td>@proced.IdProcedimento</td>
+            <td>@proced.Nome</td>
+            <td>@proced.Tipo</td>
+            <td>@proced.Valor</td>
+            
+            <td>
+                <a class="btn btn-sm btn-danger" href="/procedimento/delete/@proced.IdProcedimento">Apagar</a>
+                <a class="btn btn-sm btn-warning" href="/procedimento/update/@proced.IdProcedimento">Editar</a>
+                <a class="btn btn-sm btn-info" href="/carrinho/comprar/@proced.IdProcedimento">Comprar</a>
+            </td>
+
+        </tr>
+    }
+</table>
+
+<a class="btn btn-primary" href="/procedimento/create">Adcionar</a>

@@ -10,22 +10,36 @@ else
 {
     // <h3>@ViewBag.Mensagem @Model.Nome</h3>
 <table class="table table-hover">
+
+
+    <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Endereço</th>
+        <th>Telefone</th>
+        <th>Convenio</th>
+        <th>Status</th>
+
+    </tr>
+
+
     @foreach (var pacie in Model)
 
     {
-        <tr>
-            <td>@pacie.Id</td>
-            <td>@pacie.Nome</td>
-            <td>@pacie.Endereco</td>
-            <td>@pacie.Telefone</td>
-            <td>@pacie.Convenio</td>
-            <td>
-                <a class="btn btn-sm btn-danger" href="/paciente/delete/@pacie.Id">Apagar</a>
-                <a class="btn btn-sm btn-warning" href="/paciente/update/@pacie.Id">Editar</a>
-            </td>
-        </tr>
+<tr>
+    <td>@pacie.Id</td>
+    <td>@pacie.Nome</td>
+    <td>@pacie.Endereco</td>
+    <td>@pacie.Telefone</td>
+    <td>@pacie.Convenio</td>
+    <td>@pacie.Status</td>
+    <td>
+        <a class="btn btn-sm btn-danger" href="/paciente/delete/@pacie.Id">Apagar</a>
+        <a class="btn btn-sm btn-warning" href="/paciente/update/@pacie.Id">Editar</a>
+    </td>
+</tr>
 
-      }
- </table>
+    }
+</table>
 }
-<a class="btn btn-primary" href="paciente/create">Adicionar</a>
+<a class="btn btn-primary" href="/paciente/create">Adicionar</a>

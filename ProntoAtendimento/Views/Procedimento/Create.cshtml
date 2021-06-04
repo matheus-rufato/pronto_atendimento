@@ -1,0 +1,31 @@
+﻿@model Procedimento
+
+
+<form asp-controller="Procedimento" asp-action="Create" method="POST">
+    <h2>Cadastrar Procedimento</h2>
+    <br />
+    <div class="form-group">
+        <label>Nome</label>
+        <input asp-for="Nome" class="form-control" />
+        <span asp-validation-for="Nome"></span>
+    </div>
+
+    <div class="form-group">
+        <label>Tipo</label>
+        <select asp-for="Tipo" class="form-control">
+            <option value="1">Ambulatorial</option>
+            <option value="2">Laboratorial</option>
+            <option value="3">Translado</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>Valor</label>
+        <input asp-for="Valor" class="form-control" />
+        <span asp-validation-for="Valor"></span>
+    </div>
+
+    
+
+    <button class="btn btn-primary">Salvar</button>
+</form>

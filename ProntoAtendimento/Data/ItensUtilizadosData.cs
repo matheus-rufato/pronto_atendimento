@@ -9,7 +9,7 @@ namespace ProntoAtendimento.Data
 {
     public class ItensUtilizadosData : Data
     {
-        public List<ItensUtilizados> Read(int id)
+      /*  public List<ItensUtilizados> Read(int id)
         {
             List<ItensUtilizados> lista = new List<ItensUtilizados>();
 
@@ -35,6 +35,6 @@ namespace ProntoAtendimento.Data
             }
 
             return lista;
-        }
+        }*/
     }
 }

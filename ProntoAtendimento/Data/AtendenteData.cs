@@ -68,6 +68,7 @@ namespace ProntoAtendimento.Data
                     atendente.Cpf = (string)reader["cpf"];
                     atendente.Endereco = (string)reader["endereco"];
                     atendente.Telefone = (string)reader["telefone"];
+                    atendente.Status = (string)reader["Situação"];
                     atendente.Login = (string)reader["login"];
                     atendente.Senha = (string)reader["senha"];
 
@@ -114,6 +115,7 @@ namespace ProntoAtendimento.Data
                     Cpf = (string)reader["cpf"],
                     Endereco = (string)reader["endereco"],
                     Telefone = (string)reader["telefone"],
+                    Status = (string)reader["Situação"],
                     Login = (string)reader["login"],
                     Senha = (string)reader["senha"],
 
@@ -158,6 +160,7 @@ namespace ProntoAtendimento.Data
                     Cpf = (string)reader["cpf"],
                     Endereco = (string)reader["endereco"],
                     Telefone = (string)reader["telefone"],
+                    Status = (string)reader["Situação"],
                     Login = (string)reader["login"],
                     Senha = (string)reader["senha"],
                 };
@@ -176,7 +179,7 @@ namespace ProntoAtendimento.Data
             cmd.Connection = base.connectionDB; // Conexão com o banco de dados
 
             //Criação da string SQL (comando SQL)
-            cmd.CommandText = @"AltAtendente @id, @nome, @cpf, @endereco, @telefone, @login, @senha";
+            cmd.CommandText = @"AltAtendente @id, @nome, @cpf, @endereco, @telefone,@status, @login, @senha";
 
             //Colocando os dados recebidos pelo objeto cliente, na string SQL
 
@@ -186,7 +189,7 @@ namespace ProntoAtendimento.Data
             cmd.Parameters.AddWithValue("@cpf", atendente.Cpf);
             cmd.Parameters.AddWithValue("@endereco", atendente.Endereco);
             cmd.Parameters.AddWithValue("@telefone", atendente.Telefone);
-          //  cmd.Parameters.AddWithValue("@status", atendente.Status);
+            cmd.Parameters.AddWithValue("@status", Convert.ToInt32(atendente.Status));
             cmd.Parameters.AddWithValue("@login", atendente.Login);
             cmd.Parameters.AddWithValue("@senha", atendente.Senha);
 
@@ -200,10 +203,15 @@ namespace ProntoAtendimento.Data
             cmd.Connection = base.connectionDB; // Conexão com o banco de dados
 
             //Criação da string SQL (comando SQL)
-            cmd.CommandText = @"DELETE FROM Cliente WHERE IdCliente=@id";   //ARRUMAR
+            cmd.CommandText = @"DELETE FROM Atendentes WHERE atendente_id=@id";   //ARRUMAR
 
             //Colocando os dados recebidos pelo objeto cliente, na string SQL
             cmd.Parameters.AddWithValue("@id", id);
+
+            //Execução da string SQL no banco de dados
+            cmd.ExecuteNonQuery();
+            cmd.CommandText = @"DELETE FROM pessoas WHERE Id=@id2";
+            cmd.Parameters.AddWithValue("@id2", id);
 
             //Execução da string SQL no banco de dados
             cmd.ExecuteNonQuery();

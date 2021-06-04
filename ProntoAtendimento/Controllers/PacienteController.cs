@@ -89,6 +89,7 @@ namespace ProntoAtendimento.Controllers
                 pac.Endereco = paciente["Endereco"];
                 pac.Telefone = paciente["Telefone"];
                 pac.Convenio = paciente["Login"];
+                pac.Status = paciente["Status"];
 
 
                 Paciente p = new Paciente();

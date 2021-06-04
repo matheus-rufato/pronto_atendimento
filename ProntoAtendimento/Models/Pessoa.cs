@@ -39,7 +39,7 @@ namespace ProntoAtendimento.Models
         public string Telefone { get; set; }
 
 
-        public int Status { get; set; }
+        public string Status { get; set; }
 
       
 

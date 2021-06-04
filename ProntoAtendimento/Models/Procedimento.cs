@@ -18,6 +18,8 @@ namespace ProntoAtendimento.Models
         [Required(ErrorMessage = "Campo procedimento obrigatório")]
         public string Tipo { get; set; }
 
+        
+
         [Display(Name = "Valor")]
         [Required(ErrorMessage = "Campo valor obrigatório")]
         [DataType(DataType.Currency)]

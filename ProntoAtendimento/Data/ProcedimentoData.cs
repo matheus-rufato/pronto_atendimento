@@ -13,12 +13,16 @@ namespace ProntoAtendimento.Data
         {
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = base.connectionDB;
-            cmd.CommandText = @"CadProcedimento(@nome, @tipo, @valor)";
+            //cmd.CommandText = @"CadProcedimento @nome, @tipo, @valor ";
+            cmd.CommandText = @"insert into procedimentos values(@nome, @tipo, @valor)";
 
             cmd.Parameters.AddWithValue("@nome", procedimento.Nome);
-            cmd.Parameters.AddWithValue("@tipo", procedimento.Tipo == "Ativo"? 1:0);
+            //cmd.Parameters.AddWithValue("@tipo", procedimento.Tipo == "Ativo"? 1:0);
+            cmd.Parameters.AddWithValue("@tipo", Convert.ToInt32(procedimento.Tipo));
             cmd.Parameters.AddWithValue("@valor", procedimento.Valor);
-            
+
+            cmd.ExecuteNonQuery();
+
         }
         
         public List<Procedimento> Read()
@@ -27,7 +31,7 @@ namespace ProntoAtendimento.Data
 
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = base.connectionDB;
-            cmd.CommandText = "SELECT * FROM v_procedimento";
+            cmd.CommandText = "SELECT * FROM v_procedimentos";
 
             SqlDataReader reader = cmd.ExecuteReader();
 
@@ -52,7 +56,7 @@ namespace ProntoAtendimento.Data
             SqlCommand cmd = new SqlCommand();
             // Como conectar com o banco? O base.connectionDB está certo?
             cmd.Connection = base.connectionDB;
-            cmd.CommandText = @"SELECT * FROM v_procedimento WHERE Id = @id";
+            cmd.CommandText = @"SELECT * FROM v_procedimentos WHERE Id = @id";
 
             cmd.Parameters.AddWithValue("@id", id);
 
@@ -75,13 +79,16 @@ namespace ProntoAtendimento.Data
         {
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = base.connectionDB;
-            cmd.CommandText = @"AltProcedimento (@Id, @nome, @tipo, @valor)";
+            cmd.CommandText = @"AltProcedimento @Id, @nome, @tipo, @valor ";
+           // cmd.CommandText = @"AltProcedimento @Id, @nome, @valor ";
 
             // Onde o atributo Tipo será convertido para inteiro? 
-            cmd.Parameters.AddWithValue("@nome", procedimento.Nome);
-            cmd.Parameters.AddWithValue("@tipo", procedimento.Tipo == "Ativo"? 1:0); 
-            cmd.Parameters.AddWithValue("@valor", procedimento.Valor);
             cmd.Parameters.AddWithValue("@Id", procedimento.IdProcedimento);
+            cmd.Parameters.AddWithValue("@nome", procedimento.Nome);
+            //cmd.Parameters.AddWithValue("@tipo", procedimento.Tipo == "Ativo"? 1:0); 
+            cmd.Parameters.AddWithValue("@tipo",Convert.ToInt32(procedimento.Tipo));
+            cmd.Parameters.AddWithValue("@valor", procedimento.Valor);
+            
 
             cmd.ExecuteNonQuery();
         }
@@ -90,7 +97,9 @@ namespace ProntoAtendimento.Data
         {
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = base.connectionDB;
+            cmd.CommandText = @"DELETE FROM procedimentos WHERE Id=@id";   //ARRUMAR
 
+            //Colocando os dados recebidos pelo objeto cliente, na string SQL
             cmd.Parameters.AddWithValue("@id", id);
 
             cmd.ExecuteNonQuery();

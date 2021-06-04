@@ -86,6 +86,7 @@ namespace ProntoAtendimento.Controllers
                 atn.Cpf = atendente["Cpf"];
                 atn.Endereco = atendente["Endereco"];
                 atn.Telefone = atendente["Telefone"];
+                atn.Status = atendente["Status"];
                 atn.Login = atendente["Login"];
                 atn.Senha = atendente["Senha"];
 

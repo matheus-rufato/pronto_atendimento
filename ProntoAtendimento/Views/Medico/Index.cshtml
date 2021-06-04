@@ -9,16 +9,25 @@ else
 {
 // <h3>@ViewBag.Mensagem @Model.Nome</h3>
 <table class="table table-hover">
-    @foreach (var medic in Model)
+    <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Endereço</th>
+        <th>Telefone</th>
+        <th>Status</th>
 
-    {
+    </tr>
+
+        @foreach (var medic in Model)
+
+        {
 <tr>
     <td>@medic.Id</td>
     <td>@medic.Nome</td>
     <td>@medic.Endereco</td>
     <td>@medic.Telefone</td>
-    <td>@medic.Login</td>
-    <td>@medic.Senha</td>
+    <td>@medic.Status</td>
+
     <td>
         <a class="btn btn-sm btn-danger" href="/medico/delete/@medic.Id">Apagar</a>
         <a class="btn btn-sm btn-warning" href="/medico/update/@medic.Id">Editar</a>

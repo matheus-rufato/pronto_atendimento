@@ -89,6 +89,7 @@ namespace ProntoAtendimento.Controllers
                 med.Telefone = medico["Telefone"];
                 med.Login = medico["Login"];
                 med.Senha = medico["Senha"];
+                med.Status = medico["Status"];
                 med.CRM = medico["CRM"];
 
                 Medico m = new Medico();

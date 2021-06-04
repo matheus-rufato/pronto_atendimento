@@ -9,20 +9,33 @@
             {
                 // <h3>@ViewBag.Mensagem @Model.Nome</h3>
 <table class="table table-hover">
+
+
+    <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Endereço</th>
+        <th>Telefone</th>
+        <th>Status</th>
+
+    </tr>
+
+
     @foreach (var atend in Model)
 
     {
-    <tr>
-        <td>@atend.Id</td>
-        <td>@atend.Nome</td>
-        <td>@atend.Endereco</td>
-        <td>@atend.Telefone</td>
-        <td>@atend.Login</td>
-        <td>@atend.Senha</td>
-        <td>
-            <a class="btn btn-sm btn-danger" href="/atendente/delete/@atend.Id">Apagar</a>
-            <a class="btn btn-sm btn-warning" href="/atendente/update/@atend.Id">Editar</a>
-        </td>
-    </tr>}
+<tr>
+    <td>@atend.Id</td>
+    <td>@atend.Nome</td>
+    <td>@atend.Endereco</td>
+    <td>@atend.Telefone</td>
+    <td>@atend.Status</td>
+
+    <td>
+        <a class="btn btn-sm btn-danger" href="/atendente/delete/@atend.Id">Apagar</a>
+        <a class="btn btn-sm btn-warning" href="/atendente/update/@atend.Id">Editar</a>
+    </td>
+</tr>
+}
 </table>}
 <a class="btn btn-primary" href="atendente/create">Adicionar</a>

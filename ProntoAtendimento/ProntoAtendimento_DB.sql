@@ -101,7 +101,6 @@ end
 go
 
 
-drop procedure CadAtendente
 
 create procedure CadAtendente
 (
@@ -136,6 +135,7 @@ begin
 	insert into procedimentos values (@nome, @tipo, @valor)
 end
 go
+
 
 create procedure CadConsulta
 (
@@ -172,6 +172,8 @@ begin
 end
 go
 
+
+
 create procedure AltProcedimento
 (
 	@Id int, @nome varchar(50), @tipo int, @valor money	
@@ -180,67 +182,40 @@ as
 begin
 	update procedimentos set nome = @nome, tipo = @tipo, valor = @valor where Id = @Id
 end
+
+
 go
 
 
-drop procedure AltMedico
-/*create procedure AltMedico
-(
-	@Id int, @nome varchar(50), @endereco varchar(50), @telefone varchar(14), @status int, 
-	@login varchar(14), @senha varchar(14)
-)
-as
-begin
-	update pessoas set nome = @nome, endereco = @endereco, telefone = @telefone, status = @status where Id = @Id
-	update medicos set login = @login, senha = @senha where medico_id = @Id
-end*/
 create procedure AltMedico
 (
-	@Id int, @nome varchar(50), @cpf varchar(14), @endereco varchar(50), @telefone varchar(14), 
+	@Id int, @nome varchar(50), @cpf varchar(14), @endereco varchar(50), @telefone varchar(14), @status int, 
 	@crm varchar(14),@login varchar(14), @senha varchar(14)
 )
 as
 begin
-	update pessoas set nome = @nome, cpf = @cpf, endereco = @endereco, telefone = @telefone where Id = @Id
-	update medicos set crm = @crm, login = @login, senha = @senha where medico_id = @Id
+	update pessoas set nome = @nome,cpf = @cpf, endereco = @endereco, telefone = @telefone, status = @status where Id = @Id
+	update medicos set crm = @crm,login = @login, senha = @senha where medico_id = @Id
 end
 go
-
-select * from v_medicos
-
-drop procedure AltAtendente
-
-/*create procedure AltAtendente
-(
-	@Id int, @nome varchar(50), @cpf varchar(14), @endereco varchar(50), @telefone varchar(14), @status int, 
-	@login varchar(14), @senha varchar(14)
-)
-as
-begin
-	update pessoas set nome = @nome, cpf = @cpf, endereco = @endereco, telefone = @telefone, status = @status where Id = @Id
-	update atendentes set login = @login, senha = @senha where atendente_id = @Id
-end*/
 
 
 create procedure AltAtendente
 (
-	@Id int, @nome varchar(50), @cpf varchar(14), @endereco varchar(50), @telefone varchar(14), 
+	@Id int, @nome varchar(50), @cpf varchar(14), @endereco varchar(50), @telefone varchar(14), @status int, 
 	@login varchar(14), @senha varchar(14)
 )
 as
 begin
-	update pessoas set nome = @nome, cpf = @cpf, endereco = @endereco, telefone = @telefone where Id = @Id
+	update pessoas set nome = @nome, cpf = @cpf, endereco = @endereco, telefone = @telefone, status = @status where Id = @Id
 	update atendentes set login = @login, senha = @senha where atendente_id = @Id
 end
 go
 
-select * from v_atendentes
-
-drop procedure AltPaciente
-select * from pacientes
 
 
-/*create procedure AltPaciente
+
+create procedure AltPaciente
 (
 	@Id int, @nome varchar(50), @cpf varchar(14), @endereco varchar(50), @telefone varchar(14), @status int, 
 	@convenio varchar(15)
@@ -249,22 +224,10 @@ as
 begin
 	update pessoas set nome = @nome, cpf = @cpf, endereco = @endereco, telefone = @telefone, status = @status where Id = @Id
 	update pacientes set convenio = @convenio where paciente_id = @Id
-end*/
-
-create procedure AltPaciente
-(
-	@Id int, @nome varchar(50), @cpf varchar(14), @endereco varchar(50), @telefone varchar(14),  
-	@convenio varchar(15)
-)
-as
-begin
-	update pessoas set nome = @nome, cpf = @cpf, endereco = @endereco, telefone = @telefone where Id = @Id
-	update pacientes set convenio = @convenio where paciente_id = @Id
 end
-
 go
 
-select * from v_atendentes
+
 
 Create procedure AltConsulta
 (
@@ -289,9 +252,6 @@ as
 go
 
 
-
-drop view v_medicos
-
 create view v_medicos
 as
 	select pes.Id, pes.nome, pes.cpf, pes.endereco, pes.telefone, med.crm, med.login, med.senha,
@@ -305,12 +265,6 @@ as
 go
 
 
-select * from v_medicos
-
-
-
-drop view v_atendentes
-
 create view v_atendentes
 as
 	select pes.Id, pes.nome, pes.cpf, pes.endereco, pes.telefone, ate.login, ate.senha,
@@ -323,8 +277,6 @@ as
 	where pes.Id = ate.atendente_id
 go
 
-select * from v_atendentes
-
 
 create view v_procedimentos
 as
@@ -336,6 +288,7 @@ as
 		end	Tipo
 	from procedimentos pro
 go
+
 
 create view v_consultas
 as
@@ -357,8 +310,11 @@ as
 	where pro.Id = prou.procedimento_id
 go
 
---drop procedure CadProdUtil
 
+
+-------------------------------------SELECTS E FUNÇÕES ----------------------------------------------
+--drop procedure CadProdUtil
+select * from v_atendentes
 select * from pessoas
 select * from medicos
 select * from atendentes
@@ -376,8 +332,12 @@ exec CadMedico'Paulo', '505050', 'São Miguel, 2178', '17 996715668', '895001', '
 exec CadMedico'Lucas', '606060', 'São João, 1048', '17 998155888', '891589', 'lucas@123','212223'
 go
 
-exec AltAtendente 2, 'Maria Moura', 'Santo Antonio, 2478', '17 998520623', 3, 'maria@moura','789101'
+exec AltAtendente 2, 'Maria Moura', '12321232547612', 'Santo Antonio, 2478', '17 998520623', 2, 'maria@moura','789101'
 go
+exec AltAtendente 1
+
+
+select * from pessoas
 
 exec CadProcedimento 'Medicação', 1, 50
 exec CadProcedimento 'Curativo', 1, 70
@@ -419,4 +379,15 @@ select * from v_proc_utilizas where Nr = 2
 
 --select * from v_consultas inner join v_proc_utilizas on v_consultas.nr = v_proc_utilizas.Nr
 
--- sp_help consultas
+-- sp_select * from procedimentos
+select * from pacientes
+select * from pessoas
+
+delete from pacientes where paciente_id=26
+delete from pessoas where Id=26
+
+select * from consultas
+select * from proc_utilizas
+
+delete from proc_utilizas where consulta_nr=1
+delete from consultas where paciente_id=7help consultas

@@ -72,10 +72,13 @@ namespace ProntoAtendimento.Data
                         medico.Cpf = (string)reader["cpf"];
                         medico.Endereco = (string)reader["endereco"];
                         medico.Telefone = (string)reader["telefone"];
+                        medico.Status = (string)reader["Situação"];
                         medico.CRM = (string)reader["crm"];
+                        medico.Login = (string)reader["login"];
+                        medico.Senha = (string)reader["senha"];
 
 
-                        lista.Add(medico);
+                    lista.Add(medico);
                     }
                 }
                 catch (SqlException sqlerror) { Console.WriteLine("Erro na Leitura." + sqlerror); }
@@ -117,8 +120,10 @@ namespace ProntoAtendimento.Data
                         Cpf = (string)reader["cpf"],
                         Endereco = (string)reader["endereco"],
                         Telefone = (string)reader["telefone"],
-                        CRM = (string)reader["crm"]
-
+                        Status = (string)reader["Situação"],
+                        CRM = (string)reader["crm"],
+                        Login = (string)reader["login"],
+                        Senha = (string)reader["senha"]
                     };
                 }
 
@@ -160,7 +165,10 @@ namespace ProntoAtendimento.Data
                         Cpf = (string)reader["cpf"],
                         Endereco = (string)reader["endereco"],
                         Telefone = (string)reader["telefone"],
-                        CRM = (string)reader["crm"]
+                        Status = (string)reader["Situação"],
+                        CRM = (string)reader["crm"],
+                        Login = (string)reader["login"],
+                        Senha = (string)reader["senha"]
                     };
                 }
 
@@ -177,7 +185,7 @@ namespace ProntoAtendimento.Data
                 cmd.Connection = base.connectionDB; // Conexão com o banco de dados
 
                 //Criação da string SQL (comando SQL)
-                cmd.CommandText = @"AltMedico @id, @nome, @cpf, @endereco, @telefone, @crm, @login, @senha";
+                cmd.CommandText = @"AltMedico @id, @nome, @cpf, @endereco, @telefone, @status,@crm, @login, @senha";
 
                 //Colocando os dados recebidos pelo objeto cliente, na string SQL
 
@@ -187,7 +195,7 @@ namespace ProntoAtendimento.Data
                 cmd.Parameters.AddWithValue("@cpf", medico.Cpf);
                 cmd.Parameters.AddWithValue("@endereco", medico.Endereco);
                 cmd.Parameters.AddWithValue("@telefone", medico.Telefone);
-               // cmd.Parameters.AddWithValue("@status", medico.Status);
+                cmd.Parameters.AddWithValue("@status", Convert.ToInt32(medico.Status));
                 cmd.Parameters.AddWithValue("@crm", medico.CRM);
                 cmd.Parameters.AddWithValue("@login", medico.Login);
                 cmd.Parameters.AddWithValue("@senha", medico.Senha);
@@ -201,15 +209,17 @@ namespace ProntoAtendimento.Data
                 SqlCommand cmd = new SqlCommand(); //cmd é um comando que permitirá executar um comando SQL
                 cmd.Connection = base.connectionDB; // Conexão com o banco de dados
 
-                //Criação da string SQL (comando SQL)
-                cmd.CommandText = @"DELETE FROM Cliente WHERE IdCliente=@id";   //ARRUMAR
+            //Criação da string SQL (comando SQL)
+            cmd.CommandText = @"DELETE FROM medicos WHERE medico_id=@id";   //ARRUMAR
 
-                //Colocando os dados recebidos pelo objeto cliente, na string SQL
-                cmd.Parameters.AddWithValue("@id", id);
+            //Colocando os dados recebidos pelo objeto cliente, na string SQL
+            cmd.Parameters.AddWithValue("@id", id);
 
-                //Execução da string SQL no banco de dados
-                cmd.ExecuteNonQuery();
-            }
+            //Execução da string SQL no banco de dados
+            cmd.ExecuteNonQuery();
+            cmd.CommandText = @"DELETE FROM pessoas WHERE Id=@id2";
+            cmd.Parameters.AddWithValue("@id2", id);
+        }
 
 
 

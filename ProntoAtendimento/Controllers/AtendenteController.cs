@@ -14,7 +14,8 @@ namespace ProntoAtendimento.Controllers
     {
         public IActionResult Index(Atendente novoAtendente)
         {
-            return View(novoAtendente);
+            using (var data = new AtendenteData())
+                return View(data.Read());
         }
 
 
@@ -141,35 +142,35 @@ namespace ProntoAtendimento.Controllers
         }
 
 
-        [HttpGet]
-        public IActionResult Login()
-        {
-            return View(new AtendenteViewModel());
-        }
+        /* [HttpGet]
+            public IActionResult Login()
+           {
+               return View(new AtendenteViewModel());
+           }
 
-        [HttpPost]
-        public IActionResult Login(AtendenteViewModel model)
-        {
-            if (!ModelState.IsValid)
-                return View(model);
+           [HttpPost]
+          public IActionResult Login(AtendenteViewModel model)
+           {
+               if (!ModelState.IsValid)
+                   return View(model);
 
-            using (var data = new AtendenteData())
-            {
-                var user = data.Read(model);
+               using (var data = new AtendenteData())
+               {
+                   var user = data.Read(model);
 
-                if (user == null)
-                {
-                    ViewBag.Message = "Email e/ou senha incorretos!";
-                    return View(model);
-                }
+                   if (user == null)
+                   {
+                       ViewBag.Message = "Email e/ou senha incorretos!";
+                       return View(model);
+                   }
 
-                //HttpContext.Session.SetString("user", JsonSerializer.Serialize<Atendente>(user)); // Ta dando erro
+                   //HttpContext.Session.SetString("user", JsonSerializer.Serialize<Atendente>(user)); // Ta dando erro
 
-                return RedirectToAction("Index", "Produto");
-            }
+                   return RedirectToAction("Index", "Produto");
+               }
 
-        }
-
+           }
+         */
 
     }
 }

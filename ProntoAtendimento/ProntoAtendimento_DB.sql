@@ -26,7 +26,7 @@ create table pacientes
 	convenio        varchar(15)
 )
 go
-
+select * from v_pacientes
 --Enfermeiros (#Pessoa_id, senha, login)
 
 create table atendentes
@@ -99,6 +99,9 @@ begin
 	insert into medicos values (@@IDENTITY, @crm, @login, @senha)
 end
 go
+
+
+drop procedure CadAtendente
 
 create procedure CadAtendente
 (
@@ -179,7 +182,9 @@ begin
 end
 go
 
-create procedure AltMedico
+
+drop procedure AltMedico
+/*create procedure AltMedico
 (
 	@Id int, @nome varchar(50), @endereco varchar(50), @telefone varchar(14), @status int, 
 	@login varchar(14), @senha varchar(14)
@@ -188,32 +193,78 @@ as
 begin
 	update pessoas set nome = @nome, endereco = @endereco, telefone = @telefone, status = @status where Id = @Id
 	update medicos set login = @login, senha = @senha where medico_id = @Id
+end*/
+create procedure AltMedico
+(
+	@Id int, @nome varchar(50), @cpf varchar(14), @endereco varchar(50), @telefone varchar(14), 
+	@crm varchar(14),@login varchar(14), @senha varchar(14)
+)
+as
+begin
+	update pessoas set nome = @nome, cpf = @cpf, endereco = @endereco, telefone = @telefone where Id = @Id
+	update medicos set crm = @crm, login = @login, senha = @senha where medico_id = @Id
 end
 go
 
-create procedure AltAtendente
+select * from v_medicos
+
+drop procedure AltAtendente
+
+/*create procedure AltAtendente
 (
-	@Id int, @nome varchar(50), @endereco varchar(50), @telefone varchar(14), @status int, 
+	@Id int, @nome varchar(50), @cpf varchar(14), @endereco varchar(50), @telefone varchar(14), @status int, 
 	@login varchar(14), @senha varchar(14)
 )
 as
 begin
-	update pessoas set nome = @nome, endereco = @endereco, telefone = @telefone, status = @status where Id = @Id
+	update pessoas set nome = @nome, cpf = @cpf, endereco = @endereco, telefone = @telefone, status = @status where Id = @Id
+	update atendentes set login = @login, senha = @senha where atendente_id = @Id
+end*/
+
+
+create procedure AltAtendente
+(
+	@Id int, @nome varchar(50), @cpf varchar(14), @endereco varchar(50), @telefone varchar(14), 
+	@login varchar(14), @senha varchar(14)
+)
+as
+begin
+	update pessoas set nome = @nome, cpf = @cpf, endereco = @endereco, telefone = @telefone where Id = @Id
 	update atendentes set login = @login, senha = @senha where atendente_id = @Id
 end
 go
 
-create procedure AltPaciente
+select * from v_atendentes
+
+drop procedure AltPaciente
+select * from pacientes
+
+
+/*create procedure AltPaciente
 (
-	@Id int, @nome varchar(50), @endereco varchar(50), @telefone varchar(14), @status int, 
+	@Id int, @nome varchar(50), @cpf varchar(14), @endereco varchar(50), @telefone varchar(14), @status int, 
 	@convenio varchar(15)
 )
 as
 begin
-	update pessoas set nome = @nome, endereco = @endereco, telefone = @telefone, status = @status where Id = @Id
+	update pessoas set nome = @nome, cpf = @cpf, endereco = @endereco, telefone = @telefone, status = @status where Id = @Id
+	update pacientes set convenio = @convenio where paciente_id = @Id
+end*/
+
+create procedure AltPaciente
+(
+	@Id int, @nome varchar(50), @cpf varchar(14), @endereco varchar(50), @telefone varchar(14),  
+	@convenio varchar(15)
+)
+as
+begin
+	update pessoas set nome = @nome, cpf = @cpf, endereco = @endereco, telefone = @telefone where Id = @Id
 	update pacientes set convenio = @convenio where paciente_id = @Id
 end
+
 go
+
+select * from v_atendentes
 
 Create procedure AltConsulta
 (
@@ -237,9 +288,13 @@ as
 	where pes.Id = pac.paciente_id
 go
 
+
+
+drop view v_medicos
+
 create view v_medicos
 as
-	select pes.Id, pes.nome, pes.cpf, pes.endereco, pes.telefone, med.crm,
+	select pes.Id, pes.nome, pes.cpf, pes.endereco, pes.telefone, med.crm, med.login, med.senha,
 		case status
 			when 1 then 'Ativo'
 			when 2 then 'Inativo'
@@ -249,9 +304,16 @@ as
 	where pes.Id = med.medico_id
 go
 
+
+select * from v_medicos
+
+
+
+drop view v_atendentes
+
 create view v_atendentes
 as
-	select pes.Id, pes.nome, pes.cpf, pes.endereco, pes.telefone,
+	select pes.Id, pes.nome, pes.cpf, pes.endereco, pes.telefone, ate.login, ate.senha,
 		case status
 			when 1 then 'Ativo'
 			when 2 then 'Inativo'
@@ -260,6 +322,9 @@ as
 	from atendentes ate, pessoas pes 
 	where pes.Id = ate.atendente_id
 go
+
+select * from v_atendentes
+
 
 create view v_procedimentos
 as

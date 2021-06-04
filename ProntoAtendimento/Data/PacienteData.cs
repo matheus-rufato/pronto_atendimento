@@ -53,7 +53,7 @@ namespace ProntoAtendimento.Data
             {
                 SqlCommand cmd = new SqlCommand(); //cmd é um comando que permitirá executar um comando SQL
                 cmd.Connection = base.connectionDB; //Conexão com o banco de dados
-                cmd.CommandText = "v_pacientes order by nome";
+                cmd.CommandText = "select * from v_pacientes";
 
                 /*O objeto reader receberá os dados da tabela cliente,
                  * quando executado o comando SELECT (resultado do select)
@@ -70,12 +70,16 @@ namespace ProntoAtendimento.Data
                     paciente.Endereco = (string)reader["endereco"];
                     paciente.Telefone = (string)reader["telefone"];
                     paciente.Convenio = (string)reader["convenio"];
+                    //paciente.Status = (int)reader["status"];
 
 
                     lista.Add(paciente);
                 }
             }
-            catch (SqlException sqlerror) { Console.WriteLine("Erro na Leitura." + sqlerror); }
+            catch (SqlException sqlerror) 
+            {   
+                Console.WriteLine("Erro na Leitura " + sqlerror); 
+            }
             return lista;
         }
 
@@ -93,7 +97,7 @@ namespace ProntoAtendimento.Data
             cmd.Connection = base.connectionDB; //Conexão com o banco de dados
 
             //String SQL para ser executada no banco de dados
-            cmd.CommandText = @"v_pacientes WHERE Cpf = @Cpf";
+            cmd.CommandText = @"select * from v_pacientes WHERE Cpf = @Cpf";
 
             //Inserindo o valor do id recebido a string SQL
             cmd.Parameters.AddWithValue("@Cpf", cpf);
@@ -114,7 +118,8 @@ namespace ProntoAtendimento.Data
                     Cpf = (string)reader["cpf"],
                     Endereco = (string)reader["endereco"],
                     Telefone = (string)reader["telefone"],
-                    Convenio = (string)reader["convenio"]
+                    Convenio = (string)reader["convenio"],
+                    //Status = (int)reader["status"]
 
                 };
             }
@@ -136,7 +141,7 @@ namespace ProntoAtendimento.Data
             cmd.Connection = base.connectionDB; // Conexão com o banco de dados
 
             //String SQL para ser executada no banco de dados
-            cmd.CommandText = @"v_pacientes WHERE Id = @id";
+            cmd.CommandText = @"select * from v_pacientes WHERE Id = @id";
 
             //Inserindo o valor do id recebido na string SQL
             cmd.Parameters.AddWithValue("@id", id);
@@ -174,17 +179,20 @@ namespace ProntoAtendimento.Data
             cmd.Connection = base.connectionDB; // Conexão com o banco de dados
 
             //Criação da string SQL (comando SQL)
-            cmd.CommandText = @"AltPaciente(@id, @nome, @cpf, @endereco, @telefone, @status, @convenio)";
+            cmd.CommandText = @"AltPaciente @id, @nome, @cpf, @endereco, @telefone, @convenio";
+            //cmd.CommandText = @"Update pessoas set nome = @nome, cpf=@cpf, endereco = @endereco, telefone = @telefone Where Id = @id";
+            //cmd.CommandText = @"Update pacientes set convenio = @convenio  Where paciente_id = @id";
 
             //Colocando os dados recebidos pelo objeto cliente, na string SQL
-
+            //  @Id int, @nome varchar(50), @endereco varchar(50), @telefone varchar(14), @status int,
+             // @convenio varchar(15)
 
             cmd.Parameters.AddWithValue("@id", paciente.Id);
             cmd.Parameters.AddWithValue("@nome", paciente.Nome);
             cmd.Parameters.AddWithValue("@cpf", paciente.Cpf);
             cmd.Parameters.AddWithValue("@endereco", paciente.Endereco);
             cmd.Parameters.AddWithValue("@telefone", paciente.Telefone);
-            cmd.Parameters.AddWithValue("@status", paciente.Status);
+      //      cmd.Parameters.AddWithValue("@status", paciente.Status);
             cmd.Parameters.AddWithValue("@convenio", paciente.Convenio);
 
             //Execução da string SQL no banco de dados

@@ -14,7 +14,8 @@ namespace ProntoAtendimento.Controllers
     {
         public IActionResult Index(Medico novoMedico)
         {
-            return View(novoMedico);
+            using (var data = new MedicoData())
+                return View(data.Read());
         }
 
 
@@ -143,7 +144,7 @@ namespace ProntoAtendimento.Controllers
         }
 
 
-        [HttpGet]
+      /*  [HttpGet]
         public IActionResult Login()
         {
             return View(new MedicoViewModel());
@@ -170,7 +171,7 @@ namespace ProntoAtendimento.Controllers
                 return RedirectToAction("Index", "Produto");
             }
 
-        }
+        }*/
 
 
     }

@@ -1,6 +1,6 @@
-﻿@model Paciente
+﻿@model List<Paciente>
 
-<br />
+<br/>
 
 @if (@Model == null)
 {
@@ -8,22 +8,24 @@
 }
 else
 {
-    <h3>@ViewBag.Mensagem @Model.Nome</h3>
-    <table class="table table-hover">
+    // <h3>@ViewBag.Mensagem @Model.Nome</h3>
+<table class="table table-hover">
+    @foreach (var pacie in Model)
+
+    {
         <tr>
-            <td>@Model.Nome</td>
-            <td>@Model.Endereco</td>
-            <td>@Model.Telefone</td>
-            <td>@Model.Convenio</td>
+            <td>@pacie.Id</td>
+            <td>@pacie.Nome</td>
+            <td>@pacie.Endereco</td>
+            <td>@pacie.Telefone</td>
+            <td>@pacie.Convenio</td>
             <td>
-                <a class="btn btn-sm btn-warning"
-                   href="paciente/update/@Model.Cpf">Editar</a>
-            </td>
-            <td>
-                <a class="btn btn-primary"
-                   href="paciente/create">Novo</a>
+                <a class="btn btn-sm btn-danger" href="/paciente/delete/@pacie.Id">Apagar</a>
+                <a class="btn btn-sm btn-warning" href="/paciente/update/@pacie.Id">Editar</a>
             </td>
         </tr>
-    </table>
+
+      }
+ </table>
 }
 <a class="btn btn-primary" href="paciente/create">Adicionar</a>

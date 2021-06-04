@@ -14,7 +14,10 @@ namespace ProntoAtendimento.Controllers
     {
         public IActionResult Index(Paciente novoPaciente)
         {
-            return View(novoPaciente);
+
+            using (var data = new PacienteData())
+                return View(data.Read());
+            
         }
 
 
@@ -29,7 +32,7 @@ namespace ProntoAtendimento.Controllers
         public IActionResult Create(IFormCollection paciente)
         {
             string nome = paciente["Nome"];
-            string cpf = paciente["CPF"];
+            string cpf = paciente["Cpf"];
             string endereco = paciente["Endereco"];
             string telefone = paciente["Telefone"];
             string convenio = paciente["Convenio"];
@@ -51,6 +54,7 @@ namespace ProntoAtendimento.Controllers
              }*/
 
             var novoPaciente = new Paciente();
+            
             novoPaciente.Nome = paciente["Nome"];
             novoPaciente.Cpf = paciente["Cpf"];
             novoPaciente.Endereco = paciente["Endereco"];
@@ -60,6 +64,7 @@ namespace ProntoAtendimento.Controllers
 
             using (var data = new PacienteData())
                 data.Create(novoPaciente);
+            
 
             return RedirectToAction("Index", novoPaciente);
         }
@@ -69,7 +74,7 @@ namespace ProntoAtendimento.Controllers
         public IActionResult Read(IFormCollection paciente)
         {
             string nome = paciente["Nome"];
-            string cpf = paciente["CPF"];
+            string cpf = paciente["Cpf"];
             string endereco = paciente["Endereco"];
             string telefone = paciente["Telefone"];
             string convenio = paciente["Convenio"];
@@ -90,17 +95,17 @@ namespace ProntoAtendimento.Controllers
 
                 using (var data = new PacienteData())
                     p = data.Read(pac.Cpf);
-                /*
-                if (p.Senha == pac.Senha)
+                
+                if (p.Cpf == pac.Cpf)
                 {
                     ViewBag.Mensagem = "Olá";
-                    return View("Index", a);
+                    return View("Index", p);
                 }
                 else
                 {
                     ViewBag.Mensagem = "Usuário ou senha inválidos";
                     return View("Index", null);
-                }*/
+                }
 
             }
 
@@ -135,7 +140,7 @@ namespace ProntoAtendimento.Controllers
             using (var data = new PacienteData())
                 data.Update(paciente);
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", paciente);
         }
 
 

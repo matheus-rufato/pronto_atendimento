@@ -23,7 +23,7 @@ namespace ProntoAtendimento.Data
                 //Conectando com o banco de dados
                 cmd.Connection = base.connectionDB;
                 //Criando a string SQL
-                cmd.CommandText = @"CadMedico(@nome, @cpf, @endereco, @telefone,@crm, @login, @senha)";
+                cmd.CommandText = @"CadMedico @nome, @cpf, @endereco, @telefone,@crm, @login, @senha";
 
 
                 //Colocando os dados recebidos pelo objeto cliente, na string SQL
@@ -45,7 +45,7 @@ namespace ProntoAtendimento.Data
              * com vários registros (no caso todos os registros da tabela) 
              * caso a tabela esteja vazia ele retornará uma lista vazia
              */
-            public List<Medico> Read(MedicoViewModel model)
+            public List<Medico> Read()
             {
                 List<Medico> lista = null;
 
@@ -53,7 +53,7 @@ namespace ProntoAtendimento.Data
                 {
                     SqlCommand cmd = new SqlCommand(); //cmd é um comando que permitirá executar um comando SQL
                     cmd.Connection = base.connectionDB; //Conexão com o banco de dados
-                    cmd.CommandText = "v_medicos order by nome";
+                    cmd.CommandText = "select * from v_medicos order by nome";
 
                 /*O objeto reader receberá os dados da tabela cliente,
                  * quando executado o comando SELECT (resultado do select)
@@ -96,7 +96,7 @@ namespace ProntoAtendimento.Data
                 cmd.Connection = base.connectionDB; //Conexão com o banco de dados
 
                 //String SQL para ser executada no banco de dados
-                cmd.CommandText = @"v_medicos WHERE Id = @id";
+                cmd.CommandText = @" select * from v_medicos WHERE Id = @id";
 
                 //Inserindo o valor do id recebido a string SQL
                 cmd.Parameters.AddWithValue("@Id", id);
@@ -139,7 +139,7 @@ namespace ProntoAtendimento.Data
                 cmd.Connection = base.connectionDB; // Conexão com o banco de dados
 
                 //String SQL para ser executada no banco de dados
-                cmd.CommandText = @"v_medicos WHERE cpf = @cpf";
+                cmd.CommandText = @"select * from v_medicos WHERE cpf = @cpf";
 
                 //Inserindo o valor do id recebido na string SQL
                 cmd.Parameters.AddWithValue("@cpf", cpf);
@@ -177,7 +177,7 @@ namespace ProntoAtendimento.Data
                 cmd.Connection = base.connectionDB; // Conexão com o banco de dados
 
                 //Criação da string SQL (comando SQL)
-                cmd.CommandText = @"AltMedico(@id, @nome, @cpf, @endereco, @telefone, @status, @crm, @login, @senha)";
+                cmd.CommandText = @"AltMedico @id, @nome, @cpf, @endereco, @telefone, @crm, @login, @senha";
 
                 //Colocando os dados recebidos pelo objeto cliente, na string SQL
 
@@ -187,7 +187,7 @@ namespace ProntoAtendimento.Data
                 cmd.Parameters.AddWithValue("@cpf", medico.Cpf);
                 cmd.Parameters.AddWithValue("@endereco", medico.Endereco);
                 cmd.Parameters.AddWithValue("@telefone", medico.Telefone);
-                cmd.Parameters.AddWithValue("@status", medico.Status);
+               // cmd.Parameters.AddWithValue("@status", medico.Status);
                 cmd.Parameters.AddWithValue("@crm", medico.CRM);
                 cmd.Parameters.AddWithValue("@login", medico.Login);
                 cmd.Parameters.AddWithValue("@senha", medico.Senha);

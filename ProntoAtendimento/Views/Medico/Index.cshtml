@@ -1,30 +1,29 @@
-﻿@model Medico
+﻿@model List<Medico>
 
 <br />
 
 @if (@Model == null)
 {
-    <h3>@ViewBag.Mensagem</h3>
-}
+<h3>@ViewBag.Mensagem</h3> }
 else
 {
-    <h3>@ViewBag.Mensagem @Model.Nome</h3>
-    <table class="table table-hover">
-        <tr>
-            <td>@Model.Nome</td>
-            <td>@Model.Endereco</td>
-            <td>@Model.Telefone</td>
-            <td>@Model.Login</td>
-            <td>@Model.CRM</td>
-            <td>
-                <a class="btn btn-sm btn-warning"
-                   href="medico/update/@Model.Id">Editar</a>
-            </td>
-            <td>
-                <a class="btn btn-primary"
-                   href="medico/create">Novo</a>
-            </td>
-        </tr>
-    </table>
+// <h3>@ViewBag.Mensagem @Model.Nome</h3>
+<table class="table table-hover">
+    @foreach (var medic in Model)
+
+    {
+<tr>
+    <td>@medic.Id</td>
+    <td>@medic.Nome</td>
+    <td>@medic.Endereco</td>
+    <td>@medic.Telefone</td>
+    <td>@medic.Login</td>
+    <td>@medic.Senha</td>
+    <td>
+        <a class="btn btn-sm btn-danger" href="/medico/delete/@medic.Id">Apagar</a>
+        <a class="btn btn-sm btn-warning" href="/medico/update/@medic.Id">Editar</a>
+    </td>
+</tr>
 }
+</table>}
 <a class="btn btn-primary" href="medico/create">Adicionar</a>

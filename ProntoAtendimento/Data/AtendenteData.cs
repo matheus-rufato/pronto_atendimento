@@ -22,7 +22,7 @@ namespace ProntoAtendimento.Data
             //Conectando com o banco de dados
             cmd.Connection = base.connectionDB;
             //Criando a string SQL
-            cmd.CommandText = @"CadAtendente(@nome, @cpf, @endereco, @telefone,@login, @senha)";
+            cmd.CommandText = @"CadAtendente @nome, @cpf, @endereco, @telefone,@login, @senha";
 
 
             //Colocando os dados recebidos pelo objeto cliente, na string SQL
@@ -44,7 +44,7 @@ namespace ProntoAtendimento.Data
          * com vários registros (no caso todos os registros da tabela) 
          * caso a tabela esteja vazia ele retornará uma lista vazia
          */
-        public List<Atendente> Read(AtendenteViewModel model)
+        public List<Atendente> Read()
         {
             List<Atendente> lista = null;
 
@@ -52,7 +52,7 @@ namespace ProntoAtendimento.Data
             {
                 SqlCommand cmd = new SqlCommand(); //cmd é um comando que permitirá executar um comando SQL
                 cmd.Connection = base.connectionDB; //Conexão com o banco de dados
-                cmd.CommandText = "v_atendentes order by nome";
+                cmd.CommandText = "select * from v_atendentes order by nome";
 
                 /*O objeto reader receberá os dados da tabela cliente,
                  * quando executado o comando SELECT (resultado do select)
@@ -93,7 +93,7 @@ namespace ProntoAtendimento.Data
             cmd.Connection = base.connectionDB; //Conexão com o banco de dados
 
             //String SQL para ser executada no banco de dados
-            cmd.CommandText = @"v_atendentes WHERE Id = @id ";
+            cmd.CommandText = @"select * from v_atendentes WHERE Id = @id ";
 
             //Inserindo o valor do id recebido a string SQL
             cmd.Parameters.AddWithValue("@Id", id);
@@ -176,7 +176,7 @@ namespace ProntoAtendimento.Data
             cmd.Connection = base.connectionDB; // Conexão com o banco de dados
 
             //Criação da string SQL (comando SQL)
-            cmd.CommandText = @"AltAtendente(@id, @nome, @cpf @endereco, @telefone, @status, @login, @senha)";
+            cmd.CommandText = @"AltAtendente @id, @nome, @cpf, @endereco, @telefone, @login, @senha";
 
             //Colocando os dados recebidos pelo objeto cliente, na string SQL
 
@@ -186,7 +186,7 @@ namespace ProntoAtendimento.Data
             cmd.Parameters.AddWithValue("@cpf", atendente.Cpf);
             cmd.Parameters.AddWithValue("@endereco", atendente.Endereco);
             cmd.Parameters.AddWithValue("@telefone", atendente.Telefone);
-            cmd.Parameters.AddWithValue("@status", atendente.Status);
+          //  cmd.Parameters.AddWithValue("@status", atendente.Status);
             cmd.Parameters.AddWithValue("@login", atendente.Login);
             cmd.Parameters.AddWithValue("@senha", atendente.Senha);
 

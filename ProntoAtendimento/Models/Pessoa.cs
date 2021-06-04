@@ -41,6 +41,8 @@ namespace ProntoAtendimento.Models
 
         public int Status { get; set; }
 
+      
+
 
 
     }

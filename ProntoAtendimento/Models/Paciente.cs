@@ -16,6 +16,8 @@ namespace ProntoAtendimento.Models
         [MinLength(5)]
         [MaxLength(15)]
         public string Convenio { get; set; }
+
+
         
 
 

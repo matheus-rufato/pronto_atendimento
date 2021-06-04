@@ -390,4 +390,6 @@ select * from consultas
 select * from proc_utilizas
 
 delete from proc_utilizas where consulta_nr=1
-delete from consultas where paciente_id=7help consultas
+delete from consultas where paciente_id=7 
+
+help consultas

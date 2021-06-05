@@ -216,5 +216,60 @@ namespace ProntoAtendimento.Data
             //Execução da string SQL no banco de dados
             cmd.ExecuteNonQuery();
         }
+
+
+        public Atendente Read(AtendenteViewModel model)
+        {
+            //declarando um objeto cliente e inicializando como null
+
+            Atendente atendente = null;
+
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = base.connectionDB;//conexão com o Banco de Dados
+
+            //string SQL para ser executada no Banco de Dados
+            cmd.CommandText = @"Select * from v_atendentes Where login = @login and senha = @senha";
+
+            //inserindo o valor do id recebido a string SQL
+            cmd.Parameters.AddWithValue("@login", model.Login);
+            cmd.Parameters.AddWithValue("@senha", model.Senha);
+
+            //Executando o comando SQL no Banco de Dados
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            //verificando se, após a consulta, retornou um registro
+            if (reader.Read())
+            {
+                //instanciando o objeto cliente declarado anteriormente
+                //e colocando os dados do registro da tabela no objeto
+
+                atendente = new Atendente
+                {
+                    Id = (int)reader["Id"],
+                    Nome = (string)reader["nome"],
+                    Telefone = (string)reader["telefone"],
+                    Login = (string)reader["login"]
+                };
+            }
+
+            //retornando o objeto cliente, que pode ser null ou com as informações
+            //recebidas na consulta
+            return atendente;
+        }//consulta id
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 }

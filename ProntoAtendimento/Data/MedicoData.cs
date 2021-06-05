@@ -219,12 +219,49 @@ namespace ProntoAtendimento.Data
             cmd.ExecuteNonQuery();
             cmd.CommandText = @"DELETE FROM pessoas WHERE Id=@id2";
             cmd.Parameters.AddWithValue("@id2", id);
-        }
+            }
+
+        public Medico Read(MedicoViewModel model)
+        {
+            //declarando um objeto cliente e inicializando como null
+
+            Medico medico = null;
+
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = base.connectionDB;//conexão com o Banco de Dados
+
+            //string SQL para ser executada no Banco de Dados
+            cmd.CommandText = @"Select * from v_medicos Where login = @login and senha = @senha";
+
+            //inserindo o valor do id recebido a string SQL
+            cmd.Parameters.AddWithValue("@login", model.Login);
+            cmd.Parameters.AddWithValue("@senha", model.Senha);
+
+            //Executando o comando SQL no Banco de Dados
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            //verificando se, após a consulta, retornou um registro
+            if (reader.Read())
+            {
+                //instanciando o objeto cliente declarado anteriormente
+                //e colocando os dados do registro da tabela no objeto
+
+                medico = new Medico
+                {
+                    Id = (int)reader["Id"],
+                    Nome = (string)reader["nome"],
+                    Telefone = (string)reader["telefone"],
+                    Login = (string)reader["login"]
+                };
+            }
+
+            //retornando o objeto cliente, que pode ser null ou com as informações
+            //recebidas na consulta
+            return medico;
+        }//consulta id
 
 
 
 
-
-
-        }
     }
+}

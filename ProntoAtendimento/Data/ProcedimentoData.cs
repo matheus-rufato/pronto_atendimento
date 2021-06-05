@@ -97,7 +97,7 @@ namespace ProntoAtendimento.Data
         {
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = base.connectionDB;
-            cmd.CommandText = @"DELETE FROM procedimentos WHERE Id=@id";   //ARRUMAR
+            cmd.CommandText = @"DELETE FROM procedimentos WHERE Id=@id";   
 
             //Colocando os dados recebidos pelo objeto cliente, na string SQL
             cmd.Parameters.AddWithValue("@id", id);

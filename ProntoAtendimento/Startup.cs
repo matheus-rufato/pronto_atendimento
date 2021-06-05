@@ -50,7 +50,7 @@ namespace ProntoAtendimento
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Paciente}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

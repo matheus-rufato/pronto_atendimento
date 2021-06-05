@@ -18,9 +18,9 @@ else
 
     </tr>
 
-        @foreach (var medic in Model)
+    @foreach (var medic in Model)
 
-        {
+    {
 <tr>
     <td>@medic.Id</td>
     <td>@medic.Nome</td>
@@ -29,11 +29,10 @@ else
     <td>@medic.Status</td>
 
     <td>
-        <a class="btn btn-sm btn-danger" href="/medico/delete/@medic.Id">Apagar</a>
-        <a class="btn btn-sm btn-warning" href="/medico/update/@medic.Id">Editar</a>
-        <a class="btn btn-sm btn-info" href="/medico/create/@medic.Id">Adicionar</a>
+        
+        <a class="btn btn-sm btn-warning" href="/medico/update/@medic.Id">Selecionar</a>
+        
     </td>
-</tr>
-}
+</tr>}
 </table>}
-<a class="btn btn-primary" href="/home/editar">Voltar</a>
+<a class="btn btn-primary" href="/home/escolherconsulta">Voltar</a>

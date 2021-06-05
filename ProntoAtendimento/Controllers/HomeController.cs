@@ -18,15 +18,85 @@ namespace ProntoAtendimento.Controllers
             _logger = logger;
         }
 
+
         public IActionResult Index()
         {
             return View();
         }
 
+
+        [HttpGet]
+        public IActionResult Inicial()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Inicial(Home home)
+        {
+
+
+            if (home.opcao == 1)
+            { return RedirectToAction("Editar", "Home"); }
+            else
+            { return RedirectToAction("EscolherConsulta", "Home"); }
+        }
+
+
+        [HttpGet]
+        public IActionResult Editar()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Editar(Home home)
+        {
+           
+
+
+            if (home.opcao2 == 1)
+            { return RedirectToAction("Index", "Medico"); }
+            else if (home.opcao2 == 2)
+            { return RedirectToAction("Index", "Atendente"); }
+            else if (home.opcao2 == 3)
+            { return RedirectToAction("Index", "Paciente"); }
+            else 
+            { return RedirectToAction("Index", "Procedimento"); }
+
+            
+
+        }
+
+
+        [HttpGet]
+        public IActionResult EscolherConsulta()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        public IActionResult EscolherConsulta(Home home)
+        {
+            if (home.opcao3 == 1)
+            { return RedirectToAction("Consulta", "Medico"); }
+            else 
+            { return RedirectToAction("Consulta", "Paciente"); }
+
+        }
+
+
+
+
         public IActionResult Privacy()
         {
             return View();
         }
+
+
+        
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

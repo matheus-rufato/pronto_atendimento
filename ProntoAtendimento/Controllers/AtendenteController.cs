@@ -143,7 +143,7 @@ namespace ProntoAtendimento.Controllers
         }
 
 
-        /* [HttpGet]
+           [HttpGet]
             public IActionResult Login()
            {
                return View(new AtendenteViewModel());
@@ -167,11 +167,11 @@ namespace ProntoAtendimento.Controllers
 
                    //HttpContext.Session.SetString("user", JsonSerializer.Serialize<Atendente>(user)); // Ta dando erro
 
-                   return RedirectToAction("Index", "Produto");
+                   return RedirectToAction("Inicial","Home");
                }
 
            }
-         */
+         
 
     }
 }

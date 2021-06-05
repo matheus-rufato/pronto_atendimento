@@ -18,6 +18,13 @@ namespace ProntoAtendimento.Controllers
                 return View(data.Read());
         }
 
+        public IActionResult Consulta(Medico novoMedico)
+        {
+            using (var data = new MedicoData())
+                return View(data.Read());
+        }
+
+
 
         [HttpGet]
         public IActionResult Create()
@@ -145,7 +152,7 @@ namespace ProntoAtendimento.Controllers
         }
 
 
-      /*  [HttpGet]
+        [HttpGet]
         public IActionResult Login()
         {
             return View(new MedicoViewModel());
@@ -169,10 +176,10 @@ namespace ProntoAtendimento.Controllers
 
                // HttpContext.Session.SetString("user", JsonSerializer.Serialize<Atendente>(user)); // Ta dando erro
 
-                return RedirectToAction("Index", "Produto");
+                return RedirectToAction("Index", "Procedimento");
             }
 
-        }*/
+        }
 
 
     }

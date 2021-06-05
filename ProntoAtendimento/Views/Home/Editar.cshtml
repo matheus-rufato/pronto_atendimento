@@ -1,0 +1,28 @@
+﻿@model Home
+
+<form asp-controller="Home" asp-action="Editar" method="POST">
+
+
+
+
+
+    <div class="form-group">
+        <label>Selecione uma ação</label>
+        <select asp-for="opcao2" class="form-control">
+            <option value=1>Medico</option>
+            <option value=2>Atendente</option>
+            <option value=3>Paciente</option>
+            <option value=4>Procedimento</option>
+        </select>
+    </div>
+
+
+
+
+    <button class="btn btn-primary">Confirmar</button>
+
+</form>
+
+
+
+<a class="btn btn-info" href="/home/inicial">Voltar</a>

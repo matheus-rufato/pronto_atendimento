@@ -174,9 +174,9 @@ namespace ProntoAtendimento.Controllers
                     return View(model);
                 }
 
-               // HttpContext.Session.SetString("user", JsonSerializer.Serialize<Atendente>(user)); // Ta dando erro
+                // HttpContext.Session.SetString("user", JsonSerializer.Serialize<Atendente>(user)); // Ta dando erro
 
-                return RedirectToAction("Index", "Procedimento");
+                return RedirectToAction("Selection", "Procedimento");
             }
 
         }

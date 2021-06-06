@@ -219,3 +219,13 @@ C:\Users\Henri\Desktop\InterProjeto - Copia\pronto_atendimento\ProntoAtendimento
 C:\Users\Henri\Desktop\InterProjeto - Copia\pronto_atendimento\ProntoAtendimento\obj\Debug\netcoreapp3.1\Razor\Views\Home\Editar.cshtml.g.cs
 C:\Users\Henri\Desktop\InterProjeto - Copia\pronto_atendimento\ProntoAtendimento\obj\Debug\netcoreapp3.1\Razor\Views\Home\EscolherConsulta.cshtml.g.cs
 C:\Users\Henri\Desktop\InterProjeto - Copia\pronto_atendimento\ProntoAtendimento\obj\Debug\netcoreapp3.1\Razor\Views\Paciente\Consulta.cshtml.g.cs
+C:\Users\Henri\Desktop\InterProjeto\pronto_atendimento\ProntoAtendimento\obj\Debug\netcoreapp3.1\Razor\Views\Atendente\Inicial.cshtml.g.cs
+C:\Users\Henri\Desktop\InterProjeto\pronto_atendimento\ProntoAtendimento\obj\Debug\netcoreapp3.1\Razor\Views\Home\Editar.cshtml.g.cs
+C:\Users\Henri\Desktop\InterProjeto\pronto_atendimento\ProntoAtendimento\obj\Debug\netcoreapp3.1\Razor\Views\Home\EscolherConsulta.cshtml.g.cs
+C:\Users\Henri\Desktop\InterProjeto\pronto_atendimento\ProntoAtendimento\obj\Debug\netcoreapp3.1\Razor\Views\Home\Inicial.cshtml.g.cs
+C:\Users\Henri\Desktop\InterProjeto\pronto_atendimento\ProntoAtendimento\obj\Debug\netcoreapp3.1\Razor\Views\ListaProcedimentos\Index.cshtml.g.cs
+C:\Users\Henri\Desktop\InterProjeto\pronto_atendimento\ProntoAtendimento\obj\Debug\netcoreapp3.1\Razor\Views\ListaProcedimentos\Meus_pedidos.cshtml.g.cs
+C:\Users\Henri\Desktop\InterProjeto\pronto_atendimento\ProntoAtendimento\obj\Debug\netcoreapp3.1\Razor\Views\Medico\Consulta.cshtml.g.cs
+C:\Users\Henri\Desktop\InterProjeto\pronto_atendimento\ProntoAtendimento\obj\Debug\netcoreapp3.1\Razor\Views\Paciente\Consulta.cshtml.g.cs
+C:\Users\Henri\Desktop\InterProjeto\pronto_atendimento\ProntoAtendimento\obj\Debug\netcoreapp3.1\Razor\Views\Paciente\Inicial.cshtml.g.cs
+C:\Users\Henri\Desktop\InterProjeto\pronto_atendimento\ProntoAtendimento\obj\Debug\netcoreapp3.1\Razor\Views\Procedimento\Selection.cshtml.g.cs

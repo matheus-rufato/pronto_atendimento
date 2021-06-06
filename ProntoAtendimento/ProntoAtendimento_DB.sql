@@ -137,6 +137,8 @@ end
 go
 
 
+exec CadConsulta 7, 4, 1, 150, 1
+
 create procedure CadConsulta
 (
 	@paciente int, @medico int, @atendente int, @valor money, @status int, @diagnostico varchar(max) = null
@@ -391,5 +393,8 @@ select * from proc_utilizas
 
 delete from proc_utilizas where consulta_nr=1
 delete from consultas where paciente_id=7 
+
+select * from v_medicos
+select * from v_atendentes
 
 help consultas

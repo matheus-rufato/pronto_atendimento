@@ -1,4 +1,6 @@
-﻿
+﻿@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@using Microsoft.AspNetCore.Http
+@using System.Text.Json
 
 <!DOCTYPE html>
 <html lang="en">
@@ -38,6 +40,11 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Medico"
                                asp-action="Index">Medico</a>
                         </li>
+
+                        
+
+
+
                     </ul>
                 </div>
             </div>

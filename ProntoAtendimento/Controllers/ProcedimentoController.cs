@@ -25,6 +25,15 @@ namespace ProntoAtendimento.Controllers
             //data.Read() chama a execução do método Read (Select + From Produtos)
         }
 
+        public IActionResult Selection()
+        {
+            //Criando um objeto data da classe ProdutoData
+            using (var data = new ProcedimentoData())
+                return View(data.Read());
+            //data.Read() chama a execução do método Read (Select + From Produtos)
+        }
+
+
         [HttpGet]
         public IActionResult Create()
         {

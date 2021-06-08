@@ -228,7 +228,7 @@ namespace ProntoAtendimento.Data
             cmd.Connection = base.connectionDB;//conexão com o Banco de Dados
 
             //string SQL para ser executada no Banco de Dados
-            cmd.CommandText = @"Select * from v_atendentes Where login = @login and senha = @senha";
+            cmd.CommandText = @"select * from atendentes where login = @login and senha = @senha";
 
             //inserindo o valor do id recebido a string SQL
             cmd.Parameters.AddWithValue("@login", model.Login);
@@ -245,10 +245,9 @@ namespace ProntoAtendimento.Data
 
                 atendente = new Atendente
                 {
-                    Id = (int)reader["Id"],
-                    Nome = (string)reader["nome"],
-                    Telefone = (string)reader["telefone"],
-                    Login = (string)reader["login"]
+                    Id = (int)reader["atendente_id"],
+                    Login = (string)reader["login"],
+                    Senha = (string)reader["senha"]
                 };
             }
 

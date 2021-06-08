@@ -20,6 +20,15 @@ namespace ProntoAtendimento.Controllers
             
         }
 
+
+        public IActionResult Listagem(Paciente novoPaciente)
+        {
+
+            using (var data = new PacienteData())
+                return View(data.ReadAll());
+
+        }
+
         public IActionResult Consulta(Paciente novoPaciente)
         {
 

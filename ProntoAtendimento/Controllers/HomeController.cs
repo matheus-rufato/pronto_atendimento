@@ -56,15 +56,17 @@ namespace ProntoAtendimento.Controllers
 
 
             if (home.opcao2 == 1)
-            { return RedirectToAction("Index", "Medico"); }
+            { return RedirectToAction("Listagem", "Medico"); }
             else if (home.opcao2 == 2)
             { return RedirectToAction("Index", "Atendente"); }
             else if (home.opcao2 == 3)
-            { return RedirectToAction("Index", "Paciente"); }
-            else 
+            { return RedirectToAction("Listagem", "Paciente"); }
+            else if (home.opcao2 == 4)
             { return RedirectToAction("Index", "Procedimento"); }
+            else 
+            { return RedirectToAction("Index", "Consulta"); }
 
-            
+
 
         }
 

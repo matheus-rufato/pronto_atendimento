@@ -17,7 +17,7 @@ namespace ProntoAtendimento.Data
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = base.connectionDB;
                 cmd.Transaction = transaction;
-                cmd.CommandText = "CadConsulta(@paciente, @medico, @atendente, @valor, @status, @diagnostico)";
+                cmd.CommandText = "CadConsulta @paciente, @medico, @atendente, @valor, @status, @diagnostico";
 
                 cmd.Parameters.AddWithValue("@paciente", consulta.IdPaciente);
                 cmd.Parameters.AddWithValue("@medico", consulta.IdMedico);
@@ -39,7 +39,7 @@ namespace ProntoAtendimento.Data
                     SqlCommand cmdItem = new SqlCommand();
                     cmdItem.Connection = base.connectionDB;
                     cmdItem.Transaction = transaction;
-                    cmdItem.CommandText = @"CadProdUtil(@consulta, @procedimento, @obs)";
+                    cmdItem.CommandText = @"CadProdUtil @consulta, @procedimento, @obs";
 
                     cmdItem.Parameters.AddWithValue("@consulta", Nr);
                     cmdItem.Parameters.AddWithValue("@procedimento", procedimentos.Procedimento.IdProcedimento);
@@ -58,27 +58,45 @@ namespace ProntoAtendimento.Data
                 transaction.Rollback();
             }
         }
-
-        public List<Consulta> Read(string cpf)
+        public List<Consulta> Read()
         {
             List<Consulta> lista = new List<Consulta>();
 
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = base.connectionDB;
-            cmd.CommandText = @"SELECT * FROM v_consultas WHERE cpf = @cpf";
-
-            cmd.Parameters.AddWithValue(@"cpf", cpf);
+            cmd.CommandText = @"SELECT * FROM v_consultas where Situação != 'Encerrada'";
 
             SqlDataReader reader = cmd.ExecuteReader();
+            Consulta consulta = null;
 
             while (reader.Read())
             {
-                Consulta consulta = new Consulta()
+                consulta = new Consulta();
+                consulta.Medico = new Medico();
+                consulta.Paciente = new Paciente();
+
+                consulta.Nr = (int)reader["nr"];
+                consulta.Medico.Nome = (string)reader["Nome Médico"];
+                consulta.Medico.CRM = (string)reader["crm"];
+                consulta.Paciente.Nome = (string)reader["Nome Paciente"];
+                consulta.Paciente.Cpf = (string)reader["cpf"];
+                consulta.Paciente.Convenio = (string)reader["convenio"];
+                consulta.Data = (DateTime)reader["data"];
+                consulta.Diagnostico = (string)reader["diagnostico"];
+                consulta.Status = (string)reader["Situação"];
+
+
+
+
+
+
+
+                /*Consulta consulta = new Consulta()
                 {
                     Nr = (int)reader["nr"],
                     Status = (string)reader["Situação"],
                     Data = (DateTime)reader["data"],
-                    Diagnostico = (string)reader["diagnostico"],
+                    Diagnostico = (string)reader["Diagnostico"],
                     Valor = (decimal)reader["Valor Total"]
                 };
                 consulta.Paciente = new Paciente()
@@ -91,10 +109,159 @@ namespace ProntoAtendimento.Data
                 {
                     Nome = (string)reader["Nome Médico"],
                     CRM = (string)reader["crm"]
-                };
+                };*/
                 lista.Add(consulta);
             }
             return lista;
+        }
+
+
+
+        public List<Consulta> ReadAll()
+        {
+            List<Consulta> lista = new List<Consulta>();
+
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = base.connectionDB;
+            cmd.CommandText = @"SELECT * FROM v_consultas ";
+
+            SqlDataReader reader = cmd.ExecuteReader();
+            Consulta consulta = null;
+
+            while (reader.Read())
+            {
+                consulta = new Consulta();
+                consulta.Medico = new Medico();
+                consulta.Paciente = new Paciente();
+
+                consulta.Nr = (int)reader["nr"];
+                consulta.Medico.Nome = (string)reader["Nome Médico"];
+                consulta.Medico.CRM = (string)reader["crm"];
+                consulta.Paciente.Nome = (string)reader["Nome Paciente"];
+                consulta.Paciente.Cpf = (string)reader["cpf"];
+                consulta.Paciente.Convenio = (string)reader["convenio"];
+                consulta.Data = (DateTime)reader["data"];
+                consulta.Diagnostico = (string)reader["diagnostico"];
+                consulta.Status = (string)reader["Situação"];
+
+
+
+
+
+
+
+                /*Consulta consulta = new Consulta()
+                {
+                    Nr = (int)reader["nr"],
+                    Status = (string)reader["Situação"],
+                    Data = (DateTime)reader["data"],
+                    Diagnostico = (string)reader["Diagnostico"],
+                    Valor = (decimal)reader["Valor Total"]
+                };
+                consulta.Paciente = new Paciente()
+                {
+                    Nome = (string)reader["Nome Paciente"],
+                    Cpf = (string)reader["cpf"],
+                    Convenio = (string)reader["convenio"]
+                };
+                consulta.Medico = new Medico()
+                {
+                    Nome = (string)reader["Nome Médico"],
+                    CRM = (string)reader["crm"]
+                };*/
+                lista.Add(consulta);
+            }
+            return lista;
+        }
+
+
+
+
+        public List<Consulta> Read(string cpf)
+        {
+            List<Consulta> lista = new List<Consulta>();
+
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = base.connectionDB;
+            cmd.CommandText = @"SELECT * FROM v_consultas WHERE cpf = @cpf";
+
+            cmd.Parameters.AddWithValue(@"cpf", cpf);
+
+            SqlDataReader reader = cmd.ExecuteReader();
+            Consulta consulta = null;
+
+            while (reader.Read())
+            {
+                consulta = new Consulta();
+                consulta.Medico = new Medico();
+                consulta.Paciente = new Paciente();
+
+                consulta.Nr = (int)reader["nr"];
+                consulta.Medico.Nome = (string)reader["Nome Médico"];
+                consulta.Medico.CRM = (string)reader["crm"];
+                consulta.Paciente.Nome = (string)reader["Nome Paciente"];
+                consulta.Paciente.Cpf = (string)reader["cpf"];
+                consulta.Paciente.Convenio = (string)reader["convenio"];
+                consulta.Data = (DateTime)reader["data"];
+                consulta.Diagnostico = (string)reader["diagnostico"];
+                consulta.Status = (string)reader["Situação"];
+                lista.Add(consulta);
+            }
+            return lista;
+        }
+
+        public Consulta Read(int nr)
+        {
+            Consulta consulta = null;
+
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = base.connectionDB;
+            cmd.CommandText = @"select * from v_consultas where nr = @Nr and Situação != 'Encerrada'";
+            cmd.Parameters.AddWithValue("@nr", nr);
+
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            if (reader.Read())
+            {
+                consulta = new Consulta();
+                consulta.Medico = new Medico();
+                consulta.Paciente = new Paciente();
+
+                consulta.Nr = (int)reader["nr"];
+                consulta.Medico.Nome = (string)reader["Nome Médico"];
+                consulta.Medico.CRM = (string)reader["crm"];
+                consulta.Paciente.Nome = (string)reader["Nome Paciente"];
+                consulta.Paciente.Cpf = (string)reader["cpf"];
+                consulta.Paciente.Convenio = (string)reader["convenio"];
+                consulta.Data = (DateTime)reader["data"];
+                consulta.Diagnostico = (string)reader["diagnostico"];
+                consulta.Status = (string)reader["Situação"];
+            }
+
+            return consulta;
+        }
+
+        public void Update(Consulta consulta)
+        {
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = base.connectionDB;
+
+            cmd.CommandText = @"AltConsulta @nr, @status, @diagnostico";
+
+            cmd.Parameters.AddWithValue("@nr", consulta.Nr);
+            cmd.Parameters.AddWithValue("@status", Convert.ToInt32(consulta.Status));
+            cmd.Parameters.AddWithValue("@diagnostico", consulta.Diagnostico);
+
+            cmd.ExecuteNonQuery();
+        }
+
+        public void Delete(int nr)
+        {
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = base.connectionDB;
+            cmd.CommandText = @"delete c from consulta c where nr = @nr and status != 2";
+            cmd.Parameters.AddWithValue("@Nr", nr);
+            cmd.ExecuteNonQuery();
         }
     }
 }

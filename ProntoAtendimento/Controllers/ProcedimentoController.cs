@@ -73,17 +73,23 @@ namespace ProntoAtendimento.Controllers
 
         public IActionResult Delete(int id)
         {
-            using (var data = new ProcedimentoData())
-                data.Delete(id);
-
-            return RedirectToAction("Index");
+            ItensUtilizados procUtizas = new ItensUtilizados();
+            if(procUtizas.IdProcedmento == id)
+            {
+                using (var data = new ProcedimentoData())
+                    data.Delete(id);
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                ViewBag.Mensagem = "O procedimento não foi utilizado";
+                return View("Index");
+            }
         }
 
         [HttpGet]
         public IActionResult Update(int id)
-        {
-            
-
+        {           
             using (var data = new ProcedimentoData())
                 return View(data.Read(id));
         }

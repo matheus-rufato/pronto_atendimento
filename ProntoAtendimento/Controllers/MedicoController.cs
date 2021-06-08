@@ -18,13 +18,23 @@ namespace ProntoAtendimento.Controllers
                 return View(data.Read());
         }
 
+        public IActionResult Listagem(Medico novoMedico)
+        {
+            using (var data = new MedicoData())
+                return View(data.ReadAll());
+        }
+
         public IActionResult Consulta(Medico novoMedico)
         {
             using (var data = new MedicoData())
                 return View(data.Read());
         }
 
-
+        public IActionResult Espera(Consulta novaConsulta)
+        {
+            using (var data = new ConsultaData())
+                return View(data.Read());
+        }
 
         [HttpGet]
         public IActionResult Create()
@@ -176,7 +186,7 @@ namespace ProntoAtendimento.Controllers
 
                 // HttpContext.Session.SetString("user", JsonSerializer.Serialize<Atendente>(user)); // Ta dando erro
 
-                return RedirectToAction("Selection", "Procedimento");
+                return RedirectToAction("Atender", "Consulta");
             }
 
         }

@@ -266,7 +266,8 @@ as
 	where pes.Id = med.medico_id
 go
 
-
+select * from v_proc_utilizas
+select * from v_consultas
 create view v_atendentes
 as
 	select pes.Id, pes.nome, pes.cpf, pes.endereco, pes.telefone, ate.login, ate.senha,
@@ -292,15 +293,21 @@ as
 go
 
 
+drop view v_consultas
+
+select * from v_medicos
+drop view v_consultas
+
 create view v_consultas
 as
-	select con.nr, med.nome [Nome Médico], med.crm, pac.nome [Nome Paciente], pac.cpf, pac.convenio, con.data, con.diagnostico, 
+	select con.nr, med.nome [Nome Médico], med.crm, pac.nome [Nome Paciente], pac.cpf, pac.convenio, con.data, isnull(con.diagnostico,'none') as diagnostico,
 		con.valor [Valor Total],
 		case con.status
 			when 1 then 'Ativa'
 			when 2 then 'Encerrada'
 			else		'Aberta'
 		end Situação
+
 	from consultas con, v_medicos med, v_pacientes pac
 	where con.medico_id = med.Id and con.paciente_id = pac.Id
 go
@@ -358,7 +365,7 @@ exec CadConsulta 7, 4, 1, 150, 1
 exec CadConsulta 9, 5, 1, 150, 1
 go
 
-exec AltConsulta 1, 2, 'Alergia'
+exec AltConsulta 1, 3, 'Alergia'
 exec CadProdUtil 1, 1, 'Ocorreu tudo bem'
 exec CadValConsulta 1
 exec AltConsulta 2, 3
@@ -397,4 +404,8 @@ delete from consultas where paciente_id=7
 select * from v_medicos
 select * from v_atendentes
 
-help consultas
+select * from v_consultas where Situação != 'Encerrada'
+
+
+
+--sp_help consultas

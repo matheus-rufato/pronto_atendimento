@@ -10,7 +10,6 @@
 
   <ItemGroup>
     <Folder Include="Views\Medico\" />
-    <Folder Include="Views\Consulta\" />
     <Folder Include="Views\ItensUtilizados\" />
     <Folder Include="Views\Procedimento\" />
     <Folder Include="Views\Paciente\" />

@@ -4,42 +4,43 @@
 
 @if (@Model == null)
 {
-<h3>@ViewBag.Mensagem</h3> }
-            else
-            {
-                // <h3>@ViewBag.Mensagem @Model.Nome</h3>
-<table class="table table-hover">
+    <h3>@ViewBag.Mensagem</h3>
+}
+else
+{
+    //<h3>@ViewBag.Mensagem @Model</h3>
+    <table class="table table-hover">
 
 
-    <tr>
-        <th>ID</th>
-        <th>Nome</th>
-        <th>Endereço</th>
-        <th>Telefone</th>
-        <th>Status</th>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Endereço</th>
+            <th>Telefone</th>
+            <th>Status</th>
 
-    </tr>
+        </tr>
 
 
-    @foreach (var atend in Model)
+        @foreach (var atend in Model)
+        {
+            <tr>
+                <td>@atend.Id</td>
+                <td>@atend.Nome</td>
+                <td>@atend.Endereco</td>
+                <td>@atend.Telefone</td>
+                <td>@atend.Status</td>
 
-    {
-<tr>
-    <td>@atend.Id</td>
-    <td>@atend.Nome</td>
-    <td>@atend.Endereco</td>
-    <td>@atend.Telefone</td>
-    <td>@atend.Status</td>
-
-    <td>
-        <a class="btn btn-sm btn-danger" href="/atendente/delete/@atend.Id">Apagar</a>
-        <a class="btn btn-sm btn-warning" href="/atendente/update/@atend.Id">Editar</a>
+                <td>
+                    <a class="btn btn-sm btn-danger" href="/atendente/delete/@atend.Id">Apagar</a>
+                    <a class="btn btn-sm btn-warning" href="/atendente/update/@atend.Id">Editar</a>
         
 
 
-    </td>
-</tr>
+                </td>
+            </tr>
+        }
+    </table>
 }
-</table>}
 <a class="btn btn-primary" href="/atendente/create/">Adicionar</a>
 <a class="btn btn-primary" href="/home/editar">Voltar</a>

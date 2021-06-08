@@ -53,7 +53,7 @@ namespace ProntoAtendimento.Data
             {
                 SqlCommand cmd = new SqlCommand(); //cmd é um comando que permitirá executar um comando SQL
                 cmd.Connection = base.connectionDB; //Conexão com o banco de dados
-                cmd.CommandText = "select * from v_pacientes";
+                cmd.CommandText = "select * from v_pacientes where Situação = 'Ativo'";
 
                 /*O objeto reader receberá os dados da tabela cliente,
                  * quando executado o comando SELECT (resultado do select)
@@ -79,6 +79,46 @@ namespace ProntoAtendimento.Data
             catch (SqlException sqlerror) 
             {   
                 Console.WriteLine("Erro na Leitura " + sqlerror); 
+            }
+            return lista;
+        }
+
+
+
+        public List<Paciente> ReadAll()
+        {
+            List<Paciente> lista = null;
+
+            try
+            {
+                SqlCommand cmd = new SqlCommand(); //cmd é um comando que permitirá executar um comando SQL
+                cmd.Connection = base.connectionDB; //Conexão com o banco de dados
+                cmd.CommandText = "select * from v_pacientes ";
+
+                /*O objeto reader receberá os dados da tabela cliente,
+                 * quando executado o comando SELECT (resultado do select)
+                 */
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                lista = new List<Paciente>();
+                while (reader.Read())
+                {
+                    Paciente paciente = new Paciente();
+                    paciente.Id = (int)reader["Id"];
+                    paciente.Nome = (string)reader["nome"];
+                    paciente.Cpf = (string)reader["cpf"];
+                    paciente.Endereco = (string)reader["endereco"];
+                    paciente.Telefone = (string)reader["telefone"];
+                    paciente.Convenio = (string)reader["convenio"];
+                    paciente.Status = (string)reader["Situação"];
+
+
+                    lista.Add(paciente);
+                }
+            }
+            catch (SqlException sqlerror)
+            {
+                Console.WriteLine("Erro na Leitura " + sqlerror);
             }
             return lista;
         }

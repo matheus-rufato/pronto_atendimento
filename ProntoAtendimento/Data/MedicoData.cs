@@ -53,7 +53,7 @@ namespace ProntoAtendimento.Data
                 {
                     SqlCommand cmd = new SqlCommand(); //cmd é um comando que permitirá executar um comando SQL
                     cmd.Connection = base.connectionDB; //Conexão com o banco de dados
-                    cmd.CommandText = "select * from v_medicos order by nome";
+                    cmd.CommandText = "select * from v_medicos where Situação = 'Ativo'";
 
                 /*O objeto reader receberá os dados da tabela cliente,
                  * quando executado o comando SELECT (resultado do select)
@@ -87,10 +87,51 @@ namespace ProntoAtendimento.Data
 
 
 
+        public List<Medico> ReadAll()
+        {
+            List<Medico> lista = null;
+
+            try
+            {
+                SqlCommand cmd = new SqlCommand(); //cmd é um comando que permitirá executar um comando SQL
+                cmd.Connection = base.connectionDB; //Conexão com o banco de dados
+                cmd.CommandText = "select * from v_medicos ";
+
+                /*O objeto reader receberá os dados da tabela cliente,
+                 * quando executado o comando SELECT (resultado do select)
+                 * 
+                 * @nome varchar(50), @cpf varchar(14), @endereco varchar(50), @telefone varchar(14), 
+                @crm varchar(6), @login varchar(14), @senha varchar(14)
+                 */
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                lista = new List<Medico>();
+                while (reader.Read())
+                {
+                    Medico medico = new Medico();
+                    medico.Id = (int)reader["Id"];
+                    medico.Nome = (string)reader["nome"];
+                    medico.Cpf = (string)reader["cpf"];
+                    medico.Endereco = (string)reader["endereco"];
+                    medico.Telefone = (string)reader["telefone"];
+                    medico.Status = (string)reader["Situação"];
+                    medico.CRM = (string)reader["crm"];
+                    medico.Login = (string)reader["login"];
+                    medico.Senha = (string)reader["senha"];
 
 
-            //Metódo que fará uma consulta do cliente pelo id
-            public Medico Read(int id)
+                    lista.Add(medico);
+                }
+            }
+            catch (SqlException sqlerror) { Console.WriteLine("Erro na Leitura." + sqlerror); }
+            return lista;
+        }
+
+
+
+
+        //Metódo que fará uma consulta do cliente pelo id
+        public Medico Read(int id)
             {
                 //Declarando um objeto cliente e incializando como null
                 Medico medico = null;

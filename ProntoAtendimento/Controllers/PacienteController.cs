@@ -32,6 +32,9 @@ namespace ProntoAtendimento.Controllers
         public IActionResult Consulta(Paciente novoPaciente)
         {
 
+
+
+            HttpContext.Session.SetString("paciente", JsonSerializer.Serialize<Paciente>(novoPaciente));
             using (var data = new PacienteData())
                 return View(data.Read());
 

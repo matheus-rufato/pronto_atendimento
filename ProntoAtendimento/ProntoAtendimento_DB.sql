@@ -6,12 +6,12 @@ go
 --Pessoas (Id, endereco, cpf, nome,telefone, status)
 create table pessoas
 (
-	Id               int         not null  primary key identity,
-	nome			 varchar(50) not null,  
-	cpf              varchar(14) not null  unique,
-	endereco         varchar(50) not null,
-	telefone         varchar(14) not null,
-	status           int         not null,
+	Id			int			not null	primary key identity,
+	nome		varchar(50)	not null,
+	cpf			varchar(14)	not null	unique,
+	endereco	varchar(50)	not null,
+	telefone	varchar(14)	not null,
+	status		int			not null,
 	check (status in (1,2,3))
 )
 go
@@ -22,57 +22,59 @@ go
 
 create table pacientes
 ( 
-	paciente_id     int          not null  primary key references pessoas,
-	convenio        varchar(15)
+	paciente_id int			not null primary key references pessoas,
+	convenio	varchar(15)
 )
 go
+
 select * from v_pacientes
 --Enfermeiros (#Pessoa_id, senha, login)
 
 create table atendentes
 (
-	atendente_id      int           not null primary key references pessoas,
-	login			  varchar(14)	not null unique,
-	senha             varchar(14)	not null
+	atendente_id	int			not null primary key references pessoas,
+	login			varchar(14)	not null unique,
+	senha			varchar(14)	not null
 )
 go
 --Medicos (#Pessoa_id, senha, login, crm)
 
 create table medicos
 (		
-	medico_id         int          not null  primary key references pessoas,
-	crm               varchar(6)  not null  unique,
-    login             varchar(14) not null  unique,
-	senha             varchar(14) not null
+	medico_id	int			not null primary key references pessoas,
+	crm			varchar(6)	not null unique,
+	login		varchar(14) not null unique,
+	senha		varchar(14) not null
 )
 go
 --Consultas (Id, data, valor, #Paciente_id, #Colaborador_id)
 
-create table consultas
+
+create table consultas 
 (
-	nr                int				not null primary key identity,
-	paciente_id		  int				not null,
-	medico_id		  int				not null,
-	atendente_id	  int				not null,
-	data              datetime			not null,
-	valor             money				not null,
-	status            int				not null,
-	diagnostico       varchar(max)			null,
-	foreign key       (paciente_id)   references pacientes(paciente_id),
-    foreign key       (medico_id)     references medicos(medico_id),
-	foreign key       (atendente_id)  references atendentes(atendente_id),
-	check	          (status in (1,2,3))
+	nr				int				not null primary key identity,
+	paciente_id		int				not null,
+	medico_id		int				not null,
+	atendente_id	int				not null,
+	data			datetime		not null,
+	valor			money			not null,
+	status			int				not null	default 1,
+	diagnostico		varchar(max)		null,
+	foreign key		(paciente_id)	references pacientes(paciente_id),
+	foreign key		(medico_id)		references medicos(medico_id),
+	foreign key		(atendente_id)	references atendentes(atendente_id),
+	check			(status in (1,2,3))
 )
 go
 
 --Procedimentos (Id, valor, tipo, nome)
 
 create table procedimentos
-(		
-	Id                int          not null primary key identity,
-	nome              varchar (50) not null,
-	tipo              int          not null,
-	valor             money		   not null,
+(
+	Id		int			not null primary key identity,
+	nome	varchar(50) not null,
+	tipo	int			not null,
+	valor	money		not null,
 	check (tipo between 1 and 3)
 )
 go
@@ -80,11 +82,11 @@ go
 
 create table proc_utilizas
 (
- 	consulta_nr   	 int		  not null  references consultas,
-	procedimento_id  int		  not null  references procedimentos,
-	valor            money		  not null,
-	observacao       varchar (max)	  null,
-	primary key(consulta_nr, procedimento_id)       	
+	consulta_nr		int				not null references consultas,
+	procedimento_id int				not null references procedimentos,
+	valor			money			not null,
+	observacao		varchar(max)		null,
+	primary key(consulta_nr, procedimento_id)
 )
 go
 
@@ -137,11 +139,14 @@ end
 go
 
 
-exec CadConsulta 7, 4, 1, 150, 1
+exec CadConsulta 8,5,1,'48','3'
+select * from v_consultas
+select * from v_medicos
+
 
 create procedure CadConsulta
 (
-	@paciente int, @medico int, @atendente int, @valor money, @status int, @diagnostico varchar(max) = null
+	@paciente int, @medico int, @atendente int, @valor money, @status int , @diagnostico varchar(max) = null
 )
 as
 begin
@@ -298,6 +303,8 @@ drop view v_consultas
 select * from v_medicos
 drop view v_consultas
 
+select * from v_consultas
+
 create view v_consultas
 as
 	select con.nr, med.nome [Nome Médico], med.crm, pac.nome [Nome Paciente], pac.cpf, pac.convenio, con.data, isnull(con.diagnostico,'none') as diagnostico,
@@ -339,6 +346,7 @@ exec CadAtendente 'Fernando', '303030', 'São José, 1791', '17 992364220', 'ferna
 exec CadMedico'Carla', '404040', 'São Paulo, 2417', '17 991364768', '892550', 'carla@123','151617'
 exec CadMedico'Paulo', '505050', 'São Miguel, 2178', '17 996715668', '895001', 'paulo@123','181920'
 exec CadMedico'Lucas', '606060', 'São João, 1048', '17 998155888', '891589', 'lucas@123','212223'
+exec CadMedico'Joao das Couves', '619060', 'São João, 1048', '17 912155888', '890289', 'couves@joao','123456'
 go
 
 exec AltAtendente 2, 'Maria Moura', '12321232547612', 'Santo Antonio, 2478', '17 998520623', 2, 'maria@moura','789101'
@@ -346,8 +354,8 @@ go
 exec AltAtendente 1
 
 
-select * from pessoas
-
+select * from consultas
+exec CadConsulta 
 exec CadProcedimento 'Medicação', 1, 50
 exec CadProcedimento 'Curativo', 1, 70
 exec CadProcedimento 'Raio-x', 2, 140
@@ -368,7 +376,7 @@ go
 exec AltConsulta 1, 3, 'Alergia'
 exec CadProdUtil 1, 1, 'Ocorreu tudo bem'
 exec CadValConsulta 1
-exec AltConsulta 2, 3
+exec AltConsulta 3, 1
 exec CadProdUtil 2, 6 
 exec AltConsulta 2, 2, 'O paciente está com dengue'
 exec CadProdUtil 2, 1
@@ -406,6 +414,8 @@ select * from v_atendentes
 
 select * from v_consultas where Situação != 'Encerrada'
 
+select v_med.Id, v_med.nome, v_med.telefone, med.login from medicos med, v_medicos v_med 
+where med.login = 'carla@123' and med.senha = '151617' and v_med.Id = med.medico_id 
 
-
+select * from medicos
 --sp_help consultas

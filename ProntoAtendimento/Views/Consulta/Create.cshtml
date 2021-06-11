@@ -1,1 +1,65 @@
-﻿
+﻿@model Consulta
+
+<form asp-controller="Consulta" asp-action="Create" method="POST">
+
+
+    <div class="form-group">
+        <label>Medico</label>
+        <input asp-for="@Model.NomeMedico" class="form-control" />
+        <span asp-validation-for="NomeMedico"></span>
+    </div>
+
+    <div class="form-group">
+        <label>IdMedico</label>
+        <input asp-for="@Model.IdMedico" class="form-control" />
+        <span asp-validation-for="IdMedico"></span>
+    </div>
+
+
+    <div class="form-group">
+        <label>Paciente</label>
+        <input asp-for="@Model.NomePaciente" class="form-control" />
+        <span asp-validation-for="NomePaciente"></span>
+    </div>
+
+    <div class="form-group">
+        <label>IdPaciente</label>
+        <input asp-for="@Model.IdPaciente" class="form-control" />
+        <span asp-validation-for="IdPaciente"></span>
+    </div>
+
+    <div class="form-group">
+        <label>Atendente</label>
+        <input asp-for="@Model.NomeAtendente" class="form-control" />
+        <span asp-validation-for="NomeAtendente"></span>
+    </div>
+
+    <div class="form-group">
+        <label>IdAtendente</label>
+        <input asp-for="@Model.IdAtendente" class="form-control" />
+        <span asp-validation-for="IdAtendente"></span>
+    </div>
+
+
+    <div class="form-group">
+        <label>Valor</label>
+        <input asp-for="Valor" class="form-control" />
+        <span asp-validation-for="Valor"></span>
+    </div>
+
+    <div class="form-group">
+        <label>Status</label>
+        <select asp-for="Status" class="form-control">
+            <option value="1">Ativa</option>
+            <option value="2">Encerrada</option>
+            <option value="2">Aberta</option>
+
+        </select>
+    </div>
+
+
+
+
+
+    <button class="btn btn-primary">Confirmar</button>
+</form> 

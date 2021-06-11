@@ -6,6 +6,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ProntoAtendimento.Models;
+using ProntoAtendimento.Data;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Data.SqlClient;
+
 
 namespace ProntoAtendimento.Controllers
 {
@@ -28,6 +33,7 @@ namespace ProntoAtendimento.Controllers
         [HttpGet]
         public IActionResult Inicial()
         {
+            
             return View();
         }
 
@@ -39,7 +45,15 @@ namespace ProntoAtendimento.Controllers
             if (home.opcao == 1)
             { return RedirectToAction("Editar", "Home"); }
             else
-            { return RedirectToAction("EscolherConsulta", "Home"); }
+            { 
+                
+                
+                
+                return RedirectToAction("Consulta", "Paciente"); 
+            
+            
+            
+            }
         }
 
 

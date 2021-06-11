@@ -24,8 +24,15 @@ namespace ProntoAtendimento.Controllers
                 return View(data.ReadAll());
         }
 
-        public IActionResult Consulta(Medico novoMedico)
+        public IActionResult Consulta(Paciente novoPaciente)
         {
+
+
+            HttpContext.Session.SetString("paciente", JsonSerializer.Serialize<Paciente>(novoPaciente));
+            
+
+
+
             using (var data = new MedicoData())
                 return View(data.Read());
         }
@@ -176,15 +183,15 @@ namespace ProntoAtendimento.Controllers
 
             using (var data = new MedicoData())
             {
-                var user = data.Read(model);
+                var user2 = data.Read(model);
 
-                if (user == null)
+                if (user2 == null)
                 {
                     ViewBag.Message = "Email e/ou senha incorretos!";
                     return View(model);
                 }
 
-                // HttpContext.Session.SetString("user", JsonSerializer.Serialize<Atendente>(user)); // Ta dando erro
+                HttpContext.Session.SetString("user2", JsonSerializer.Serialize<Medico>(user2)); // Ta dando erro
 
                 return RedirectToAction("Atender", "Consulta");
             }

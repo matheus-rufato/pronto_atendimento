@@ -22,28 +22,42 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
+
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Procedimento"
-                               asp-action="Index">Procedimento</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Paciente"
-                               asp-action="Index">Paciente</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Atendente"
-                               asp-action="Index">Atendente</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Medico"
-                               asp-action="Index">Medico</a>
-                        </li>
+                            @{ string json = HttpContextAccessor.HttpContext.Session.GetString("user");
+                                string json2 = HttpContextAccessor.HttpContext.Session.GetString("user2");
 
-                        
+                                if (json != null)
+                                {
+                                    Atendente user = JsonSerializer.Deserialize<Atendente>(json);
+
+                                    if (user != null)
+                                    {
+                    <a class="nav-link text-dark">Bem vindo @user.Nome</a> }
+
+                                }
 
 
+
+
+                                if (json2 != null)
+                                {
+                                    Medico user2 = JsonSerializer.Deserialize<Medico>
+                                        (json2);
+
+                                    if (user2 != null)
+                                    {
+                    <a class="nav-link text-dark">Bem vindo Dr. @user2.Nome</a> }
+
+                                    }
+
+
+                                }
+
+                        </li>
 
                     </ul>
                 </div>

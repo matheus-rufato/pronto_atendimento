@@ -12,20 +12,25 @@ namespace ProntoAtendimento.Models
         //Propriedades e Atributos
         public int Nr { get; set; }
         public int IdPaciente { get; set; }
+        
         public int IdAtendente { get; set; }
         public int IdMedico { get; set; }
+        public string NomePaciente { get; set; }
+        public string NomeMedico { get; set; }
+        public string NomeAtendente { get; set; }
         public DateTime Data { get; set; }
         public List<ItensUtilizados> Procedimentos { get; set; } = new List<ItensUtilizados>();
-        public decimal Valor 
-        {
-            get
-            {
-                return Procedimentos.Sum(i => i.ValorTotal);
-            }
+        /* public decimal Valor 
+         {
+             get
+             {
+                 return Procedimentos.Sum(i => i.ValorTotal);
+             }
 
-            set { Valor = value; }
-        }
-
+             set { Valor = value; }
+         }*/
+        public decimal Valor { get; set; }        
+        
         public string Status { get; set; }
 
         [Required(ErrorMessage = "Campo Diagnóstico obrigatório")]

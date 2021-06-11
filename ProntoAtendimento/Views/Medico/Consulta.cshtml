@@ -4,35 +4,37 @@
 
 @if (@Model == null)
 {
-<h3>@ViewBag.Mensagem</h3> }
+    <h3>@ViewBag.Mensagem</h3>
+}
 else
 {
-// <h3>@ViewBag.Mensagem @Model.Nome</h3>
-<table class="table table-hover">
-    <tr>
-        <th>ID</th>
-        <th>Nome</th>
-        <th>Endereço</th>
-        <th>Telefone</th>
-        <th>Status</th>
+    // <h3>@ViewBag.Mensagem @Model.Nome</h3>
+    <table class="table table-hover">
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Endereço</th>
+            <th>Telefone</th>
+            <th>Status</th>
 
-    </tr>
+        </tr>
 
-    @foreach (var medic in Model)
+        @foreach (var medic in Model)
+        {
+            <tr>
+                <td>@medic.Id</td>
+                <td>@medic.Nome</td>
+                <td>@medic.Endereco</td>
+                <td>@medic.Telefone</td>
+                <td>@medic.Status</td>
 
-    {
-<tr>
-    <td>@medic.Id</td>
-    <td>@medic.Nome</td>
-    <td>@medic.Endereco</td>
-    <td>@medic.Telefone</td>
-    <td>@medic.Status</td>
+                <td>
 
-    <td>
-        
-        <a class="btn btn-sm btn-warning" href="/medico/update/@medic.Id">Selecionar</a>
-        
-    </td>
-</tr>}
-</table>}
+                    <a class="btn btn-sm btn-warning" href="/consulta/finalizar/@medic.Id">Selecionar</a>
+
+                </td>
+            </tr>
+        }
+    </table>
+}
 <a class="btn btn-primary" href="/home/escolherconsulta">Voltar</a>

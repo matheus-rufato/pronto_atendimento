@@ -8,6 +8,8 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Text.Json;
+
 
 namespace ProntoAtendimento.Controllers
 {
@@ -22,7 +24,7 @@ namespace ProntoAtendimento.Controllers
             if(listaprocedimentos != null)
             {
                 //TODO Converter String para Lista(Json)
-                lista = System.Text.Json.JsonSerializer.Deserialize<List<ItensUtilizados>>(listaprocedimentos);
+                lista = JsonSerializer.Deserialize<List<ItensUtilizados>>(listaprocedimentos);
             }
 
             return View(lista);
@@ -39,7 +41,7 @@ namespace ProntoAtendimento.Controllers
             if(listaprocedimentos != null)
             {
                 //TODO Converter String para Lista(Json)
-                lista = System.Text.Json.JsonSerializer.Deserialize<List<ItensUtilizados>>(listaprocedimentos);
+                lista = JsonSerializer.Deserialize<List<ItensUtilizados>>(listaprocedimentos);
             }
 
 
@@ -56,13 +58,12 @@ namespace ProntoAtendimento.Controllers
                     item.Procedimento = procedimento;
                     item.ValorTotal = item.Procedimento.Valor;
                     lista.Add(item);
-                }
-                
+                }            
 
 
 
-                    //TODO Converter Lista para String (Json)
-                listaprocedimentos = System.Text.Json.JsonSerializer.Serialize<List<ItensUtilizados>>(lista);
+                //TODO Converter Lista para String (Json)
+                listaprocedimentos = JsonSerializer.Serialize<List<ItensUtilizados>>(lista);
                 
                 HttpContext.Session.SetString("ListaProcedimentos", listaprocedimentos);
 
@@ -80,7 +81,7 @@ namespace ProntoAtendimento.Controllers
             if(listaprocedimentos != null)
             {
                 //TODO Converter String para Lista(Json)
-                lista = System.Text.Json.JsonSerializer.Deserialize<List<ItensUtilizados>>(listaprocedimentos);
+                lista = JsonSerializer.Deserialize<List<ItensUtilizados>>(listaprocedimentos);
             }
 
 
@@ -96,7 +97,7 @@ namespace ProntoAtendimento.Controllers
 
 
                 //TODO Converter Lista para String (Json)
-                listaprocedimentos = System.Text.Json.JsonSerializer.Serialize<List<ItensUtilizados>>(lista);
+                listaprocedimentos = JsonSerializer.Serialize<List<ItensUtilizados>>(lista);
                 
                 HttpContext.Session.SetString("ListaProcedimentos", listaprocedimentos);
 

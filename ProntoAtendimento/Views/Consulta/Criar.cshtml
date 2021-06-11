@@ -1,0 +1,39 @@
+﻿@model Consulta
+
+<br />
+
+@if (@Model == null)
+{
+<h3>@ViewBag.Mensagem</h3> }
+            else
+            {
+                // <h3>@ViewBag.Mensagem @Model.Nome</h3>
+<table class="table table-hover">
+
+
+    <tr>
+        <th>Medico</th>
+        <th>Paciente</th>
+        <th>Atendente</th>
+
+
+    </tr>
+
+
+    
+    <tr>
+        <td>@Model.NomeMedico</td>
+        <td>@Model.NomePaciente</td>
+        <td>@Model.NomeAtendente</td>
+
+        <td>
+
+            <a class="btn btn-sm btn-info" href="/consulta/create/@Model ">Selecionar</a>
+
+
+        </td>
+    </tr>
+</table>}
+<a class="btn btn-primary" href="/home/escolherconsulta">Voltar</a>
+
+<a class="btn btn-primary" href="/medico/consulta">Continuar</a>

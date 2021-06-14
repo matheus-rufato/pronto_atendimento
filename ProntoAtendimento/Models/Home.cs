@@ -16,6 +16,8 @@ namespace ProntoAtendimento.Models
 
         public int opcao3 { get; set; }
 
+        public bool acesso { get; set; }
+
 
 
     }

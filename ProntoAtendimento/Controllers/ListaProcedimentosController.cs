@@ -31,6 +31,24 @@ namespace ProntoAtendimento.Controllers
 
         }
 
+
+        public IActionResult Meus_pedidos()
+        {
+            List<ItensUtilizados> lista = new List<ItensUtilizados>();
+
+            var listaprocedimentos = HttpContext.Session.GetString("ListaProcedimentos");
+
+            if (listaprocedimentos != null)
+            {
+                //TODO Converter String para Lista(Json)
+                lista = JsonSerializer.Deserialize<List<ItensUtilizados>>(listaprocedimentos);
+            }
+
+            return View(lista);
+
+        }
+
+
         [HttpGet]
         public IActionResult Escolher(int id)
         {

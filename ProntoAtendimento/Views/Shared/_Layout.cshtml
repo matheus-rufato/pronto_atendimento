@@ -27,34 +27,41 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            @{ string json = HttpContextAccessor.HttpContext.Session.GetString("user");
+                            @{
+
+
+
+                                
+                                string json = HttpContextAccessor.HttpContext.Session.GetString("user");
                                 string json2 = HttpContextAccessor.HttpContext.Session.GetString("user2");
 
                                 if (json != null)
                                 {
+
                                     Atendente user = JsonSerializer.Deserialize<Atendente>(json);
 
-                                    if (user != null)
+                                    if (user != null )
                                     {
-                    <a class="nav-link text-dark">Bem vindo @user.Nome</a> }
-
-                                }
-
-
-
-
-                                if (json2 != null)
-                                {
-                                    Medico user2 = JsonSerializer.Deserialize<Medico>
-                                        (json2);
-
-                                    if (user2 != null)
-                                    {
-                    <a class="nav-link text-dark">Bem vindo Dr. @user2.Nome</a> }
+                                        <a class="nav-link text-dark">Bem vindo @user.Nome</a> }
 
                                     }
 
 
+
+
+                                    if (json2 != null)
+                                    {
+
+                                        Medico user2 = JsonSerializer.Deserialize<Medico>
+                                            (json2);
+
+                                        if (user2 != null)
+                                        {
+                                        <a class="nav-link text-dark">Bem vindo Dr(a). @user2.Nome</a> }
+
+                                        }
+
+                                    
                                 }
 
                         </li>

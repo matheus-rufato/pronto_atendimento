@@ -1,0 +1,70 @@
+﻿@model List<Consulta>
+
+@if (Model.Count == 0)
+{
+<div class="container-fluid mt-100">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Relatórios</h5>
+                </div>
+                <div class="card-body cart">
+                    <div class="col-sm-12 empty-cart-cls text-center">
+                        <h3><strong>Nenhum Relatório encontrado</strong></h3>
+
+                        <a href="/home/inicial" class="btn btn-primary" data-abc="true">Voltar</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> }
+            else
+            {
+<div class="container-fluid mt-100">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Relatório da Consulta</h5>
+                </div>
+                <div>
+                    <table class="table table-hover">
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome Medico</th>
+                            <th>Nome Paciente</th>
+                            <th>Data</th>
+                            <th>Valor</th>
+                            <th>Diagnostico</th>
+
+                        </tr>
+                        @foreach (var item in Model)
+                        {
+                    <tr>
+                        <td>@item.Nr</td>
+                        <td>@item.Medico.Nome</td>
+                        <td>@item.Paciente.Nome</td>
+                        <td>@item.Data</td> 
+                        <td>@item.Valor</td>
+                        <td>@item.Diagnostico</td>
+
+                        
+                    </tr>}
+                    </table>
+                </div>
+            </div>
+            <a href="/home/inicial" class="btn btn-info cart-btn-transform mt-2 float-right m-2"
+               data-abc="true">
+                Voltar
+            </a>
+            
+        </div>
+    </div>
+</div>
+
+                <script>function removidoBox() {
+            alert("Item Removido Com Sucesso!");
+        }</script>}

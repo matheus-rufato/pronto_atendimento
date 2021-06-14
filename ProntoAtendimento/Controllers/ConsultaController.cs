@@ -20,6 +20,13 @@ namespace ProntoAtendimento.Controllers
             return View(data.ReadAll());
         }
 
+
+        public IActionResult Fim()
+        {
+            
+                return View();
+        }
+
         public IActionResult Atender(Consulta novaConsulta)
         {
             var medico = HttpContext.Session.GetString("user2");
@@ -28,6 +35,67 @@ namespace ProntoAtendimento.Controllers
             using (var data = new ConsultaData())
                 return View(data.Read((int)novomedico.Id));
         }
+
+
+        public IActionResult RelatorioPaciente()
+        {
+
+
+
+            //HttpContext.Session.SetString("pacienterelatorio", JsonSerializer.Serialize<Paciente>(novoPaciente));
+            using (var data = new PacienteData())
+                return View(data.Read());
+
+        }
+
+        public IActionResult RelatorioMedico(Paciente novoPaciente)
+        {
+
+
+            HttpContext.Session.SetString("pacienterelatorio", JsonSerializer.Serialize<Paciente>(novoPaciente));
+
+
+
+
+            using (var data = new MedicoData())
+                return View(data.Read());
+        }
+
+
+
+        public IActionResult Relatorio(Medico novomedico)
+        {
+
+            HttpContext.Session.SetString("medicorelatorio", JsonSerializer.Serialize<Medico>(novomedico));
+
+
+
+            Consulta consurelato = new Consulta();
+
+            var paciente = HttpContext.Session.GetString("pacienterelatorio");
+            Paciente pacrelato = System.Text.Json.JsonSerializer.Deserialize<Paciente>(paciente);
+
+
+
+            var medico = HttpContext.Session.GetString("medicorelatorio");
+            Medico medrelato = System.Text.Json.JsonSerializer.Deserialize<Medico>(medico);
+
+
+
+            consurelato.IdMedico = (int)medrelato.Id;
+            consurelato.IdPaciente = (int)pacrelato.Id;
+
+
+            using (var data = new ConsultaData())
+                return View(data.ReadRelatorio(consurelato));
+        }
+
+
+
+
+
+
+
 
         public IActionResult Finalizar(Medico novoMedico)
         {
@@ -224,6 +292,12 @@ namespace ProntoAtendimento.Controllers
         [HttpGet]
         public IActionResult Update(int id)
         {
+
+
+            HttpContext.Session.SetString("consultanpn", JsonSerializer.Serialize<int>(id));
+           // var consltanpn = HttpContext.Session.GetString("consultanpn");
+           // Consulta novaconsultanpn = new Consulta();
+           // novaconsultanpn.Nr = System.Text.Json.JsonSerializer.Deserialize<int>(consltanpn);
 
 
             using (var data = new ConsultaData())

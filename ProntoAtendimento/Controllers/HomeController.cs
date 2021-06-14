@@ -26,6 +26,9 @@ namespace ProntoAtendimento.Controllers
 
         public IActionResult Index()
         {
+            HttpContext.Session.Clear();
+           
+
             return View();
         }
 
@@ -50,8 +53,6 @@ namespace ProntoAtendimento.Controllers
                 
                 
                 return RedirectToAction("Consulta", "Paciente"); 
-            
-            
             
             }
         }

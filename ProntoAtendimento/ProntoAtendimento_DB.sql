@@ -169,13 +169,22 @@ begin
 end
 go
 
+exec CadProdUtil 
+
+SELECT* FROM v_consultas v, consultas c where c.nr = v.nr and c.medico_id = 4 and paciente_id = 8
+
+select * from v_consultas
+select * from consultas
+select * from medicos
+
+drop procedure CadValConsulta
 create procedure CadValConsulta (@consulta int)
 as
 begin
 	declare @valorTotal money
 	set @valorTotal = (select sum(valor) from proc_utilizas where consulta_nr = @consulta)
 
-	update consultas set valor = valor + @valorTotal where nr = @consulta 
+	update consultas set valor = valor + @valorTotal - 50 where nr = @consulta 
 end
 go
 
@@ -307,7 +316,7 @@ select * from v_consultas
 
 create view v_consultas
 as
-	select con.nr, med.nome [Nome Médico], med.crm, pac.nome [Nome Paciente], pac.cpf, pac.convenio, con.data, isnull(con.diagnostico,'none') as diagnostico,
+	select con.nr, med.nome [Nome Médico], med.crm, pac.nome [Nome Paciente], pac.cpf, pac.convenio, con.data, isnull(con.diagnostico,'Sem diagnóstico') as diagnostico,
 		con.valor [Valor Total],
 		case con.status
 			when 1 then 'Ativa'
@@ -372,7 +381,7 @@ go
 exec CadConsulta 7, 4, 1, 150, 1
 exec CadConsulta 9, 5, 1, 150, 1
 go
-
+select * from proc_utilizas
 exec AltConsulta 1, 3, 'Alergia'
 exec CadProdUtil 1, 1, 'Ocorreu tudo bem'
 exec CadValConsulta 1

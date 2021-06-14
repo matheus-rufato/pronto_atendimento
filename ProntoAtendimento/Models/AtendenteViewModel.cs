@@ -21,6 +21,7 @@ namespace ProntoAtendimento.Models
         [MinLength(6, ErrorMessage = "A senha deve conter no mínimo 6 caracteres")]
         public string Senha { get; set; }
 
+        public bool acesso { get; set; }
 
     }
 }

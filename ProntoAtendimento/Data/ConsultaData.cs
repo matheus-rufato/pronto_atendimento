@@ -182,6 +182,51 @@ namespace ProntoAtendimento.Data
 
 
 
+        public List<Consulta> ReadRelatorio(Consulta novaconsulta)
+        {
+            List<Consulta> lista = new List<Consulta>();
+
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = base.connectionDB;
+            cmd.CommandText = @"SELECT* FROM v_consultas v, consultas c where  v.nr = c.nr and c.medico_id = @idmed and paciente_id = @idpac ";
+            
+
+
+            cmd.Parameters.AddWithValue(@"idmed", novaconsulta.IdMedico);
+            cmd.Parameters.AddWithValue(@"idpac", novaconsulta.IdPaciente);
+
+
+
+
+            SqlDataReader reader = cmd.ExecuteReader();
+            Consulta consulta = null;
+
+            while (reader.Read())
+            {
+                consulta = new Consulta();
+                consulta.Medico = new Medico();
+                consulta.Paciente = new Paciente();
+
+                consulta.Nr = (int)reader["nr"];
+                consulta.Medico.Nome = (string)reader["Nome Médico"];
+                consulta.Medico.CRM = (string)reader["crm"];
+                consulta.Paciente.Nome = (string)reader["Nome Paciente"];
+                consulta.Paciente.Cpf = (string)reader["cpf"];
+                consulta.Paciente.Convenio = (string)reader["convenio"];
+                consulta.Data = (DateTime)reader["data"];
+                consulta.Diagnostico = (string)reader["diagnostico"];
+                consulta.Valor = (decimal)reader["valor"];
+                consulta.Status = (string)reader["Situação"];
+
+                lista.Add(consulta);
+            }
+            return lista;
+        }
+
+
+
+
+
 
         public List<Consulta> Read(int id)
         {

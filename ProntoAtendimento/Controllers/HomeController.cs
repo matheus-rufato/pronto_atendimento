@@ -112,7 +112,14 @@ namespace ProntoAtendimento.Controllers
         }
 
 
-        
+        public IActionResult FaleConosco()
+        {
+            return View();
+        }
+        public IActionResult Contato()
+        {
+            return View();
+        }
 
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

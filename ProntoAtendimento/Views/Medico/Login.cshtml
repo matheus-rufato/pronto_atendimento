@@ -1,23 +1,28 @@
-﻿@model MedicoViewModel
+﻿
+@model MedicoViewModel
 
-@if(ViewBag.Message != null)
+
+@if (ViewBag.Message != null)
 {
-    <div class="alert alert-danger">@ViewBag.Message</div>
-}
+    <div class="alert alert-danger">@ViewBag.Message</div>}
 
-<form asp-controller="Medico" asp-action="Login" method="post">
 
-    <div class="form-group">
-        <label>Login Medico</label>
-        <input asp-for="Login" class="form-control" />
-        <span asp-validation-for="Login"></span>
-    </div>
+    <form asp-controller="Medico" asp-action="Login" method="post" class="border-left border-right border-top border-bottom rounded shadow col-7 m-auto" style="background-color:lightsteelblue">
 
-    <div class="form-group">
-        <label asp-for="Senha"></label>
-        <input asp-for="Senha" class="form-control" />
-        <span asp-validation-for="Senha"></span>
-    </div>
+        <div class="form-group text-center">
+            <label class=" navbar-brand">Login Medico</label>
+            <center><input asp-for="Login" class="form-control col-5 align-items-center" /></center>
+            <span asp-validation-for="Login"></span>
+        </div>
 
-    <button class="btn btn-primary">Entrar</button>
-</form>
+        <div class="form-group text-center">
+            <label asp-for="Senha" class=" navbar-brand"></label>
+            <center>
+                <input asp-for="Senha" class="form-control col-5 align-items-center" />
+            </center>
+            <span asp-validation-for="Senha"></span>
+        </div>
+
+        <center><button class="btn btn-primary class=" btn btn-primary text-center"">Entrar</button></center>
+        <br>
+    </form>

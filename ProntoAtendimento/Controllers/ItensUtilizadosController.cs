@@ -46,13 +46,13 @@ namespace ProntoAtendimento.Controllers
 
                 using (var data = new ItensUtilizadosData())
                     data.Create(novoitem);
-                using (var data2 = new ItensUtilizadosData())
-                    data2.Valorar(novoitem);
+                
 
 
             }
+            using (var data2 = new ItensUtilizadosData())
+                data2.Valorar(novoitem);
 
-            
             return View(novoitem);
 
             }

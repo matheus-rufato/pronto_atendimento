@@ -184,11 +184,14 @@ begin
 	declare @valorTotal money
 	set @valorTotal = (select sum(valor) from proc_utilizas where consulta_nr = @consulta)
 
-	update consultas set valor = valor + @valorTotal - 50 where nr = @consulta 
+	update consultas set valor = valor + @valorTotal  where nr = @consulta 
 end
 go
 
+exec CadValConsulta 27
 
+
+select * from v_consultas
 
 create procedure AltProcedimento
 (
@@ -313,6 +316,7 @@ select * from v_medicos
 drop view v_consultas
 
 select * from v_consultas
+select * from procedimentos
 
 drop view v_consultas 
 create view v_consultas

@@ -18,7 +18,7 @@ namespace ProntoAtendimento.Models
 
         [Display(Name = "Senha")]
         [Required(ErrorMessage = "Campo Senha obrigatório")]
-        [MinLength(5)]
+        [MinLength(8)]
         [MaxLength(15)]
         public string Senha { get; set; }
 

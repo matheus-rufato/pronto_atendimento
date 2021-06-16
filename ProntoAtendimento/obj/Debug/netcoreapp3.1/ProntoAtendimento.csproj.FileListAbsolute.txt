@@ -557,3 +557,5 @@ C:\Users\Henri\Desktop\InterProjeto\pronto_atendimento\ProntoAtendimento\obj\Deb
 C:\Users\Henri\Desktop\InterProjeto\pronto_atendimento\ProntoAtendimento\obj\Debug\netcoreapp3.1\Razor\Views\Atendente\Update2.cshtml.g.cs
 C:\Users\Henri\Desktop\InterProjeto\pronto_atendimento\ProntoAtendimento\obj\Debug\netcoreapp3.1\Razor\Views\Paciente\Update2.cshtml.g.cs
 C:\Users\Henri\Desktop\InterProjeto\pronto_atendimento\ProntoAtendimento\obj\Debug\netcoreapp3.1\Razor\Views\Consulta\RelatorioProcedimento.cshtml.g.cs
+C:\Users\Henri\Desktop\InterProjeto\pronto_atendimento\ProntoAtendimento\obj\Debug\netcoreapp3.1\Razor\Views\Home\FaleConosco.cshtml.g.cs
+C:\Users\Henri\Desktop\InterProjeto\pronto_atendimento\ProntoAtendimento\obj\Debug\netcoreapp3.1\Razor\Views\Home\Contato.cshtml.g.cs

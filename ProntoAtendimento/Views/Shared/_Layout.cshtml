@@ -1,6 +1,8 @@
 ﻿@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
 @using Microsoft.AspNetCore.Http
 @using System.Text.Json
+@using Microsoft.AspNetCore.Html
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -11,11 +13,13 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
-<body>
+<body >
+    
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3" >
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">ProntoAtendimento</a>
+                <a  >  </a>
+                <a style="background-image:url('../sirene.jpg'); background-position:left; background-repeat:no-repeat; background-position-y:center; background-position-x:left; background-size:40px;" class="navbar-brand col-3"  asp-area="" asp-controller="Home" asp-action="Index">      ProntoAtendimento</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -23,15 +27,15 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
 
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        <li class="nav-item col-9">
+                            
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item alert-info rounded-pill">
                             @{
 
 
 
-                                
+
                                 string json = HttpContextAccessor.HttpContext.Session.GetString("user");
                                 string json2 = HttpContextAccessor.HttpContext.Session.GetString("user2");
 
@@ -40,29 +44,29 @@
 
                                     Atendente user = JsonSerializer.Deserialize<Atendente>(json);
 
-                                    if (user != null )
+                                    if (user != null)
                                     {
                                         <a class="nav-link text-dark">Bem vindo @user.Nome</a> }
 
-                                    }
+                                }
 
 
 
 
-                                    if (json2 != null)
+                                if (json2 != null)
+                                {
+
+                                    Medico user2 = JsonSerializer.Deserialize<Medico>
+                                        (json2);
+
+                                    if (user2 != null)
                                     {
-
-                                        Medico user2 = JsonSerializer.Deserialize<Medico>
-                                            (json2);
-
-                                        if (user2 != null)
-                                        {
                                         <a class="nav-link text-dark">Bem vindo Dr(a). @user2.Nome</a> }
 
-                                        }
-
-                                    
                                 }
+
+
+                            }
 
                         </li>
 
@@ -79,12 +83,13 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2021 - ProntoAtendimento - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2021 - ProntoAtendimento - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a><a> - </a> <a asp-area="" asp-controller="Home" asp-action="FaleConosco">Fale Conosco</a> <a> - </a> <a asp-area="" asp-controller="Home" asp-action="Contato">Contato</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
+
 </body>
 </html>

@@ -34,7 +34,11 @@ namespace ProntoAtendimento.Controllers
 
         public IActionResult Meus_pedidos()
         {
+            
+
+
             List<ItensUtilizados> lista = new List<ItensUtilizados>();
+            
 
             var listaprocedimentos = HttpContext.Session.GetString("ListaProcedimentos");
 
@@ -42,8 +46,10 @@ namespace ProntoAtendimento.Controllers
             {
                 //TODO Converter String para Lista(Json)
                 lista = JsonSerializer.Deserialize<List<ItensUtilizados>>(listaprocedimentos);
+                
             }
 
+            
             return View(lista);
 
         }

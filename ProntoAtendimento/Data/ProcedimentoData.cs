@@ -42,7 +42,7 @@ namespace ProntoAtendimento.Data
                 procedimento.IdProcedimento = (int)reader["Id"];
                 procedimento.Nome = (string)reader["nome"];
                 procedimento.Tipo = (string)reader["Tipo"];
-                procedimento.Valor = (decimal)reader["valor"];
+                procedimento.Valor = (Math.Round((decimal)reader["valor"],2));
 
                 lista.Add(procedimento);
             }

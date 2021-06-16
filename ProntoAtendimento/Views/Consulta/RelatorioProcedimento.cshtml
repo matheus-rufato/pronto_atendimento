@@ -1,0 +1,68 @@
+﻿@model List<ItensUtilizados>
+
+@if (Model.Count == 0)
+{
+<div class="container-fluid mt-100">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Procedimentos</h5>
+                </div>
+                <div class="card-body cart">
+                    <div class="col-sm-12 empty-cart-cls text-center">
+                        <h3><strong>Nenhum Procedimento</strong></h3>
+
+                        <a href="/procedimento/selection" class="btn btn-primary" data-abc="true">Escolher Procedimento</a>
+                        <a href="/home" class="btn btn-sm btn-danger m-3" data-abc="true">Sair</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> }
+            else
+            {
+<div class="container-fluid mt-100">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Procedimentos Utilizados</h5>
+                </div>
+                <div>
+                    <table class="table table-hover">
+                        <tr>
+                            
+                            <th>Nome</th>
+                            <th>Tipo</th>
+                            <th>Valor</th>
+
+                        </tr>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+            
+                                <td>@item.Procedimento.Nome</td>
+                                <td>@item.Procedimento.Tipo</td>
+                                <td>@item.Procedimento.Valor</td>
+
+            
+                            </tr>}
+                    </table>
+                </div>
+            </div>
+            <a href="/home/inicial" class="btn btn-info cart-btn-transform mt-2 float-right m-2"
+               data-abc="true">
+                Continuar
+            </a>
+            
+        </div>
+    </div>
+</div>
+
+                <script>
+                    function removidoBox() {
+                        alert("Item Removido Com Sucesso!");
+                    }
+                </script>}

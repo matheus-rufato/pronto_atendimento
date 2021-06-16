@@ -7,7 +7,8 @@
     <h3>@ViewBag.Mensagem</h3>
 }
 else
-{
+{ 
+    <h5>Lista de Médicos</h5>
     //<h3>@ViewBag.Mensagem @Model.Nome</h3>
     <table class="table table-hover">
         <tr>
@@ -36,5 +37,7 @@ else
         }
     </table>
 }
-<a class="btn btn-primary" href="/medico/create/">Adicionar</a>
+<div>
+<a class="btn btn-info cart-btn-transform mt-2 float-right m-2" href="/medico/create/">Adicionar</a>
+    </div>
 <a class="btn btn-primary" href="/home/editar">Voltar</a>

@@ -25,6 +25,7 @@
             else
             {
 
+
 <br />
 
                 @if (@Model == null)
@@ -32,6 +33,8 @@
 <h3>@ViewBag.Mensagem</h3> }
                 else
                 {
+
+                    <h5>Lista de Consultas</h5>
 <table class="table table-hover">
     <tr>
         <th>Nr</th>
@@ -50,11 +53,7 @@
     <td>@consulta.Data</td>
     <td>@consulta.Status</td>
 
-    <td>
-        <a class="btn btn-sm btn-danger" href="/consulta/delete/@consulta.Nr">Apagar</a>
-        <a class="btn btn-sm btn-warning" href="/consulta/read/@consulta.Nr">Visualizar</a>
-
-    </td>
+    
 </tr>}
 </table>}
                                 <a href="/home/inicial" class="btn btn-primary" data-abc="true">Voltar</a> }

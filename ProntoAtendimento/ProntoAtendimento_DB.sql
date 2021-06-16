@@ -314,9 +314,10 @@ drop view v_consultas
 
 select * from v_consultas
 
+drop view v_consultas 
 create view v_consultas
 as
-	select con.nr, med.nome [Nome Médico], med.crm, pac.nome [Nome Paciente], pac.cpf, pac.convenio, con.data, isnull(con.diagnostico,'Sem diagnóstico') as diagnostico,
+	select con.nr, med.nome [Nome Médico], med.crm, pac.nome [Nome Paciente], pac.cpf, pac.convenio, con.data, isnull(con.diagnostico,' ') as diagnostico,
 		con.valor [Valor Total],
 		case con.status
 			when 1 then 'Ativa'
@@ -346,7 +347,7 @@ select * from atendentes
 select * from pacientes
 select * from procedimentos
 select * from consultas
-select * from proc_utilizas
+select * from v_proc_utilizas where Nr = 3
 go
 
 exec CadAtendente 'João da Silva', '101010', 'São Pedro, 2034', '17 991425364', 'joao@silva','123456'

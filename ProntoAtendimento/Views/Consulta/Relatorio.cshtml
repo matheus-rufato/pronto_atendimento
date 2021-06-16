@@ -33,9 +33,9 @@
                 <div>
                     <table class="table table-hover">
                         <tr>
-                            <th>ID</th>
-                            <th>Nome Medico</th>
-                            <th>Nome Paciente</th>
+                            <th>Id</th>
+                            <th>Médico</th>
+                            <th>Paciente</th>
                             <th>Data</th>
                             <th>Valor</th>
                             <th>Diagnostico</th>
@@ -47,12 +47,15 @@
                         <td>@item.Nr</td>
                         <td>@item.Medico.Nome</td>
                         <td>@item.Paciente.Nome</td>
-                        <td>@item.Data</td> 
+                        <td>@item.Data</td>
                         <td>@item.Valor</td>
                         <td>@item.Diagnostico</td>
+                        <td>
+                            <a href="/consulta/relatorioprocedimento/@item.Nr" class="btn btn-sm btn-danger" >Procedimentos</a>
+                        </td>
+                    </tr>
+                                        }
 
-                        
-                    </tr>}
                     </table>
                 </div>
             </div>
@@ -68,3 +71,13 @@
                 <script>function removidoBox() {
             alert("Item Removido Com Sucesso!");
         }</script>}
+
+
+
+
+
+
+
+
+
+

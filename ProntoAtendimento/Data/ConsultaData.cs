@@ -215,7 +215,7 @@ namespace ProntoAtendimento.Data
                 consulta.Paciente.Convenio = (string)reader["convenio"];
                 consulta.Data = (DateTime)reader["data"];
                 consulta.Diagnostico = (string)reader["diagnostico"];
-                consulta.Valor = (decimal)reader["valor"];
+                consulta.Valor = (Math.Round((decimal)reader["valor"],2));
                 consulta.Status = (string)reader["Situação"];
 
                 lista.Add(consulta);

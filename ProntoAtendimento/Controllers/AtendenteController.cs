@@ -14,6 +14,8 @@ namespace ProntoAtendimento.Controllers
     {
         public IActionResult Index(Atendente novoAtendente)
         {
+
+
             using (var data = new AtendenteData())
                 return View(data.Read());
         }
@@ -21,6 +23,11 @@ namespace ProntoAtendimento.Controllers
 
         [HttpGet]
         public IActionResult Create()
+        {
+            return View();
+        }
+
+        public IActionResult Erro()
         {
             return View();
         }
@@ -114,13 +121,27 @@ namespace ProntoAtendimento.Controllers
 
         public IActionResult Delete(int id)
         {
-            using (var data = new AtendenteData())
-                data.Delete(id);
+            HttpContext.Session.SetString("atendenteupdate", JsonSerializer.Serialize<int>(id));
+            try
+            {
+                using (var data = new AtendenteData())
+                    data.Delete(id);
 
-            return RedirectToAction("Index");
+                return RedirectToAction("Index");
+            }
+            catch (Exception er)
+            {
+                ViewBag.Mensagem = "Email inválido";
+                return RedirectToAction("Erro", "Atendente");
+            }
+        
+
+
+
         }
+            
 
-        [HttpGet]
+[HttpGet]
         public IActionResult Update(int id)
         {
             using (var data = new AtendenteData())
@@ -143,10 +164,46 @@ namespace ProntoAtendimento.Controllers
         }
 
 
-           [HttpGet]
+
+        [HttpGet]
+        public IActionResult Update2()
+        {
+
+
+
+            var idate = HttpContext.Session.GetString("atendenteupdate");
+            int id = System.Text.Json.JsonSerializer.Deserialize<int>(idate);
+
+            using (var data = new AtendenteData())
+                return View(data.Read(id));
+        }
+
+
+        [HttpPost]
+        public IActionResult Update2(int id, Atendente atendente)
+        {
+            atendente.Id = id;
+
+            if (!ModelState.IsValid)
+                return View(atendente);
+
+            using (var data = new AtendenteData())
+                data.Update(atendente);
+
+            return RedirectToAction("Index");
+        }
+
+
+
+
+
+
+
+        [HttpGet]
             public IActionResult Login()
            {
-               return View(new AtendenteViewModel());
+            HttpContext.Session.Clear();
+            return View(new AtendenteViewModel());
            }
 
            [HttpPost]

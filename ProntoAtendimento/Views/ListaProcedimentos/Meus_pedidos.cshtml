@@ -3,12 +3,13 @@
 
 <table class="table table-hover">
     <tr>
-        <th>Confirmar Procedimentos?</th>
+        <th>Confirmar Procedimentos para a consulta?</th>
 
 
     </tr>
 
     <tr>
+        
         <th>ID</th>
         <th>Nome</th>
         <th>Tipo</th>
@@ -16,14 +17,17 @@
 
     </tr>
 
-
-    @foreach (var item in Model)
-    {
+    <int>
+        
+        @foreach (var item in Model)
+        {
 <tr>
+    
     <td>@item.Procedimento.IdProcedimento</td>
     <td>@item.Procedimento.Nome</td>
     <td>@item.Procedimento.Tipo</td>
     <td>@item.Procedimento.Valor</td>
+
 
 
 </tr>}
@@ -34,5 +38,5 @@
 </table>
 
 
-<a class="btn btn btn-primary" href="/itensutilizados/criar/">Confirmar</a>
-<a class="btn btn-sm btn-danger" href="/listaprocedimentos/index/">Voltar</a>
+<a class="btn btn-success" href="/itensutilizados/criar/">Confirmar</a>
+<a class="btn btn-info" href="/listaprocedimentos/index/">Voltar</a>

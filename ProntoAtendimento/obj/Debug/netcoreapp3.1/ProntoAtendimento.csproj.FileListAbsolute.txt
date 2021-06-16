@@ -550,3 +550,10 @@ C:\Users\Henri\Desktop\InterProjeto\pronto_atendimento\ProntoAtendimento\obj\Deb
 C:\Users\Henri\Desktop\InterProjeto\pronto_atendimento\ProntoAtendimento\obj\Debug\netcoreapp3.1\Razor\Views\Consulta\RelatorioPaciente.cshtml.g.cs
 C:\Users\Henri\Desktop\InterProjeto\pronto_atendimento\ProntoAtendimento\obj\Debug\netcoreapp3.1\Razor\Views\ItensUtilizados\Criar.cshtml.g.cs
 C:\Users\Henri\Desktop\InterProjeto\pronto_atendimento\ProntoAtendimento\obj\Debug\netcoreapp3.1\Razor\Views\ItensUtilizados\Meus_pedidos.cshtml.g.cs
+C:\Users\Henri\Desktop\InterProjeto\pronto_atendimento\ProntoAtendimento\obj\Debug\netcoreapp3.1\Razor\Views\Paciente\Erro.cshtml.g.cs
+C:\Users\Henri\Desktop\InterProjeto\pronto_atendimento\ProntoAtendimento\obj\Debug\netcoreapp3.1\Razor\Views\Atendente\Erro.cshtml.g.cs
+C:\Users\Henri\Desktop\InterProjeto\pronto_atendimento\ProntoAtendimento\obj\Debug\netcoreapp3.1\Razor\Views\Medico\Erro.cshtml.g.cs
+C:\Users\Henri\Desktop\InterProjeto\pronto_atendimento\ProntoAtendimento\obj\Debug\netcoreapp3.1\Razor\Views\Medico\Update2.cshtml.g.cs
+C:\Users\Henri\Desktop\InterProjeto\pronto_atendimento\ProntoAtendimento\obj\Debug\netcoreapp3.1\Razor\Views\Atendente\Update2.cshtml.g.cs
+C:\Users\Henri\Desktop\InterProjeto\pronto_atendimento\ProntoAtendimento\obj\Debug\netcoreapp3.1\Razor\Views\Paciente\Update2.cshtml.g.cs
+C:\Users\Henri\Desktop\InterProjeto\pronto_atendimento\ProntoAtendimento\obj\Debug\netcoreapp3.1\Razor\Views\Consulta\RelatorioProcedimento.cshtml.g.cs

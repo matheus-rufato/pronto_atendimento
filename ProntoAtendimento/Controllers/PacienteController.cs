@@ -48,6 +48,12 @@ namespace ProntoAtendimento.Controllers
         }
 
 
+        public IActionResult Erro()
+        {
+            return View();
+        }
+
+
         [HttpPost]
         public IActionResult Create(IFormCollection paciente)
         {
@@ -136,10 +142,20 @@ namespace ProntoAtendimento.Controllers
 
         public IActionResult Delete(int id)
         {
-            using (var data = new PacienteData())
-                data.Delete(id);
 
-            return RedirectToAction("Index");
+            HttpContext.Session.SetString("pacienteupdate", JsonSerializer.Serialize<int>(id));
+            try
+            {
+                using (var data = new PacienteData())
+                    data.Delete(id);
+
+                return RedirectToAction("Index");
+            }
+            catch (Exception er)
+            {
+                ViewBag.Mensagem =  ("Erro ao deletar : " + er);
+                return RedirectToAction("Erro","Paciente");
+            }
         }
 
         [HttpGet]
@@ -152,6 +168,35 @@ namespace ProntoAtendimento.Controllers
 
         [HttpPost]
         public IActionResult Update(int id, Paciente paciente)
+        {
+            paciente.Id = id;
+
+            if (!ModelState.IsValid)
+                return View(paciente);
+
+            using (var data = new PacienteData())
+                data.Update(paciente);
+
+            return RedirectToAction("Index", paciente);
+        }
+
+
+
+        [HttpGet]
+        public IActionResult Update2()
+        {
+
+            var idpac = HttpContext.Session.GetString("pacienteupdate");
+            int id = System.Text.Json.JsonSerializer.Deserialize<int>(idpac);
+
+
+            using (var data = new PacienteData())
+                return View(data.Read(id));
+        }
+
+
+        [HttpPost]
+        public IActionResult Update2(int id, Paciente paciente)
         {
             paciente.Id = id;
 

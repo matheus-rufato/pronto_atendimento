@@ -2,21 +2,27 @@
 
 
 <table class="table table-hover">
-    <tr>
-        <th>Consulta será criada</th>
-
-
-    </tr>
-
-
-
-
-
-
+    
+    <center>
+        <h4>
+            A consulta será criada
+        </h4>
+    </center>
 </table>
+<div>
+    
+        
+        <p> Paciente: @Model.NomePaciente </p>
+        <p> Médico: @Model.NomeMedico</p>
+
+    
+</div>
 
 
-<a class="btn btn btn-primary" href="/consulta/create/">Criar Consulta</a>
-<a class="btn btn-sm btn-danger" href="/medico/update/">Cancelar</a>
+<div>
+    <a class="btn btn-primary btn-sm" href="/consulta/create/">Criar Consulta</a>
+
+<a class="btn btn-danger btn-sm" href="/medico/update/">Cancelar</a>
+    </div>
 
 

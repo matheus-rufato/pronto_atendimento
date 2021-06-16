@@ -17,21 +17,28 @@ namespace ProntoAtendimento.Controllers
             using (var data = new MedicoData())
                 return View(data.Read());
         }
-
+        public IActionResult Erro()
+        {
+            return View();
+        }
         public IActionResult Listagem(Medico novoMedico)
         {
+
             using (var data = new MedicoData())
                 return View(data.ReadAll());
         }
 
         public IActionResult Consulta(Paciente novoPaciente)
         {
-
-
-            HttpContext.Session.SetString("paciente", JsonSerializer.Serialize<Paciente>(novoPaciente));
             
 
+            HttpContext.Session.SetString("paciente", JsonSerializer.Serialize<Paciente>(novoPaciente));
 
+
+
+
+
+           
 
             using (var data = new MedicoData())
                 return View(data.Read());
@@ -140,10 +147,20 @@ namespace ProntoAtendimento.Controllers
 
         public IActionResult Delete(int id)
         {
-            using (var data = new MedicoData())
-                data.Delete(id);
 
-            return RedirectToAction("Index");
+            HttpContext.Session.SetString("medicoupdate", JsonSerializer.Serialize<int>(id));
+
+            try
+            {
+                using (var data = new MedicoData())
+                    data.Delete(id);
+
+                return RedirectToAction("Index");
+            }
+            catch(Exception er)
+            {
+                return RedirectToAction("erro", "medico");
+            }
         }
 
         [HttpGet]
@@ -170,8 +187,39 @@ namespace ProntoAtendimento.Controllers
 
 
         [HttpGet]
+        public IActionResult Update2()
+        {
+
+
+
+            var idmed = HttpContext.Session.GetString("medicoupdate");
+            int id = System.Text.Json.JsonSerializer.Deserialize<int>(idmed);
+            
+            using (var data = new MedicoData())
+                return View(data.Read(id));
+        }
+
+
+        [HttpPost]
+        public IActionResult Update2(int id, Medico medico)
+        {
+            medico.Id = id;
+
+            if (!ModelState.IsValid)
+                return View(medico);
+
+            using (var data = new MedicoData())
+                data.Update(medico);
+
+            return RedirectToAction("Index");
+        }
+
+
+
+        [HttpGet]
         public IActionResult Login()
         {
+            HttpContext.Session.Clear();
             return View(new MedicoViewModel());
         }
 

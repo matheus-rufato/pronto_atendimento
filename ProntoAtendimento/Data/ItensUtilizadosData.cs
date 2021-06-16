@@ -89,12 +89,18 @@ namespace ProntoAtendimento.Data
                 {
                     Nome    = (string)reader["Nome"],
                     Tipo    = (string)reader["Tipo"],
-                    Valor   = (decimal)reader["Valor"]
+                    Valor   = (Math.Round((decimal)reader["Valor"],2))
                 };
                 lista.Add(procedimentos);
             }
 
             return lista;
         }
+
+
+
+
+
+
     }
 }

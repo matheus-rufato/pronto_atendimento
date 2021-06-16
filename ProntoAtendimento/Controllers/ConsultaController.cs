@@ -48,6 +48,17 @@ namespace ProntoAtendimento.Controllers
 
         }
 
+        public IActionResult RelatorioProcedimento(int id)
+        {
+
+
+
+            //HttpContext.Session.SetString("relatorioconsulta", JsonSerializer.Serialize<int>(id));
+            using (var data = new ItensUtilizadosData())
+                return View(data.Read(id));
+
+        }
+
         public IActionResult RelatorioMedico(Paciente novoPaciente)
         {
 
@@ -138,7 +149,7 @@ namespace ProntoAtendimento.Controllers
             consulta.IdAtendente = (int)atendente.Id;
 
 
-            return View();
+            return View(consulta);
         }
 
 
@@ -327,10 +338,17 @@ namespace ProntoAtendimento.Controllers
 
             using (var data = new ConsultaData())
                 data.Update(consulta);
-            
 
 
-            return RedirectToAction("Atender", "Consulta");
+            if (consulta.Status == "2")
+            {
+                return RedirectToAction("Fim", "Consulta");
+
+            }
+            else
+            {
+                return RedirectToAction("Atender", "Consulta");
+            }
         }
     }
 }

@@ -1,0 +1,46 @@
+﻿@model Medico
+
+<br/>
+
+@if (@Model == null)
+{
+    <h3>@ViewBag.Mensagem</h3>
+}
+else
+{
+    // <h3>@ViewBag.Mensagem @Model.Nome</h3>
+<table class="table table-hover rounded-top rounded-bottom shadow">
+
+    <h6> Médico Encontrado </h6>
+    <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Endereço</th>
+        <th>Telefone</th>
+        <th>CRM</th>
+        <th>Status</th>
+
+    </tr>
+
+
+    
+<tr>
+    <td>@Model.Id</td>
+    <td>@Model.Nome</td>
+    <td>@Model.Endereco</td>
+    <td>@Model.Telefone</td>
+    <td>@Model.CRM</td>
+    <td>@Model.Status</td>
+    <td>
+        <a class="btn btn-sm btn-danger" href="/medico/delete/">Apagar</a>
+        <a class="btn btn-sm btn-warning" href="/medico/update/">Editar</a>
+        
+
+    </td>
+</tr>
+
+    
+</table>
+}
+
+<a class="btn btn-primary" href="/home/inicial">Voltar</a>

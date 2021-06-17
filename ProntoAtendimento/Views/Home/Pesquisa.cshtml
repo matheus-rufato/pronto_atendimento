@@ -1,0 +1,27 @@
+﻿@model Home
+
+<form asp-controller="Paciente" asp-action="Pesquisa">
+    
+        
+        <p></p>
+    
+        <div class="form-group text-center">
+            <label class=" navbar-brand">Pesquisa de Paciente</label>
+            <center><input asp-for="Cpf" class="form-control col-5 align-items-center" /></center>
+            <span asp-validation-for="Cpf"></span>
+        </div>
+
+
+
+
+
+
+
+
+    <button class="btn btn-light btn-outline-info float-right m-2 "> Pesquisar </button>
+
+
+
+</form> 
+
+<a class="btn btn-light btn-primary " href="/home/pesquisa">Voltar</a>

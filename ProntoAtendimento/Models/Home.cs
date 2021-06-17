@@ -18,6 +18,10 @@ namespace ProntoAtendimento.Models
 
         public bool acesso { get; set; }
 
+        [Display(Name = "CPF")]
+        [Required(ErrorMessage = "Campo CPF obrigatório")]
+        [MinLength(14)]
+        public string Cpf { get; set; }
 
 
     }

@@ -74,8 +74,8 @@ namespace ProntoAtendimento.Data
                     medico.Telefone = (string)reader["telefone"];
                     medico.Status = (string)reader["Situação"];
                     medico.CRM = (string)reader["crm"];
-                    /*medico.Login = (string)reader["login"];
-                    medico.Senha = (string)reader["senha"];*/
+                    medico.Login = (string)reader["login"];
+                    medico.Senha = (string)reader["senha"];
 
 
                     lista.Add(medico);
@@ -162,9 +162,9 @@ namespace ProntoAtendimento.Data
                     Endereco = (string)reader["endereco"],
                     Telefone = (string)reader["telefone"],
                     Status = (string)reader["Situação"],
-                    CRM = (string)reader["crm"]
-                    //Login = (string)reader["login"],
-                    //Senha = (string)reader["senha"]
+                    CRM = (string)reader["crm"],
+                    Login = (string)reader["login"],
+                    Senha = (string)reader["senha"]
                 };
             }
 
@@ -211,6 +211,10 @@ namespace ProntoAtendimento.Data
                     Login = (string)reader["login"],
                     Senha = (string)reader["senha"]
                 };
+            }
+            else
+            {
+                return medico;
             }
 
             /*Retornando o objeto cliente, que pode ser null ou com as informações

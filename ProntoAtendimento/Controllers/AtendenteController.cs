@@ -194,6 +194,30 @@ namespace ProntoAtendimento.Controllers
         }
 
 
+        [HttpGet]
+        public IActionResult Update3(int id)
+        {
+            using (var data = new AtendenteData())
+                return View(data.Read(id));
+        }
+
+
+        [HttpPost]
+        public IActionResult Update3(int id, Atendente atendente)
+        {
+            atendente.Id = id;
+
+            if (!ModelState.IsValid)
+                return View(atendente);
+
+            using (var data = new AtendenteData())
+                data.Update(atendente);
+
+            Atendente user = new Atendente();
+            user = atendente;
+            HttpContext.Session.SetString("user", JsonSerializer.Serialize<Atendente>(user));
+            return RedirectToAction("Inicial","home");
+        }
 
 
 

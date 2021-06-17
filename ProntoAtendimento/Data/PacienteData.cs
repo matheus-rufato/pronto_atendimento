@@ -130,44 +130,57 @@ namespace ProntoAtendimento.Data
         //Metódo que fará uma consulta do cliente pelo id
         public Paciente Read(string cpf)
         {
-            //Declarando um objeto cliente e incializando como null
             Paciente paciente = null;
-
-            SqlCommand cmd = new SqlCommand(); //cmd é um comando que permitirá executar um comando SQL
-            cmd.Connection = base.connectionDB; //Conexão com o banco de dados
-
-            //String SQL para ser executada no banco de dados
-            cmd.CommandText = @"select * from v_pacientes WHERE Cpf = @Cpf";
-
-            //Inserindo o valor do id recebido a string SQL
-            cmd.Parameters.AddWithValue("@Cpf", cpf);
-
-            //Executando o comando SQL no banco de dados
-            SqlDataReader reader = cmd.ExecuteReader();
-
-            //Verificando se, após a consulta, retornou um registro
-            if (reader.Read())
+            try
             {
-                /*Instanciando o objeto declarado anteriormente
-                 *e colocando os dados do registro da tabela no objeto
-                 */
-                paciente = new Paciente
+                //Declarando um objeto cliente e incializando como null
+                
+
+                SqlCommand cmd = new SqlCommand(); //cmd é um comando que permitirá executar um comando SQL
+                cmd.Connection = base.connectionDB; //Conexão com o banco de dados
+
+                //String SQL para ser executada no banco de dados
+                cmd.CommandText = @"select * from v_pacientes WHERE Cpf = @Cpf";
+
+                //Inserindo o valor do id recebido a string SQL
+                cmd.Parameters.AddWithValue("@Cpf", cpf);
+
+                //Executando o comando SQL no banco de dados
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                //Verificando se, após a consulta, retornou um registro
+                if (reader.Read())
                 {
-                    Id = (int)reader["Id"],
-                    Nome = (string)reader["nome"],
-                    Cpf = (string)reader["cpf"],
-                    Endereco = (string)reader["endereco"],
-                    Telefone = (string)reader["telefone"],
-                    Convenio = (string)reader["convenio"],
-                    Status = (string)reader["Situação"]
+                    /*Instanciando o objeto declarado anteriormente
+                     *e colocando os dados do registro da tabela no objeto
+                     */
+                    paciente = new Paciente
+                    {
+                        Id = (int)reader["Id"],
+                        Nome = (string)reader["nome"],
+                        Cpf = (string)reader["cpf"],
+                        Endereco = (string)reader["endereco"],
+                        Telefone = (string)reader["telefone"],
+                        Convenio = (string)reader["convenio"],
+                        Status = (string)reader["Situação"]
 
-                };
+                    };
+                }
+                else
+                {
+                    return paciente;
+                }
+
+                /*Retornando o objeto cliente, que pode ser null ou com as informações
+                 *que foram recebidas da consulta
+                 */
+                return paciente;
             }
+            catch(Exception ed)
+            {
+                return paciente;
 
-            /*Retornando o objeto cliente, que pode ser null ou com as informações
-             *que foram recebidas da consulta
-             */
-            return paciente;
+            }
         }
 
 

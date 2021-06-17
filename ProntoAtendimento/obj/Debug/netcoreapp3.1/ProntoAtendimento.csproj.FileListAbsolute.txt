@@ -559,3 +559,11 @@ C:\Users\Henri\Desktop\InterProjeto\pronto_atendimento\ProntoAtendimento\obj\Deb
 C:\Users\Henri\Desktop\InterProjeto\pronto_atendimento\ProntoAtendimento\obj\Debug\netcoreapp3.1\Razor\Views\Consulta\RelatorioProcedimento.cshtml.g.cs
 C:\Users\Henri\Desktop\InterProjeto\pronto_atendimento\ProntoAtendimento\obj\Debug\netcoreapp3.1\Razor\Views\Home\FaleConosco.cshtml.g.cs
 C:\Users\Henri\Desktop\InterProjeto\pronto_atendimento\ProntoAtendimento\obj\Debug\netcoreapp3.1\Razor\Views\Home\Contato.cshtml.g.cs
+C:\Users\Henri\Desktop\InterProjeto\pronto_atendimento\ProntoAtendimento\obj\Debug\netcoreapp3.1\Razor\Views\Medico\Update3.cshtml.g.cs
+C:\Users\Henri\Desktop\InterProjeto\pronto_atendimento\ProntoAtendimento\obj\Debug\netcoreapp3.1\Razor\Views\Atendente\Update3.cshtml.g.cs
+C:\Users\Henri\Desktop\InterProjeto\pronto_atendimento\ProntoAtendimento\obj\Debug\netcoreapp3.1\Razor\Views\Home\Pesquisa.cshtml.g.cs
+C:\Users\Henri\Desktop\InterProjeto\pronto_atendimento\ProntoAtendimento\obj\Debug\netcoreapp3.1\Razor\Views\Paciente\Sem.cshtml.g.cs
+C:\Users\Henri\Desktop\InterProjeto\pronto_atendimento\ProntoAtendimento\obj\Debug\netcoreapp3.1\Razor\Views\Paciente\Index2.cshtml.g.cs
+C:\Users\Henri\Desktop\InterProjeto\pronto_atendimento\ProntoAtendimento\obj\Debug\netcoreapp3.1\Razor\Views\Home\PesquisaMed.cshtml.g.cs
+C:\Users\Henri\Desktop\InterProjeto\pronto_atendimento\ProntoAtendimento\obj\Debug\netcoreapp3.1\Razor\Views\Medico\Sem.cshtml.g.cs
+C:\Users\Henri\Desktop\InterProjeto\pronto_atendimento\ProntoAtendimento\obj\Debug\netcoreapp3.1\Razor\Views\Medico\Index2.cshtml.g.cs

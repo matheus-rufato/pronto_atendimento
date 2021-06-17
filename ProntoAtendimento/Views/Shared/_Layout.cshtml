@@ -13,24 +13,24 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
-<body >
+<body style="background-image: url('https://uploaddeimagens.com.br/images/003/293/088/original/MicrosoftTeams-image_%283%29.png?1623957002'); background-repeat: no-repeat; background-position: left " >
     
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3" >
             <div class="container">
                 <a  >  </a>
-                <a style="background-image:url('../sirene.jpg'); background-position:left; background-repeat:no-repeat; background-position-y:center; background-position-x:left; background-size:40px;" class="navbar-brand col-3"  asp-area="" asp-controller="Home" asp-action="Index">      ProntoAtendimento</a>
+                <a style="background-image: url('https://uploaddeimagens.com.br/images/003/293/096/full/MicrosoftTeams-image_%284%29.png?1623957103'); background-position: left; background-repeat: no-repeat; background-position-y: center; background-position-x: left; background-size: 40px;" class="navbar-brand col-3"  asp-area="" asp-controller="Home" asp-action="Index">      ProntoAtendimento</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item col-6">
 
-                        <li class="nav-item col-9">
-                            
-                        </li>
-                        <li class="nav-item alert-info rounded-pill">
+                            </li>
+
+                        <li class="nav-item alert-info rounded-pill" align="center">
                             @{
 
 
@@ -46,7 +46,8 @@
 
                                     if (user != null)
                                     {
-                                        <a class="nav-link text-dark">Bem vindo @user.Nome</a> }
+
+                                        <a class="nav-link text-dark m-auto">Bem vindo @user.Nome</a> }
 
                                 }
 
@@ -61,12 +62,33 @@
 
                                     if (user2 != null)
                                     {
-                                        <a class="nav-link text-dark">Bem vindo Dr(a). @user2.Nome</a> }
+
+                                        <a class="nav-link m-3">Bem vindo Dr(a). @user2.Nome</a> }
 
                                 }
 
 
                             }
+
+                        </li>
+
+                        <li>
+                            @{
+
+
+                                if (json != null)
+                                {
+                                    Atendente user4 = JsonSerializer.Deserialize<Atendente>(json);
+                                    <a href="/atendente/update3/@user4.Id"><img src="/atendimento.jpg" alt="some text" width=40 height=45></a>
+                                }
+                                if (json2 != null)
+                                {
+                                    Medico user3 = JsonSerializer.Deserialize<Medico>
+                                        (json2);
+                                    <a href="/medico/update3/@user3.Id"><img src="/Imagem3.jpg" alt="some text" width=60 height=70></a>}
+                            }
+
+                            
 
                         </li>
 
@@ -83,7 +105,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2021 - ProntoAtendimento - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a><a> - </a> <a asp-area="" asp-controller="Home" asp-action="FaleConosco">Fale Conosco</a> <a> - </a> <a asp-area="" asp-controller="Home" asp-action="Contato">Contato</a>
+            &copy; 2021 - ProntoAtendimento - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a><a> - </a> <a asp-area="" asp-controller="Home" asp-action="FaleConosco">Fale Conosco</a> <a> - </a> <a asp-area="" asp-controller="Home" asp-action="Contato">Contato</a> <h8> - Para informações sobre a Covid-19, clique <a href="https://covid.saude.gov.br/">aqui.</a> <img src='../imgcvrs.jpg' alt="some text" width=30 height=30></h8>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

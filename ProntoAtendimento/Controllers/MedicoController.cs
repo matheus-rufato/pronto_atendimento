@@ -17,6 +17,25 @@ namespace ProntoAtendimento.Controllers
             using (var data = new MedicoData())
                 return View(data.Read());
         }
+
+        public IActionResult Index2(Medico novoMedico)
+        {
+            Medico mediconovo = new Medico();
+            using (var data = new MedicoData())
+                mediconovo = data.Read(novoMedico.Cpf);
+            return View(mediconovo);
+
+        }
+
+
+        public IActionResult Sem()
+        {
+
+
+            return View();
+
+        }
+
         public IActionResult Erro()
         {
             return View();
@@ -217,6 +236,32 @@ namespace ProntoAtendimento.Controllers
 
 
         [HttpGet]
+        public IActionResult Update3(int id)
+        {
+            using (var data = new MedicoData())
+                return View(data.Read(id));
+        }
+
+
+        [HttpPost]
+        public IActionResult Update3(int id, Medico medico)
+        {
+            medico.Id = id;
+
+            if (!ModelState.IsValid)
+                return View(medico);
+
+            using (var data = new MedicoData())
+                data.Update(medico);
+            Medico user2 = new Medico();
+            user2 = medico;
+            HttpContext.Session.SetString("user2", JsonSerializer.Serialize<Medico>(user2));
+            return RedirectToAction("Index");
+        }
+
+
+
+        [HttpGet]
         public IActionResult Login()
         {
             HttpContext.Session.Clear();
@@ -243,6 +288,38 @@ namespace ProntoAtendimento.Controllers
 
                 return RedirectToAction("Atender", "Consulta");
             }
+
+        }
+
+
+        [HttpPost]
+        public IActionResult Pesquisa(IFormCollection medico)
+        {
+            var med = new Medico();
+
+
+            med.Cpf = medico["Cpf"];
+
+
+
+            Medico m = new Medico();
+
+            using (var data = new MedicoData())
+                m = data.Read(med.Cpf);
+
+            if (m != null)
+            {
+
+                return RedirectToAction("Index2", m);
+            }
+            else
+            {
+
+                return RedirectToAction("Sem", "Medico");
+            }
+
+
+
 
         }
 

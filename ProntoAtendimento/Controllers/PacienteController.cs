@@ -19,6 +19,21 @@ namespace ProntoAtendimento.Controllers
                 return View(data.Read());
             
         }
+        public IActionResult Index2(Paciente novoPaciente)
+        {
+            Paciente pacientenovo = new Paciente();
+            using (var data = new PacienteData())
+                pacientenovo = data.Read(novoPaciente.Cpf);
+            return View(pacientenovo);
+
+        }
+        public IActionResult Sem()
+        {
+
+            
+                return View();
+
+        }
 
 
         public IActionResult Listagem(Paciente novoPaciente)
@@ -207,6 +222,39 @@ namespace ProntoAtendimento.Controllers
                 data.Update(paciente);
 
             return RedirectToAction("Index", paciente);
+        }
+
+
+
+        [HttpPost]
+        public IActionResult Pesquisa(IFormCollection paciente)
+        {
+                var pac = new Paciente();
+
+                
+                pac.Cpf = paciente["Cpf"];
+                
+
+
+                Paciente p = new Paciente();
+
+                using (var data = new PacienteData())
+                    p = data.Read(pac.Cpf);
+
+                if (p !=null)
+                {
+                    
+                    return RedirectToAction("Index2", p);
+                }
+                else
+                {
+                    
+                    return RedirectToAction("Sem","Paciente" );
+                }
+
+            
+
+            
         }
 
 

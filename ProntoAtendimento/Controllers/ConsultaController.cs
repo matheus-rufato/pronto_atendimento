@@ -116,9 +116,20 @@ namespace ProntoAtendimento.Controllers
 
             Consulta consulta = new Consulta();
 
+
             var paciente = HttpContext.Session.GetString("paciente");
             Paciente novopaciente = System.Text.Json.JsonSerializer.Deserialize<Paciente>(paciente);
+            
 
+            if (novopaciente.Id == null) {
+                var paciente2 = HttpContext.Session.GetString("pacientevolta");
+                novopaciente = System.Text.Json.JsonSerializer.Deserialize<Paciente>(paciente2);
+            }
+            else
+            {
+
+                HttpContext.Session.SetString("pacientevolta", JsonSerializer.Serialize<Paciente>(novopaciente));
+            }
 
 
             var medico = HttpContext.Session.GetString("medico");
@@ -128,10 +139,10 @@ namespace ProntoAtendimento.Controllers
             var user = HttpContext.Session.GetString("user");
             Atendente atendente = System.Text.Json.JsonSerializer.Deserialize<Atendente>(user);
 
-
+            Paciente novopaciente2 = new Paciente();
 
             using (var datapac = new PacienteData())
-                novopaciente = datapac.Read((int)novopaciente.Id);
+                novopaciente2 = datapac.Read((int)novopaciente.Id);
             using (var datamed = new MedicoData())
                 novomedico = datamed.Read((int)novomedico.Id);
             using (var dataate = new AtendenteData())
@@ -141,10 +152,10 @@ namespace ProntoAtendimento.Controllers
 
 
 
-            consulta.NomePaciente = novopaciente.Nome;
+            consulta.NomePaciente = novopaciente2.Nome;
             consulta.NomeMedico = novomedico.Nome;
             consulta.NomeAtendente = atendente.Nome;
-            consulta.IdPaciente = (int)novopaciente.Id;
+            consulta.IdPaciente = (int)novopaciente2.Id;
             consulta.IdMedico = (int)novomedico.Id;
             consulta.IdAtendente = (int)atendente.Id;
 

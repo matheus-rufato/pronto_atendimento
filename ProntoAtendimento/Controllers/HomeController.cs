@@ -32,6 +32,18 @@ namespace ProntoAtendimento.Controllers
             return View();
         }
 
+        public IActionResult Pesquisa()
+        {
+            
+            return View();
+        }
+
+        public IActionResult PesquisaMed()
+        {
+
+            return View();
+        }
+
 
         [HttpGet]
         public IActionResult Inicial()
@@ -47,13 +59,12 @@ namespace ProntoAtendimento.Controllers
 
             if (home.opcao == 1)
             { return RedirectToAction("Editar", "Home"); }
-            else
-            { 
-                
-                
-                
-                return RedirectToAction("Consulta", "Paciente"); 
-            
+            else if (home.opcao == 2)
+            {
+                return RedirectToAction("Consulta", "Paciente");
+            }
+            else {
+                return RedirectToAction("relatoriopaciente", "consulta");
             }
         }
 

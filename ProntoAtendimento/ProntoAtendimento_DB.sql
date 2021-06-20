@@ -258,6 +258,7 @@ begin
 end
 go
 
+select* from v_medicos
 create view v_pacientes
 as
 	select pes.Id, pes.nome, pes.cpf, pes.endereco, pes.telefone, pac.convenio,

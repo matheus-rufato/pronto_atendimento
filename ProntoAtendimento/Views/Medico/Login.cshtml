@@ -18,11 +18,26 @@
         <div class="form-group text-center">
             <label asp-for="Senha" class=" navbar-brand"></label>
             <center>
-                <input asp-for="Senha" class="form-control col-5 align-items-center" />
+                <input asp-for="Senha" class="form-control col-5 align-items-center" id="senha"/>
             </center>
             <span asp-validation-for="Senha"></span>
+            <input type="checkbox" onclick="mostrarSenha()" />Mostrar Senha
         </div>
 
         <center><button class="btn btn-primary class=" btn btn-primary text-center"">Entrar</button></center>
         <br>
     </form>
+
+    <script>
+        function mostrarSenha() {
+            var tipo = document.getElementById("senha");
+            if (tipo.type == "password") {
+                tipo.type = "text";
+            }
+            else {
+                tipo.type = "password";
+            }
+
+
+        }
+    </script>

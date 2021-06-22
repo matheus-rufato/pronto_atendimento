@@ -160,6 +160,21 @@ namespace ProntoAtendimento.Controllers
             using (var data = new AtendenteData())
                 data.Update(atendente);
 
+
+
+            var user = HttpContext.Session.GetString("user");
+            Atendente atendente2 = System.Text.Json.JsonSerializer.Deserialize<Atendente>(user);
+
+            if(atendente.Id == atendente2.Id)
+            {
+                Atendente useratend = new Atendente();
+                useratend = atendente;
+                HttpContext.Session.SetString("user", JsonSerializer.Serialize<Atendente>(useratend));
+
+
+            }
+
+
             return RedirectToAction("Index");
         }
 
@@ -246,7 +261,7 @@ namespace ProntoAtendimento.Controllers
                        return View(model);
                    }
 
-                   HttpContext.Session.SetString("user", JsonSerializer.Serialize<Atendente>(user)); // Ta dando erro
+                   HttpContext.Session.SetString("user", JsonSerializer.Serialize<Atendente>(user)); 
 
                    return RedirectToAction("Inicial","Home");
                }

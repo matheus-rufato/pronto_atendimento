@@ -201,6 +201,10 @@ namespace ProntoAtendimento.Controllers
             using (var data = new MedicoData())
                 data.Update(medico);
 
+            Medico user2 = new Medico();
+            user2 = medico;
+
+            
             return RedirectToAction("Index");
         }
 
@@ -256,7 +260,7 @@ namespace ProntoAtendimento.Controllers
             Medico user2 = new Medico();
             user2 = medico;
             HttpContext.Session.SetString("user2", JsonSerializer.Serialize<Medico>(user2));
-            return RedirectToAction("Index");
+            return RedirectToAction("Atender", "Consulta");
         }
 
 

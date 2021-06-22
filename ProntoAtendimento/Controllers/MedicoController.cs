@@ -79,42 +79,58 @@ namespace ProntoAtendimento.Controllers
         [HttpPost]
         public IActionResult Create(IFormCollection medico)
         {
-            string nome = medico["Nome"];
-            string cpf = medico["CPF"];
-            string endereco = medico["Endereco"];
-            string telefone = medico["Telefone"];
-            string login = medico["Login"];
-            string senha = medico["Senha"];
-            string CRM = medico["CRM"];
-
-            if (nome.Length < 6)
+            try
             {
-                ViewBag.Mensagem = "Nome deve conter 6 ou mais carecteres";
+                string nome = medico["Nome"];
+                string cpf = medico["CPF"];
+                string endereco = medico["Endereco"];
+                string telefone = medico["Telefone"];
+                string login = medico["Login"];
+                string senha = medico["Senha"];
+                string CRM = medico["CRM"];
+
+
+
+                if (nome.Length < 6)
+                {
+                    ViewBag.Message = "Nome deve conter 6 ou mais carecteres";
+                    return View();
+                }
+                if (senha.Length < 7)
+                {
+                    ViewBag.Message = "Senha deve conter 6 ou mais carecteres";
+                    return View();
+                }
+                if (!login.Contains("@"))
+                {
+                    ViewBag.Message = "Email inválido";
+                    return View();
+                }
+
+
+
+
+
+                var novoMedico = new Medico();
+                novoMedico.Nome = medico["Nome"];
+                novoMedico.Cpf = medico["Cpf"];
+                novoMedico.Endereco = medico["Endereco"];
+                novoMedico.Telefone = medico["Telefone"];
+                novoMedico.Login = medico["Login"];
+                novoMedico.Senha = medico["Senha"];
+                novoMedico.CRM = medico["CRM"];
+
+                using (var data = new MedicoData())
+                    data.Create(novoMedico);
+
+                return RedirectToAction("Index", novoMedico);
             }
-            /*if (!email.Contains("@"))
+            catch (Exception ex)
             {
-                ViewBag.Mensagem = "Email inválido";
+                ViewBag.Message = "CPF, CRM e/ou Login já cadastrado";
                 return View();
-            }*/
-            if (senha.Length < 6)
-            {
-                ViewBag.Mensagem = "Senha deve conter 6 caracteres ou mais";
-                return View();
+
             }
-
-            var novoMedico = new Medico();
-            novoMedico.Nome = medico["Nome"];
-            novoMedico.Cpf = medico["Cpf"];
-            novoMedico.Endereco = medico["Endereco"];
-            novoMedico.Telefone = medico["Telefone"];
-            novoMedico.Login = medico["Login"];
-            novoMedico.Senha = medico["Senha"];
-            novoMedico.CRM = medico["CRM"];
-
-            using (var data = new MedicoData())
-                data.Create(novoMedico);
-
-            return RedirectToAction("Index", novoMedico);
         }
 
 
@@ -193,19 +209,28 @@ namespace ProntoAtendimento.Controllers
         [HttpPost]
         public IActionResult Update(int id, Medico medico)
         {
-            medico.Id = id;
+            try
+            {
+                medico.Id = id;
 
-            if (!ModelState.IsValid)
-                return View(medico);
+                if (!ModelState.IsValid)
+                    return View(medico);
 
-            using (var data = new MedicoData())
-                data.Update(medico);
+                using (var data = new MedicoData())
+                    data.Update(medico);
 
-            Medico user2 = new Medico();
-            user2 = medico;
+                Medico user2 = new Medico();
+                user2 = medico;
 
-            
-            return RedirectToAction("Index");
+
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = "CPF, CRM e/ou Login já cadastrado";
+                return View();
+
+            }
         }
 
 
@@ -226,15 +251,24 @@ namespace ProntoAtendimento.Controllers
         [HttpPost]
         public IActionResult Update2(int id, Medico medico)
         {
-            medico.Id = id;
+            try
+            {
+                medico.Id = id;
 
-            if (!ModelState.IsValid)
-                return View(medico);
+                if (!ModelState.IsValid)
+                    return View(medico);
 
-            using (var data = new MedicoData())
-                data.Update(medico);
+                using (var data = new MedicoData())
+                    data.Update(medico);
 
-            return RedirectToAction("Index");
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = "CPF, CRM e/ou Login já cadastrado";
+                return View();
+
+            }
         }
 
 
@@ -250,17 +284,26 @@ namespace ProntoAtendimento.Controllers
         [HttpPost]
         public IActionResult Update3(int id, Medico medico)
         {
-            medico.Id = id;
+            try
+            {
+                medico.Id = id;
 
-            if (!ModelState.IsValid)
-                return View(medico);
+                if (!ModelState.IsValid)
+                    return View(medico);
 
-            using (var data = new MedicoData())
-                data.Update(medico);
-            Medico user2 = new Medico();
-            user2 = medico;
-            HttpContext.Session.SetString("user2", JsonSerializer.Serialize<Medico>(user2));
-            return RedirectToAction("Atender", "Consulta");
+                using (var data = new MedicoData())
+                    data.Update(medico);
+                Medico user2 = new Medico();
+                user2 = medico;
+                HttpContext.Session.SetString("user2", JsonSerializer.Serialize<Medico>(user2));
+                return RedirectToAction("Atender", "Consulta");
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = "CPF, CRM e/ou Login já cadastrado";
+                return View();
+
+            }
         }
 
 

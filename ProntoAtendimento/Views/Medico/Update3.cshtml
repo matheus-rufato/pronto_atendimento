@@ -1,5 +1,10 @@
 ﻿@model Medico
 
+
+@if (ViewBag.Message != null)
+{
+<div class="alert alert-danger">@ViewBag.Message</div>}
+
 <form asp-controller="Medico" asp-action="Update3" method="POST">
     <div class="form-group">
         <label asp-for="Nome"></label>
@@ -44,7 +49,7 @@
 
     <div class="form-group">
         <label>Senha</label>
-        <input asp-for="Senha" class="form-control" type="password"/>
+        <input asp-for="Senha" class="form-control" type="password" />
         <span asp-validation-for="Senha"></span>
     </div>
 

@@ -32,46 +32,68 @@ namespace ProntoAtendimento.Controllers
             return View();
         }
 
+        public IActionResult ErroCreate()
+        {
+            return View();
+        }
+
 
         [HttpPost]
         public IActionResult Create(IFormCollection atendente)
         {
-            string nome = atendente["Nome"];
-            string cpf = atendente["CPF"];
-            string endereco = atendente["Endereco"];
-            string telefone = atendente["Telefone"];
-            string login = atendente["Login"];
-            string senha = atendente["Senha"];
-
-
-
-            if (nome.Length < 6)
+            try
             {
-                ViewBag.Mensagem = "Nome deve conter 6 ou mais carecteres";
+                string nome = atendente["Nome"];
+                string cpf = atendente["CPF"];
+                string endereco = atendente["Endereco"];
+                string telefone = atendente["Telefone"];
+                string login = atendente["Login"];
+                string senha = atendente["Senha"];
+
+
+
+
+
+                if (nome.Length < 6)
+                {
+                    ViewBag.Message = "Nome deve conter 6 ou mais carecteres";
+                    return View();
+                }
+                if (senha.Length < 7)
+                {
+                    ViewBag.Message = "Senha deve conter 6 ou mais carecteres";
+                    return View();
+                }
+                if (!login.Contains("@"))
+                {
+                    ViewBag.Message = "Email inválido";
+                    return View();
+                }
+
+
+                var novoAtendente = new Atendente();
+                novoAtendente.Nome = atendente["Nome"];
+                novoAtendente.Cpf = atendente["Cpf"];
+                novoAtendente.Endereco = atendente["Endereco"];
+                novoAtendente.Telefone = atendente["Telefone"];
+                novoAtendente.Login = atendente["Login"];
+                novoAtendente.Senha = atendente["Senha"];
+
+                if (!ModelState.IsValid)
+                    return View(atendente);
+
+
+                using (var data = new AtendenteData())
+                    data.Create(novoAtendente);
+
+                return RedirectToAction("Index", novoAtendente);
             }
-            /*if (!email.Contains("@"))
+            catch(Exception ex)
             {
-                ViewBag.Mensagem = "Email inválido";
+                ViewBag.Message = "CPF e/ou Login já cadastrado";
                 return View();
-            }*/
-            if (senha.Length < 6)
-            {
-                ViewBag.Mensagem = "Senha deve conter 6 caracteres ou mais";
-                return View();
+
             }
-
-            var novoAtendente = new Atendente();
-            novoAtendente.Nome = atendente["Nome"];
-            novoAtendente.Cpf = atendente["Cpf"];
-            novoAtendente.Endereco = atendente["Endereco"];
-            novoAtendente.Telefone = atendente["Telefone"];
-            novoAtendente.Login = atendente["Login"];
-            novoAtendente.Senha = atendente["Senha"];
-
-            using (var data = new AtendenteData())
-                data.Create(novoAtendente);
-
-            return RedirectToAction("Index", novoAtendente);
         }
 
 
@@ -152,30 +174,40 @@ namespace ProntoAtendimento.Controllers
         [HttpPost]
         public IActionResult Update(int id, Atendente atendente)
         {
-            atendente.Id = id;
-
-            if (!ModelState.IsValid)
-                return View(atendente);
-
-            using (var data = new AtendenteData())
-                data.Update(atendente);
-
-
-
-            var user = HttpContext.Session.GetString("user");
-            Atendente atendente2 = System.Text.Json.JsonSerializer.Deserialize<Atendente>(user);
-
-            if(atendente.Id == atendente2.Id)
+            try
             {
-                Atendente useratend = new Atendente();
-                useratend = atendente;
-                HttpContext.Session.SetString("user", JsonSerializer.Serialize<Atendente>(useratend));
+                atendente.Id = id;
+
+                if (!ModelState.IsValid)
+                    return View(atendente);
+
+                using (var data = new AtendenteData())
+                    data.Update(atendente);
+
+
+
+                var user = HttpContext.Session.GetString("user");
+                Atendente atendente2 = System.Text.Json.JsonSerializer.Deserialize<Atendente>(user);
+
+                if (atendente.Id == atendente2.Id)
+                {
+                    Atendente useratend = new Atendente();
+                    useratend = atendente;
+                    HttpContext.Session.SetString("user", JsonSerializer.Serialize<Atendente>(useratend));
+
+
+                }
+
+
+                return RedirectToAction("Index");
+            }
+            catch(Exception es)
+            {
+                ViewBag.Message = "CPF e/ou Login já cadastrado";
+                return View();
 
 
             }
-
-
-            return RedirectToAction("Index");
         }
 
 
@@ -197,15 +229,24 @@ namespace ProntoAtendimento.Controllers
         [HttpPost]
         public IActionResult Update2(int id, Atendente atendente)
         {
-            atendente.Id = id;
+            try
+            {
+                atendente.Id = id;
 
-            if (!ModelState.IsValid)
-                return View(atendente);
+                if (!ModelState.IsValid)
+                    return View(atendente);
 
-            using (var data = new AtendenteData())
-                data.Update(atendente);
+                using (var data = new AtendenteData())
+                    data.Update(atendente);
 
-            return RedirectToAction("Index");
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = "CPF e/ou Login já cadastrado";
+                return View();
+
+            }
         }
 
 
@@ -220,18 +261,27 @@ namespace ProntoAtendimento.Controllers
         [HttpPost]
         public IActionResult Update3(int id, Atendente atendente)
         {
-            atendente.Id = id;
+            try
+            {
+                atendente.Id = id;
 
-            if (!ModelState.IsValid)
-                return View(atendente);
+                if (!ModelState.IsValid)
+                    return View(atendente);
 
-            using (var data = new AtendenteData())
-                data.Update(atendente);
+                using (var data = new AtendenteData())
+                    data.Update(atendente);
 
-            Atendente user = new Atendente();
-            user = atendente;
-            HttpContext.Session.SetString("user", JsonSerializer.Serialize<Atendente>(user));
-            return RedirectToAction("Inicial","home");
+                Atendente user = new Atendente();
+                user = atendente;
+                HttpContext.Session.SetString("user", JsonSerializer.Serialize<Atendente>(user));
+                return RedirectToAction("Inicial", "home");
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = "CPF e/ou Login já cadastrado";
+                return View();
+
+            }
         }
 
 

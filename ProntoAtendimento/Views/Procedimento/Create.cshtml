@@ -1,5 +1,9 @@
 ﻿@model Procedimento
 
+@if (ViewBag.Message != null)
+{
+<div class="alert alert-danger">@ViewBag.Message</div>}
+
 
 <form asp-controller="Procedimento" asp-action="Create" method="POST">
     <h2>Cadastrar Procedimento</h2>
@@ -25,7 +29,7 @@
         <span asp-validation-for="Valor"></span>
     </div>
 
-    
+
 
     <button class="btn btn-primary">Salvar</button>
 </form>

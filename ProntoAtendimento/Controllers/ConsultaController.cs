@@ -27,6 +27,11 @@ namespace ProntoAtendimento.Controllers
                 return View();
         }
 
+        public IActionResult Erro()
+        {
+            return View();
+        }
+
         public IActionResult Atender(Consulta novaConsulta)
         {
             var medico = HttpContext.Session.GetString("user2");
@@ -262,48 +267,137 @@ namespace ProntoAtendimento.Controllers
         [HttpPost]
         public IActionResult Create(IFormCollection consulta)
         {
-
-            /*Consulta consultanova = new Consulta();
-            consultanova = consulta;
-
-
-            var paciente = HttpContext.Session.GetString("paciente");
-            Paciente novopaciente = new Paciente();
-            novopaciente = System.Text.Json.JsonSerializer.Deserialize<Paciente>(paciente);
-
-
-            var medico = HttpContext.Session.GetString("medico");
-            Medico novomedico = new Medico();
-            novomedico = System.Text.Json.JsonSerializer.Deserialize<Medico>(medico);
-
-            var user = HttpContext.Session.GetString("user");
-            Atendente atendente = new Atendente();
-            atendente = System.Text.Json.JsonSerializer.Deserialize<Atendente>(user);
-
-
-
-
-            consultanova.IdPaciente = (int)novopaciente.Id;
-            consultanova.IdMedico = (int)novomedico.Id;
-            consultanova.IdAtendente = (int)atendente.Id;*/
-
-            var novoConsulta = new Consulta();
-            novoConsulta.IdPaciente = Convert.ToInt32(consulta["IdPaciente"]);
-            novoConsulta.IdMedico = Convert.ToInt32(consulta["IdMedico"]);
-            novoConsulta.IdAtendente = Convert.ToInt32(consulta["IdAtendente"]);
-            novoConsulta.Valor = Convert.ToInt32(consulta["Valor"]);
-            novoConsulta.Status = (consulta["Status"]);
-
-
-
-            if (!ModelState.IsValid)
+            try
             {
-                return View(consulta);
-            }
+                /*Consulta consultanova = new Consulta();
+                consultanova = consulta;
 
-            using (var data = new ConsultaData())
-               data.Create(novoConsulta);
-            return RedirectToAction("Index");
+
+                var paciente = HttpContext.Session.GetString("paciente");
+                Paciente novopaciente = new Paciente();
+                novopaciente = System.Text.Json.JsonSerializer.Deserialize<Paciente>(paciente);
+
+
+                var medico = HttpContext.Session.GetString("medico");
+                Medico novomedico = new Medico();
+                novomedico = System.Text.Json.JsonSerializer.Deserialize<Medico>(medico);
+
+                var user = HttpContext.Session.GetString("user");
+                Atendente atendente = new Atendente();
+                atendente = System.Text.Json.JsonSerializer.Deserialize<Atendente>(user);
+
+
+
+
+                consultanova.IdPaciente = (int)novopaciente.Id;
+                consultanova.IdMedico = (int)novomedico.Id;
+                consultanova.IdAtendente = (int)atendente.Id;*/
+
+                var novoConsulta = new Consulta();
+                novoConsulta.IdPaciente = Convert.ToInt32(consulta["IdPaciente"]);
+                novoConsulta.IdMedico = Convert.ToInt32(consulta["IdMedico"]);
+                novoConsulta.IdAtendente = Convert.ToInt32(consulta["IdAtendente"]);
+                novoConsulta.Valor = Convert.ToInt32(consulta["Valor"]);
+                novoConsulta.Status = (consulta["Status"]);
+
+
+                if (novoConsulta.Valor < 0)
+                {
+                    ViewBag.Message = "Valor inválido.";
+                    Consulta consulta3 = new Consulta();
+
+                    var paciente = HttpContext.Session.GetString("paciente");
+                    Paciente novopaciente = System.Text.Json.JsonSerializer.Deserialize<Paciente>(paciente);
+
+
+
+                    var medico = HttpContext.Session.GetString("medico");
+                    Medico novomedico = System.Text.Json.JsonSerializer.Deserialize<Medico>(medico);
+
+
+                    var user = HttpContext.Session.GetString("user");
+                    Atendente atendente = System.Text.Json.JsonSerializer.Deserialize<Atendente>(user);
+
+
+
+                    using (var datapac = new PacienteData())
+                        novopaciente = datapac.Read((int)novopaciente.Id);
+                    using (var datamed = new MedicoData())
+                        novomedico = datamed.Read((int)novomedico.Id);
+                    using (var dataate = new AtendenteData())
+                        atendente = dataate.Read((int)atendente.Id);
+
+
+
+
+
+                    consulta3.NomePaciente = novopaciente.Nome;
+                    consulta3.NomeMedico = novomedico.Nome;
+                    consulta3.NomeAtendente = atendente.Nome;
+                    consulta3.IdPaciente = (int)novopaciente.Id;
+                    consulta3.IdMedico = (int)novomedico.Id;
+                    consulta3.IdAtendente = (int)atendente.Id;
+
+
+
+
+                    return View(consulta3);
+                }
+
+
+
+                if (!ModelState.IsValid)
+                {
+                    return View(consulta);
+                }
+
+                using (var data = new ConsultaData())
+                    data.Create(novoConsulta);
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex){
+                ViewBag.Message = "Valor inválido.";
+                Consulta consulta2 = new Consulta();
+
+                var paciente = HttpContext.Session.GetString("paciente");
+                Paciente novopaciente = System.Text.Json.JsonSerializer.Deserialize<Paciente>(paciente);
+
+
+
+                var medico = HttpContext.Session.GetString("medico");
+                Medico novomedico = System.Text.Json.JsonSerializer.Deserialize<Medico>(medico);
+
+
+                var user = HttpContext.Session.GetString("user");
+                Atendente atendente = System.Text.Json.JsonSerializer.Deserialize<Atendente>(user);
+
+
+
+                using (var datapac = new PacienteData())
+                    novopaciente = datapac.Read((int)novopaciente.Id);
+                using (var datamed = new MedicoData())
+                    novomedico = datamed.Read((int)novomedico.Id);
+                using (var dataate = new AtendenteData())
+                    atendente = dataate.Read((int)atendente.Id);
+
+
+
+
+
+                consulta2.NomePaciente = novopaciente.Nome;
+                consulta2.NomeMedico = novomedico.Nome;
+                consulta2.NomeAtendente = atendente.Nome;
+                consulta2.IdPaciente = (int)novopaciente.Id;
+                consulta2.IdMedico = (int)novomedico.Id;
+                consulta2.IdAtendente = (int)atendente.Id;
+
+
+
+
+                return View(consulta2);
+                
+                
+            }
         }
 
 

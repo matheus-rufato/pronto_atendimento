@@ -17,6 +17,7 @@ namespace ProntoAtendimento.Data
 
         public void Create(Atendente atendente)
         {
+            
             //cmd é um comando que permitirá executar um comando SQL
             SqlCommand cmd = new SqlCommand();
             //Conectando com o banco de dados

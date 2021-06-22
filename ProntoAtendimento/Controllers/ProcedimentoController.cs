@@ -66,6 +66,13 @@ namespace ProntoAtendimento.Controllers
                 return View(procedimento);
             }
 
+            if (procedimento.Valor < 0)
+            {
+                ViewBag.Message = "O Valor deve ser maior que 0";
+                return View();
+            }
+
+
             using (var data = new ProcedimentoData())
                 data.Create(procedimento);
             return RedirectToAction("Index");

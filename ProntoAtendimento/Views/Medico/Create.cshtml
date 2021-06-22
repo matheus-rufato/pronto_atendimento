@@ -1,5 +1,10 @@
 ﻿@model Medico
 
+@if (ViewBag.Message != null)
+{
+<div class="alert alert-danger">@ViewBag.Message</div>}
+
+
 <form asp-controller="Medico" asp-action="Create" method="POST">
     <div class="form-group">
         <label asp-for="Nome"></label>
@@ -44,4 +49,4 @@
     </div>
 
     <button class="btn btn-primary">Salvar</button>
-</form> 
+</form>

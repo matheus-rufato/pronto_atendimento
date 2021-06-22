@@ -1,5 +1,10 @@
 ﻿@model Consulta
 
+@if (ViewBag.Message != null)
+{
+<div class="alert alert-danger">@ViewBag.Message</div>}
+
+
 <form asp-controller="Consulta" asp-action="Create" method="POST">
 
     <h5>Informe os Campos</h5>

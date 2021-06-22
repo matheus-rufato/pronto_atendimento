@@ -72,42 +72,44 @@ namespace ProntoAtendimento.Controllers
         [HttpPost]
         public IActionResult Create(IFormCollection paciente)
         {
-            string nome = paciente["Nome"];
-            string cpf = paciente["Cpf"];
-            string endereco = paciente["Endereco"];
-            string telefone = paciente["Telefone"];
-            string convenio = paciente["Convenio"];
-
-
-            if (nome.Length < 6)
+            try
             {
-                ViewBag.Mensagem = "Nome deve conter 6 ou mais carecteres";
+                string nome = paciente["Nome"];
+                string cpf = paciente["Cpf"];
+                string endereco = paciente["Endereco"];
+                string telefone = paciente["Telefone"];
+                string convenio = paciente["Convenio"];
+
+
+                if (nome.Length < 6)
+                {
+                    ViewBag.Message = "Nome deve conter 6 ou mais carecteres";
+                    return View();
+                }
+                
+                
+
+                var novoPaciente = new Paciente();
+
+                novoPaciente.Nome = paciente["Nome"];
+                novoPaciente.Cpf = paciente["Cpf"];
+                novoPaciente.Endereco = paciente["Endereco"];
+                novoPaciente.Telefone = paciente["Telefone"];
+                novoPaciente.Convenio = paciente["Convenio"];
+
+
+                using (var data = new PacienteData())
+                    data.Create(novoPaciente);
+
+
+                return RedirectToAction("Index", novoPaciente);
             }
-            /*if (!email.Contains("@"))
+            catch (Exception ex)
             {
-                ViewBag.Mensagem = "Email inválido";
+                ViewBag.Message = "CPF, CRM e/ou Login já cadastrado";
                 return View();
-            }*/
-            /* if (senha.Length < 6)
-             {
-                 ViewBag.Mensagem = "Senha deve conter 6 caracteres ou mais";
-                 return View();
-             }*/
 
-            var novoPaciente = new Paciente();
-            
-            novoPaciente.Nome = paciente["Nome"];
-            novoPaciente.Cpf = paciente["Cpf"];
-            novoPaciente.Endereco = paciente["Endereco"];
-            novoPaciente.Telefone = paciente["Telefone"];
-            novoPaciente.Convenio = paciente["Convenio"];
-
-
-            using (var data = new PacienteData())
-                data.Create(novoPaciente);
-            
-
-            return RedirectToAction("Index", novoPaciente);
+            }
         }
 
 
@@ -184,15 +186,24 @@ namespace ProntoAtendimento.Controllers
         [HttpPost]
         public IActionResult Update(int id, Paciente paciente)
         {
-            paciente.Id = id;
+            try
+            {
+                paciente.Id = id;
 
-            if (!ModelState.IsValid)
-                return View(paciente);
+                if (!ModelState.IsValid)
+                    return View(paciente);
 
-            using (var data = new PacienteData())
-                data.Update(paciente);
+                using (var data = new PacienteData())
+                    data.Update(paciente);
 
-            return RedirectToAction("Index", paciente);
+                return RedirectToAction("Index", paciente);
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = "CPF já cadastrado";
+                return View();
+
+            }
         }
 
 
@@ -213,15 +224,24 @@ namespace ProntoAtendimento.Controllers
         [HttpPost]
         public IActionResult Update2(int id, Paciente paciente)
         {
-            paciente.Id = id;
+            try
+            {
+                paciente.Id = id;
 
-            if (!ModelState.IsValid)
-                return View(paciente);
+                if (!ModelState.IsValid)
+                    return View(paciente);
 
-            using (var data = new PacienteData())
-                data.Update(paciente);
+                using (var data = new PacienteData())
+                    data.Update(paciente);
 
-            return RedirectToAction("Index", paciente);
+                return RedirectToAction("Index", paciente);
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = "CPF já cadastrado";
+                return View();
+
+            }
         }
 
 

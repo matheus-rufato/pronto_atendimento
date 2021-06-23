@@ -104,17 +104,36 @@ namespace ProntoAtendimento.Controllers
         [HttpPost]
         public IActionResult Update(int id, Procedimento procedimento)
         {
-            procedimento.IdProcedimento = id;
-
-            if (!ModelState.IsValid)
+            try
             {
-                return View(procedimento);
+                if (procedimento.Valor < 0)
+                {
+                    ViewBag.Message = "Valor inválido.";
+                    using (var data = new ProcedimentoData())
+                        return View(data.Read(id));
+                }
+
+                    procedimento.IdProcedimento = id;
+
+                    if (!ModelState.IsValid)
+                    {
+                        return View(procedimento);
+                    }
+
+                    using (var data = new ProcedimentoData())
+                        data.Update(procedimento);
+
+                    return RedirectToAction("Index");
+                
+            }
+            catch (Exception es)
+            {
+                ViewBag.Message = "CPF e/ou Login já cadastrado";
+                return View();
+
+
             }
 
-            using (var data = new ProcedimentoData())
-                data.Update(procedimento);
-
-            return RedirectToAction("Index");
         }
     }
 }

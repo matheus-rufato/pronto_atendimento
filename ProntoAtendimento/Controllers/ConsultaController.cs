@@ -304,7 +304,7 @@ namespace ProntoAtendimento.Controllers
                 if (novoConsulta.Valor < 0)
                 {
                     ViewBag.Message = "Valor inválido.";
-                    Consulta consulta3 = new Consulta();
+                    Consulta consulta3 = new Consulta(); 
 
                     var paciente = HttpContext.Session.GetString("paciente");
                     Paciente novopaciente = System.Text.Json.JsonSerializer.Deserialize<Paciente>(paciente);

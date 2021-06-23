@@ -1,5 +1,9 @@
 ﻿@model Procedimento
 
+@if (ViewBag.Message != null)
+{
+<div class="alert alert-danger">@ViewBag.Message</div>}
+
 
 <form asp-controller="Procedimento" asp-action="Update" method="POST">
     <h2>Editar Procedimento</h2>

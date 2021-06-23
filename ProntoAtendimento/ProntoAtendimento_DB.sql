@@ -1,6 +1,6 @@
-create database prontoAtendimento
+create database prontoAtendimento5
 go
-use prontoAtendimento
+use prontoAtendimento5
 go
 
 --Pessoas (Id, endereco, cpf, nome,telefone, status)
@@ -30,6 +30,9 @@ go
 select * from v_pacientes
 --Enfermeiros (#Pessoa_id, senha, login)
 
+
+select * from v_atendentes
+111222333-4543
 create table atendentes
 (
 	atendente_id	int			not null primary key references pessoas,
@@ -49,6 +52,7 @@ create table medicos
 go
 --Consultas (Id, data, valor, #Paciente_id, #Colaborador_id)
 
+select * from v_medicos
 
 create table consultas 
 (
@@ -284,7 +288,7 @@ as
 	where pes.Id = med.medico_id
 go
 
-select * from v_proc_utilizas
+select * from v_atendentes
 select * from v_consultas
 create view v_atendentes
 as
@@ -355,15 +359,18 @@ select * from consultas
 select * from v_proc_utilizas where Nr = 3
 go
 
-exec CadAtendente 'João da Silva', '101010', 'São Pedro, 2034', '17 991425364', 'joao@silva','123456'
-exec CadAtendente 'Maria Moura', '202020', 'Santo Antonio, 2478', '17 998520623', 'maria@moura','789101'
-exec CadAtendente 'Fernando', '303030', 'São José, 1791', '17 992364220', 'fernando@123','121314'
-exec CadMedico'Carla', '404040', 'São Paulo, 2417', '17 991364768', '892550', 'carla@123','151617'
-exec CadMedico'Paulo', '505050', 'São Miguel, 2178', '17 996715668', '895001', 'paulo@123','181920'
-exec CadMedico'Lucas', '606060', 'São João, 1048', '17 998155888', '891589', 'lucas@123','212223'
+exec CadAtendente 'admin', '0000', 'Rua 0, numero 0', '17 90000-0000', 'admin@admin','admin'
+exec CadAtendente 'João da Silva', '101010', 'São Pedro, 2034', '17 99999-8888', 'joao@silva','123456'
+exec CadAtendente 'Maria Moura', '202020', 'Santo Antonio, 2478', '17 9999-7777', 'maria@moura','123456'
+exec CadAtendente 'Fernando Silva', '303030', 'São José, 1791', '17 9888-9999', 'fernando@silva','123456'
+exec CadMedico'José da Silva', '404040', 'São Paulo, 2417', '17 9988-8888', '892550', 'jose@silva','123456'
+exec CadMedico'Paulo de Souza', '505050', 'São Miguel, 2178', '17 9777-8888', '895001', 'paulo@souza','123456'
+exec CadMedico'Geraldo Tavares', '606060', 'São João, 1048', '17 99999-7890', '891589', 'geraldo@tavares','123456'
 exec CadMedico'Joao das Couves', '619060', 'São João, 1048', '17 912155888', '890289', 'couves@joao','123456'
 go
 
+
+exec AltAtendente  1,'admin','00000000000-00', 'Administrador', '00 00000-0000',1,'admin@admin', '123456'
 exec AltAtendente 2, 'Maria Moura', '12321232547612', 'Santo Antonio, 2478', '17 998520623', 2, 'maria@moura','789101'
 go
 exec AltAtendente 1
@@ -379,9 +386,9 @@ exec CadProcedimento 'Hidratação', 1, 50
 exec CadProcedimento 'Exame de sangue', 2, 100
 go
 
-exec CadPaciente 'Vilma', '707070', 'Padre Ernesto, 2014', '17 991230774', '20105924281'
-exec CadPaciente 'Fabio', '808080', 'São Benedito, 218', '17 991747886', '14566788153'
-exec CadPaciente 'Patricia', '909090', 'São Jorge, 6875', '17 998166741', '67816671981'
+exec CadPaciente 'Vilma Roberta', '707070', 'Padre Ernesto, 2014', '17 99000-1234', '20105924281'
+exec CadPaciente 'Fabio João', '808080', 'São Benedito, 218', '17 9123-4567', '14566788153'
+exec CadPaciente 'Patricia Luisa', '909090', 'São Jorge, 6875', '17 98765-4321', '67816671981'
 go
 
 exec CadConsulta 7, 4, 1, 150, 1

@@ -37,7 +37,7 @@ else
                                 <th>ID</th>
                                 <th>Nome</th>
                                 <th>Tipo</th>
-                                <th>Valor</th>
+                                
                                 
                             </tr>
                             @foreach (var item in Model)
@@ -46,7 +46,7 @@ else
                                     <td>@item.Procedimento.IdProcedimento</td>
                                     <td>@item.Procedimento.Nome</td>
                                     <td>@item.Procedimento.Tipo</td>
-                                    <td>@item.Procedimento.Valor</td>
+                                    
                                     
                                     <td>
                                         <a class="btn btn-sm btn-danger" href="/listaprocedimentos/remover/@item.Procedimento.IdProcedimento" onclick="removidoBox()">Remover

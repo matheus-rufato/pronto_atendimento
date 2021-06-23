@@ -69,7 +69,7 @@ namespace ProntoAtendimento.Data
                     IdProcedimento = (int)reader["Id"],
                     Nome = (string)reader["nome"],
                     Tipo = (string)reader["Tipo"],
-                    Valor = (decimal)reader["valor"]
+                    Valor = (Math.Round((decimal)reader["valor"],2))
                 };
             }
             return procedimento;

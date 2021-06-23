@@ -32,6 +32,12 @@ namespace ProntoAtendimento.Controllers
             return View();
         }
 
+        public IActionResult Admin()
+        {
+            ViewBag.Message = "Por favor, não modificar conta administrador.";
+            return View();
+        }
+
         public IActionResult ErroCreate()
         {
             return View();
@@ -143,6 +149,12 @@ namespace ProntoAtendimento.Controllers
 
         public IActionResult Delete(int id)
         {
+            if(id==1)
+            {
+                ViewBag.Message = "Administrador não pode ser removido.";
+                return RedirectToAction("Admin","Atendente");
+            }
+
             HttpContext.Session.SetString("atendenteupdate", JsonSerializer.Serialize<int>(id));
             try
             {
@@ -174,6 +186,12 @@ namespace ProntoAtendimento.Controllers
         [HttpPost]
         public IActionResult Update(int id, Atendente atendente)
         {
+            if (id == 1)
+            {
+                
+                return RedirectToAction("Admin", "Atendente");
+            }
+
             try
             {
                 atendente.Id = id;

@@ -22,23 +22,29 @@
     </tr>
 
 
-    @foreach (var atend in Model)
+    @foreach (var atend in Model) 
     {
-<tr>
-    <td>@atend.Id</td>
-    <td>@atend.Nome</td>
+
+    <tr>
+    @if (@atend.Id != 1)
+        {
+        <td>@atend.Id</td>
+        <td>@atend.Nome</td>
+        
     <td>@atend.Endereco</td>
-    <td>@atend.Telefone</td>
-    <td>@atend.Status</td>
+        <td>@atend.Telefone</td>
+        <td>@atend.Status</td>}
 
-    <td>
-        @if(@atend.Id != 1)
-        {<a class="btn btn-sm btn-danger" href="/atendente/delete/@atend.Id">Apagar</a>
-        <a class="btn btn-sm btn-warning" href="/atendente/update/@atend.Id">Editar</a>}
+        <td>
+            @if (@atend.Id != 1)
+            {
+            <a class="btn btn-sm btn-danger" href="/atendente/delete/@atend.Id">Apagar</a>
+            <a class="btn btn-sm btn-warning" href="/atendente/update/@atend.Id">Editar</a>}
 
 
 
-    </td>
+
+        </td>
 </tr>}
 </table>
 <a class="btn btn-info cart-btn-transform mt-2 float-right m-2" href="/atendente/create/">Adicionar</a>

@@ -223,7 +223,7 @@ namespace ProntoAtendimento.Controllers
                 user2 = medico;
 
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Listagem");
             }
             catch (Exception ex)
             {

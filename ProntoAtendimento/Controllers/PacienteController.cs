@@ -196,7 +196,7 @@ namespace ProntoAtendimento.Controllers
                 using (var data = new PacienteData())
                     data.Update(paciente);
 
-                return RedirectToAction("Index", paciente);
+                return RedirectToAction("Listagem", paciente);
             }
             catch (Exception ex)
             {

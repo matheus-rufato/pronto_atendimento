@@ -49,7 +49,7 @@ namespace ProntoAtendimento.Controllers
 
             //HttpContext.Session.SetString("pacienterelatorio", JsonSerializer.Serialize<Paciente>(novoPaciente));
             using (var data = new PacienteData())
-                return View(data.Read());
+                return View(data.ReadAll());
 
         }
 
@@ -74,7 +74,7 @@ namespace ProntoAtendimento.Controllers
 
 
             using (var data = new MedicoData())
-                return View(data.Read());
+                return View(data.ReadAll());
         }
 
 
